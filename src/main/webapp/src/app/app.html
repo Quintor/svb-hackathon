@@ -1,0 +1,81 @@
+<main class="page">
+  <h1>Grondslag calculation tree</h1>
+  <p class="intro">
+    Run a calculation and inspect the resulting Grondslag as a tree of Grondslaggegevens,
+    each node linked to the underlying (onderliggend) values it was derived from.
+  </p>
+
+  <form class="calc-form" (ngSubmit)="calculate()">
+    <label>
+      Definitiecode
+      <select name="definitiecode" [(ngModel)]="definitiecode">
+        @for (code of definitiecodes; track code) {
+          <option [value]="code">{{ code }}</option>
+        }
+      </select>
+    </label>
+
+    <label>
+      Distance
+      <input type="number" name="distance" [(ngModel)]="distance" min="0" />
+    </label>
+
+    <label class="checkbox">
+      <input type="checkbox" name="electric" [(ngModel)]="electric" />
+      Electric
+    </label>
+
+    <label>
+      Vehicle
+      <select name="vehicle" [(ngModel)]="vehicle">
+        @for (v of vehicles; track v) {
+          <option [value]="v">{{ v }}</option>
+        }
+      </select>
+    </label>
+
+    <label>
+      Peildatum
+      <input type="date" name="peildatum" [(ngModel)]="peildatum" required />
+    </label>
+
+    <button type="submit" [disabled]="loading()">
+      {{ loading() ? 'Calculating…' : 'Calculate' }}
+    </button>
+  </form>
+
+  <form class="saved-form">
+    <label>
+      Previously calculated Grondslag
+      <select
+        name="savedGrondslag"
+        [(ngModel)]="selectedGrondslagId"
+        (ngModelChange)="onSelectSaved($event)"
+        [disabled]="savedGrondslagen().length === 0"
+      >
+        <option [ngValue]="null" disabled>
+          {{ savedGrondslagen().length === 0 ? 'No saved calculations yet' : 'Select a saved calculation…' }}
+        </option>
+        @for (saved of savedGrondslagen(); track saved.id) {
+          <option [ngValue]="saved.id">{{ label(saved) }}</option>
+        }
+      </select>
+    </label>
+  </form>
+
+  @if (error()) {
+    <p class="error">{{ error() }}</p>
+  }
+
+  @if (grondslag(); as result) {
+    @if (result.grondslaggegevens.length === 0) {
+      <p class="empty">No Grondslaggegevens were calculated for this input.</p>
+    } @else {
+      <ul class="tree">
+        @for (root of roots(result); track root.id) {
+          <app-grondslaggegeven-node [node]="root" />
+        }
+      </ul>
+    }
+  }
+</main>

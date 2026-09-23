@@ -1,0 +1,105 @@
+:host {
+  display: block;
+  font-family: system-ui, sans-serif;
+  color: #1f2d3d;
+}
+
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px 64px;
+}
+
+h1 {
+  font-size: 1.5rem;
+  margin-bottom: 4px;
+}
+
+.intro {
+  color: #4a5568;
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+.calc-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 16px;
+  margin-bottom: 32px;
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.calc-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: #4a5568;
+}
+
+.calc-form label.checkbox {
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+}
+
+.calc-form select,
+.calc-form input[type='number'] {
+  padding: 6px 8px;
+  border: 1px solid #cbd5e0;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.calc-form button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.calc-form button:disabled {
+  background: #94a3b8;
+  cursor: default;
+}
+
+.saved-form {
+  margin-bottom: 24px;
+}
+
+.saved-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: #4a5568;
+  max-width: 420px;
+}
+
+.saved-form select {
+  padding: 6px 8px;
+  border: 1px solid #cbd5e0;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.error {
+  color: #b91c1c;
+}
+
+.empty {
+  color: #4a5568;
+}
+
+.tree {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

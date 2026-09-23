@@ -1,0 +1,34 @@
+:host {
+  display: contents;
+}
+
+.node {
+  margin: 6px 0;
+  list-style: none;
+  font-family: system-ui, sans-serif;
+  font-size: 0.9rem;
+}
+
+.code {
+  font-weight: 600;
+  color: #1f2d3d;
+}
+
+.waarde {
+  margin-left: 6px;
+  color: #4a5568;
+  overflow-wrap: break-word;
+}
+
+.periode {
+  margin-left: 6px;
+  color: #718096;
+  font-size: 0.8rem;
+}
+
+.children {
+  margin: 6px 0 0 10px;
+  padding-left: 16px;
+  border-left: 1px solid #cbd5e0;
+  list-style: none;
+}

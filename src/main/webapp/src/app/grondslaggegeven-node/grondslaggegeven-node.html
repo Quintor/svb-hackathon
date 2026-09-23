@@ -1,0 +1,14 @@
+<li class="node">
+  <span class="code">{{ node.definitie.definitiecode }}</span>
+  <span class="waarde">= {{ node.waarde }}</span>
+  @if (node.geldigheidsPeriode; as periode) {
+    <span class="periode">({{ periode.start ?? '…' }} t/m {{ periode.end ?? '…' }})</span>
+  }
+  @if (node.onderliggend.length > 0) {
+    <ul class="children">
+      @for (child of node.onderliggend; track child.id) {
+        <app-grondslaggegeven-node [node]="child" />
+      }
+    </ul>
+  }
+</li>

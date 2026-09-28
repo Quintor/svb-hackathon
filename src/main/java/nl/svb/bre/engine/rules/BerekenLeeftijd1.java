@@ -3,9 +3,11 @@ package nl.svb.bre.engine.rules;
 import nl.svb.bre.domain.enums.Definitiecode;
 import nl.svb.bre.engine.context.CalculationContext;
 import nl.svb.bre.engine.domain.Waarde;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
+@Component
 public class BerekenLeeftijd1 extends Rule<Integer> {
 
     @Override

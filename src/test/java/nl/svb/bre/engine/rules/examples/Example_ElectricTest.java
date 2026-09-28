@@ -1,6 +1,7 @@
 package nl.svb.bre.engine.rules.examples;
 
 import nl.svb.bre.engine.context.CalculationContext;
+import nl.svb.bre.engine.domain.ExampleObject;
 import nl.svb.bre.engine.domain.TestObject;
 import nl.svb.bre.engine.domain.Waarde;
 import nl.svb.bre.engine.domain.enums.ExampleVehicle;
@@ -23,7 +24,7 @@ class Example_ElectricTest {
 
     @Test
     void executeRule_returnsElectricFromTestObject() {
-        CalculationContext context = new CalculationContext(new TestObject(100, true, ExampleVehicle.BICYCLE), LocalDate.of(2024, 1, 1));
+        CalculationContext context = new CalculationContext(new ExampleObject(100, true, ExampleVehicle.BICYCLE), null, LocalDate.of(2024, 1, 1));
 
         assertThat(rule.execute(context).value(), is(true));
     }

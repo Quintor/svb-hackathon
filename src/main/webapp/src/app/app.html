@@ -16,20 +16,25 @@
     </label>
 
     <label>
-      Distance
-      <input type="number" name="distance" [(ngModel)]="distance" min="0" />
-    </label>
-
-    <label class="checkbox">
-      <input type="checkbox" name="electric" [(ngModel)]="electric" />
-      Electric
+      Persoon ID
+      <input type="number" name="persoonId" [(ngModel)]="persoonId" required />
     </label>
 
     <label>
-      Vehicle
-      <select name="vehicle" [(ngModel)]="vehicle">
-        @for (v of vehicles; track v) {
-          <option [value]="v">{{ v }}</option>
+      Persoon ID kind 1
+      <input type="number" name="persoonIdKind1" [(ngModel)]="persoonIdKind1" required />
+    </label>
+
+    <label>
+      Persoon ID kind 2
+      <input type="number" name="persoonIdKind2" [(ngModel)]="persoonIdKind2" required />
+    </label>
+
+    <label>
+      Testgeval
+      <select name="testgeval" [(ngModel)]="testgeval">
+        @for (t of testgevallen; track t) {
+          <option [ngValue]="t">{{ t }}</option>
         }
       </select>
     </label>

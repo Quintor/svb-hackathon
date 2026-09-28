@@ -1,6 +1,7 @@
 package nl.svb.bre.engine.rules.examples;
 
 import nl.svb.bre.engine.context.CalculationContext;
+import nl.svb.bre.engine.domain.ExampleObject;
 import nl.svb.bre.engine.domain.TestObject;
 import nl.svb.bre.engine.domain.Waarde;
 import nl.svb.bre.engine.domain.enums.ExampleVehicle;
@@ -25,7 +26,7 @@ class Example_DurationTest {
 
     @Test
     void executeRule_notElectric_returnsDrivingTimeOnly() {
-        CalculationContext context = new CalculationContext(new TestObject(100, false, ExampleVehicle.CAR), LocalDate.of(2024, 1, 1));
+        CalculationContext context = new CalculationContext(new ExampleObject(100, false, ExampleVehicle.CAR), null, LocalDate.of(2024, 1, 1));
         context.addCalculatedRule(Definitiecode.EXAMPLE_ELECTRIC, new Waarde<>(false, null));
         context.addCalculatedRule(Definitiecode.EXAMPLE_DISTANCE, new Waarde<>(100, null));
         context.addCalculatedRule(Definitiecode.EXAMPLE_AVERAGE_SPEED, new Waarde<>(20, null));
@@ -35,7 +36,7 @@ class Example_DurationTest {
 
     @Test
     void executeRule_electric_addsChargingTimeToDrivingTime() {
-        CalculationContext context = new CalculationContext(new TestObject(140, true, ExampleVehicle.BICYCLE), LocalDate.of(2024, 1, 1));
+        CalculationContext context = new CalculationContext(new ExampleObject(140, true, ExampleVehicle.BICYCLE), null, LocalDate.of(2024, 1, 1));
         context.addCalculatedRule(Definitiecode.EXAMPLE_ELECTRIC, new Waarde<>(true, null));
         context.addCalculatedRule(Definitiecode.EXAMPLE_DISTANCE, new Waarde<>(140, null));
         context.addCalculatedRule(Definitiecode.EXAMPLE_AVERAGE_SPEED, new Waarde<>(20, null));

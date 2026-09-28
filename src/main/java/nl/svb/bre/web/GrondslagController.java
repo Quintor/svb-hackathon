@@ -28,11 +28,44 @@ public class GrondslagController {
 
     @GetMapping("/calculate")
     public Grondslag calculate(@RequestParam final Definitiecode definitiecode,
-                                @RequestParam final Integer distance,
-                                @RequestParam final Boolean electric,
-                                @RequestParam final ExampleVehicle vehicle,
+                                @RequestParam final Long persoonId,
+                                @RequestParam final Long persoonIdKind1,
+                                @RequestParam final Long persoonIdKind2,
+                                @RequestParam final Integer testgeval,
                                 @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) final LocalDate peildatum) {
-        return treeCalculator.calculateResult(definitiecode, new TestObject(distance, electric, vehicle), peildatum);
+        return treeCalculator.calculateResult(definitiecode, new TestObject(
+                persoonId,
+                List.of(persoonIdKind1, persoonIdKind2),
+                true,
+                false,
+                false,
+                "andere reden",
+                false,
+                false,
+                true,
+                true,
+                "reageren op een informatieverzoek",
+                false,
+                false,
+                false,
+                true,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                "Een wijziging in het adres van de niet in de BRP ingeschreven kinderbijslaggerechtigde onverwijld melden",
+                true,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                LocalDate.of(2016, 3,25),
+                LocalDate.of(2018, 4,1)
+        ), peildatum);
     }
 
     @GetMapping("/grondslag")

@@ -7,6 +7,7 @@ import nl.svb.bre.domain.Grondslaggegeven;
 import nl.svb.bre.domain.enums.Definitiecode;
 import nl.svb.bre.engine.context.CalculationContext;
 import nl.svb.bre.engine.domain.EngineError;
+import nl.svb.bre.engine.domain.ExampleObject;
 import nl.svb.bre.engine.domain.TestObject;
 import nl.svb.bre.engine.errors.CalculationException;
 import nl.svb.bre.engine.errors.FunctionalCalculationException;
@@ -32,11 +33,15 @@ public class TreeCalculator {
     private final Map<Definitiecode, Rule<?>> calculationRules;
 
     public Grondslag calculateResult(final Definitiecode definitiecode, final TestObject testObject, final LocalDate peildatum) {
-        return calculateResults(Set.of(definitiecode), testObject, peildatum);
+        return calculateResults(Set.of(definitiecode), null, testObject, peildatum);
     }
 
-    public Grondslag calculateResults(final Set<Definitiecode> definitiecodes, final TestObject testObject, final LocalDate peildatum) {
-        final CalculationContext calculationContext = new CalculationContext(testObject, peildatum);
+    public Grondslag calculateResult(final Definitiecode definitiecode, final ExampleObject testObject, final LocalDate peildatum) {
+        return calculateResults(Set.of(definitiecode), testObject, null, peildatum);
+    }
+
+    public Grondslag calculateResults(final Set<Definitiecode> definitiecodes, final ExampleObject exampleObject, final TestObject testObject, final LocalDate peildatum) {
+        final CalculationContext calculationContext = new CalculationContext(exampleObject, testObject, peildatum);
         final List<EngineError> errors = new LinkedList<>();
 
         final Grondslag grondslag = new Grondslag();

@@ -16,6 +16,6 @@ public class Example_Vehicle extends Rule<ExampleVehicle> {
 
     @Override
     protected Waarde<ExampleVehicle> executeRule(CalculationContext calculationContext) {
-        return new Waarde<>(calculationContext.getTestObject().vehicle(), null);
+        return new Waarde<>(calculationContext.getExampleObject().vehicle(), null);
     }
 }

@@ -7,6 +7,7 @@ import nl.svb.bre.domain.enums.Definitiecode;
 import nl.svb.bre.engine.context.CalculationContext;
 import nl.svb.bre.engine.domain.Dependency;
 import nl.svb.bre.engine.domain.DependencySet;
+import nl.svb.bre.engine.domain.ExampleObject;
 import nl.svb.bre.engine.domain.TestObject;
 import nl.svb.bre.engine.domain.Waarde;
 import nl.svb.bre.engine.domain.enums.CalculationError;
@@ -54,12 +55,12 @@ class TreeCalculatorTest {
 
     private final Map<Definitiecode, Rule<?>> calculationRules = new HashMap<>();
     private TreeCalculator treeCalculator;
-    private TestObject testObject;
+    private ExampleObject testObject;
 
     @BeforeEach
     void setUp() {
         treeCalculator = new TreeCalculator(grondslagRepository, definitieRepository, calculationRules);
-        testObject = new TestObject(100, false, ExampleVehicle.BICYCLE);
+        testObject = new ExampleObject(100, false, ExampleVehicle.BICYCLE);
         when(grondslagRepository.save(any(Grondslag.class))).thenAnswer(invocation -> invocation.getArgument(0));
     }
 
@@ -129,7 +130,7 @@ class TreeCalculatorTest {
         calculationRules.put(EXAMPLE_DISTANCE, distanceRule);
         when(definitieRepository.findByDefinitiecode(any())).thenAnswer(invocation -> definitie(invocation.getArgument(0)));
 
-        treeCalculator.calculateResults(Set.of(EXAMPLE_JOURNEY, EXAMPLE_DISTANCE), testObject, LocalDate.of(2024, 1, 1));
+        treeCalculator.calculateResults(Set.of(EXAMPLE_JOURNEY, EXAMPLE_DISTANCE), testObject, null, LocalDate.of(2024, 1, 1));
 
         verify(vehicleRule, times(1)).execute(any());
     }

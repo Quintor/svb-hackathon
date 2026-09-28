@@ -16,6 +16,6 @@ public class Example_Electric extends Rule<Boolean> {
 
     @Override
     protected Waarde<Boolean> executeRule(CalculationContext calculationContext) {
-        return new Waarde<>(calculationContext.getTestObject().electric(), null);
+        return new Waarde<>(calculationContext.getExampleObject().electric(), null);
     }
 }

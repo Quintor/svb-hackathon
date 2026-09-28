@@ -17,7 +17,7 @@ const DEFINITIECODES = [
   'EXAMPLE_ELECTRIC_DISTANCE_BICYCLE',
 ];
 
-const VEHICLES = ['BICYCLE', 'CAR'];
+const TESTGEVALLEN = [1, 2, 3];
 
 @Component({
   selector: 'app-root',
@@ -28,12 +28,13 @@ const VEHICLES = ['BICYCLE', 'CAR'];
 })
 export class App implements OnInit {
   protected readonly definitiecodes = DEFINITIECODES;
-  protected readonly vehicles = VEHICLES;
+  protected readonly testgevallen = TESTGEVALLEN;
 
   protected definitiecode = 'EXAMPLE_JOURNEY';
-  protected distance = 100;
-  protected electric = false;
-  protected vehicle = 'BICYCLE';
+  protected persoonId = 1;
+  protected persoonIdKind1 = 2;
+  protected persoonIdKind2 = 3;
+  protected testgeval = 1;
   protected peildatum = new Date().toISOString().slice(0, 10);
 
   protected readonly grondslag = signal<Grondslag | null>(null);
@@ -55,9 +56,10 @@ export class App implements OnInit {
     this.grondslagService
       .calculate({
         definitiecode: this.definitiecode,
-        distance: this.distance,
-        electric: this.electric,
-        vehicle: this.vehicle,
+        persoonId: this.persoonId,
+        persoonIdKind1: this.persoonIdKind1,
+        persoonIdKind2: this.persoonIdKind2,
+        testgeval: this.testgeval,
         peildatum: this.peildatum,
       })
       .subscribe({

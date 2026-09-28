@@ -2,6 +2,7 @@ package nl.svb.bre.engine;
 
 import nl.svb.bre.domain.Grondslag;
 import nl.svb.bre.domain.Grondslaggegeven;
+import nl.svb.bre.engine.domain.ExampleObject;
 import nl.svb.bre.engine.domain.TestObject;
 import nl.svb.bre.engine.domain.enums.ExampleVehicle;
 import nl.svb.bre.domain.enums.Definitiecode;
@@ -36,7 +37,7 @@ class TreeCalculatorIntegrationTest {
     @ParameterizedTest
     @MethodSource
     void calculateResults(Integer distance, boolean electric, String duration) {
-        Grondslag outcome = treeCalculator.calculateResult(Definitiecode.EXAMPLE_JOURNEY, new TestObject(distance, electric, ExampleVehicle.BICYCLE), LocalDate.of(2024, 1, 1));
+        Grondslag outcome = treeCalculator.calculateResult(Definitiecode.EXAMPLE_JOURNEY, new ExampleObject(distance, electric, ExampleVehicle.BICYCLE), LocalDate.of(2024, 1, 1));
         String result = findGrondslaggegevenByDefinitiecode(outcome, Definitiecode.EXAMPLE_JOURNEY).getWaarde();
         assertThat(result, is("The journey by bicycle will take " + duration));
     }

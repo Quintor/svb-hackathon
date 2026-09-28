@@ -16,6 +16,6 @@ public class Example_Distance extends Rule<Integer> {
 
     @Override
     protected Waarde<Integer> executeRule(CalculationContext calculationContext) {
-        return new Waarde<>(calculationContext.getTestObject().distance(), null);
+        return new Waarde<>(calculationContext.getExampleObject().distance(), null);
     }
 }

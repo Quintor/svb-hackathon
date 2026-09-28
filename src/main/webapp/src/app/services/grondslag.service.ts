@@ -5,9 +5,10 @@ import { Grondslag } from '../models/grondslag.model';
 
 export interface CalculateParams {
   definitiecode: string;
-  distance: number;
-  electric: boolean;
-  vehicle: string;
+  persoonId: number;
+  persoonIdKind1: number;
+  persoonIdKind2: number;
+  testgeval: number;
   peildatum: string;
 }
 
@@ -21,9 +22,10 @@ export class GrondslagService {
     return this.http.get<Grondslag>(`${this.baseUrl}/calculate`, {
       params: {
         definitiecode: params.definitiecode,
-        distance: params.distance,
-        electric: params.electric,
-        vehicle: params.vehicle,
+        persoonId: params.persoonId,
+        persoonIdKind1: params.persoonIdKind1,
+        persoonIdKind2: params.persoonIdKind2,
+        testgeval: params.testgeval,
         peildatum: params.peildatum,
       },
     });

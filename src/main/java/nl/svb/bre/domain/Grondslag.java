@@ -1,11 +1,13 @@
 package nl.svb.bre.domain;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -26,6 +28,9 @@ public class Grondslag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Exclude
     private Long id;
+
+    @Column(unique=true)
+    private Long persoonId;
 
     @OneToMany(cascade = CascadeType.PERSIST)
     private Set<Grondslaggegeven<?>> grondslaggegevens = new HashSet<>();

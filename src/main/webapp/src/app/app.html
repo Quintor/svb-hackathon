@@ -9,7 +9,7 @@
     <label>
       Definitiecode
       <select name="definitiecode" [(ngModel)]="definitiecode">
-        @for (code of definitiecodes; track code) {
+        @for (code of definitiecodes(); track code) {
           <option [value]="code">{{ code }}</option>
         }
       </select>

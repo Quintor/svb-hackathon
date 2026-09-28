@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import nl.svb.bre.domain.Grondslag;
 import nl.svb.bre.domain.enums.Definitiecode;
 import nl.svb.bre.engine.TreeCalculator;
+import nl.svb.bre.engine.domain.ExampleObject;
 import nl.svb.bre.engine.domain.TestObject;
 import nl.svb.bre.engine.domain.enums.ExampleVehicle;
 import nl.svb.bre.repository.GrondslagRepository;
@@ -68,6 +69,18 @@ public class GrondslagController {
                 LocalDate.of(2018, 4,1)
         ), peildatum);
     }
+
+
+    @GetMapping("/calculate_journey")
+    public Grondslag calculate(@RequestParam final Definitiecode definitiecode,
+                               @RequestParam final Long persoonId,
+                               @RequestParam final Integer distance,
+                               @RequestParam final Boolean electric,
+                               @RequestParam final ExampleVehicle vehicle,
+                               @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) final LocalDate peildatum) {
+        return treeCalculator.calculateResult(definitiecode, new ExampleObject(persoonId, distance, electric, vehicle), peildatum);
+    }
+
 
     @GetMapping("/grondslag")
     public List<Grondslag> list() {

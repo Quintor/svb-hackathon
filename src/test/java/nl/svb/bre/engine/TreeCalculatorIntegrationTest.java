@@ -6,6 +6,8 @@ import nl.svb.bre.engine.domain.ExampleObject;
 import nl.svb.bre.engine.domain.TestObject;
 import nl.svb.bre.engine.domain.enums.ExampleVehicle;
 import nl.svb.bre.domain.enums.Definitiecode;
+import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
+import java.util.Random;
 import java.util.stream.Stream;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -37,9 +40,16 @@ class TreeCalculatorIntegrationTest {
     @ParameterizedTest
     @MethodSource
     void calculateResults(Integer distance, boolean electric, String duration) {
-        Grondslag outcome = treeCalculator.calculateResult(Definitiecode.EXAMPLE_JOURNEY, new ExampleObject(distance, electric, ExampleVehicle.BICYCLE), LocalDate.of(2024, 1, 1));
+        Grondslag outcome = treeCalculator.calculateResult(Definitiecode.EXAMPLE_JOURNEY, new ExampleObject(new Random().nextLong(), distance, electric, ExampleVehicle.BICYCLE), LocalDate.of(2024, 1, 1));
         String result = findGrondslaggegevenByDefinitiecode(outcome, Definitiecode.EXAMPLE_JOURNEY).getWaarde();
         assertThat(result, is("The journey by bicycle will take " + duration));
+    }
+
+    @RepeatedTest(2)
+    void calculateResultsFor42() {
+        Grondslag outcome = treeCalculator.calculateResult(Definitiecode.EXAMPLE_JOURNEY, new ExampleObject(42L, 18, false, ExampleVehicle.BICYCLE), LocalDate.of(2024, 1, 1));
+        String result = findGrondslaggegevenByDefinitiecode(outcome, Definitiecode.EXAMPLE_JOURNEY).getWaarde();
+        assertThat(result, is("The journey by bicycle will take PT1H"));
     }
 
     private Grondslaggegeven<?> findGrondslaggegevenByDefinitiecode(Grondslag grondslag, Definitiecode definitiecode) {

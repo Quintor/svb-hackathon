@@ -130,7 +130,7 @@ class TreeCalculatorTest {
         calculationRules.put(EXAMPLE_DISTANCE, distanceRule);
         when(definitieRepository.findByDefinitiecode(any())).thenAnswer(invocation -> definitie(invocation.getArgument(0)));
 
-        treeCalculator.calculateResults(Set.of(EXAMPLE_JOURNEY, EXAMPLE_DISTANCE), testObject, null, LocalDate.of(2024, 1, 1));
+        treeCalculator.calculateResults(Set.of(EXAMPLE_JOURNEY, EXAMPLE_DISTANCE), testObject, LocalDate.of(2024, 1, 1));
 
         verify(vehicleRule, times(1)).execute(any());
     }

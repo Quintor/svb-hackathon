@@ -2,28 +2,8 @@ import { Component, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { GrondslaggegevenNode } from './grondslaggegeven-node/grondslaggegeven-node';
 import { Grondslag, Grondslaggegeven } from './models/grondslag.model';
+import { DefinitieService } from './services/definitie.service';
 import { GrondslagService } from './services/grondslag.service';
-
-const DEFINITIECODES = [
-  'EXAMPLE_JOURNEY',
-  'EXAMPLE_VEHICLE',
-  'EXAMPLE_JOURNEY_BICYCLE',
-  'EXAMPLE_CHARGING_TIME_BICYCLE',
-  'EXAMPLE_CHARGING_TIME',
-  'EXAMPLE_DURATION',
-  'EXAMPLE_ELECTRIC',
-  'EXAMPLE_AVERAGE_SPEED',
-  'EXAMPLE_DISTANCE',
-  'EXAMPLE_ELECTRIC_DISTANCE_BICYCLE',
-  'D1_DUUR_HOOGTE_MAATREGEL',
-  'D11_EISEN_MAATREGEL_SANCTIE',
-  'D111_MEDEWERKINGSVERPLICHTING_OVERTREDEN',
-  'D1112_UITZONDERING_MEDEWERKINGSVERPLICHTING_AKW',
-  'D11121_UITZONDERING_MEDEWERKINGSVERPLICHTING_VERHUIZING_BUITENLAND_AKW',
-  'SVB_LEEFTIJD_KIND1',
-  'SVB_LEEFTIJD_KIND2',
-  'SVB_D12121_BEDRAG_AKW'
-];
 
 const TESTGEVALLEN = [1, 2, 3];
 
@@ -35,7 +15,7 @@ const TESTGEVALLEN = [1, 2, 3];
   styleUrl: './app.css',
 })
 export class App implements OnInit {
-  protected readonly definitiecodes = DEFINITIECODES;
+  protected readonly definitiecodes = signal<string[]>([]);
   protected readonly testgevallen = TESTGEVALLEN;
 
   protected definitiecode = 'EXAMPLE_JOURNEY';
@@ -52,9 +32,13 @@ export class App implements OnInit {
   protected readonly savedGrondslagen = signal<Grondslag[]>([]);
   protected selectedGrondslagId: number | null = null;
 
-  constructor(private readonly grondslagService: GrondslagService) {}
+  constructor(
+    private readonly grondslagService: GrondslagService,
+    private readonly definitieService: DefinitieService,
+  ) {}
 
   ngOnInit(): void {
+    this.loadDefinitiecodes();
     this.loadSaved();
   }
 
@@ -110,6 +94,18 @@ export class App implements OnInit {
       .map((gegeven) => `${gegeven.definitie.definitiecode} = ${gegeven.waarde}`)
       .join(', ');
     return `#${grondslag.id} — ${rootsLabel || 'empty'}`;
+  }
+
+  private loadDefinitiecodes(): void {
+    this.definitieService.definitiecodes().subscribe({
+      next: (codes) => {
+        this.definitiecodes.set(codes);
+        if (!codes.includes(this.definitiecode) && codes.length > 0) {
+          this.definitiecode = codes[0];
+        }
+      },
+      error: (err) => this.error.set(`Failed to load definitiecodes: ${err?.message ?? err}`),
+    });
   }
 
   private loadSaved(): void {

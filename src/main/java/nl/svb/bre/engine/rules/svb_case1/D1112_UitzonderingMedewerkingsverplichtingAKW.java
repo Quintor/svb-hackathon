@@ -13,7 +13,7 @@ public class D1112_UitzonderingMedewerkingsverplichtingAKW extends Rule<Boolean>
 
     @Override
     protected Waarde<Boolean> executeRule(CalculationContext calculationContext) {
-        var result = (Boolean) getCalculatedValue(calculationContext, Definitiecode.D11121_UITZONDERING_MEDEWERKINGSVERPLICHTING_VERHUIZING_BUITENLAND_AKW)
+        var result = this.<Boolean>getCalculatedValue(calculationContext, Definitiecode.D11121_UITZONDERING_MEDEWERKINGSVERPLICHTING_VERHUIZING_BUITENLAND_AKW)
                 || calculationContext.getTestObject().heeftSvbInhoudingenZvwOfWlzOpgevraagd()
                 || calculationContext.getTestObject().heeftSvbInformatieGevraagdBijBezwaar()
                 || calculationContext.getTestObject().isBetalingGestaaktOpVerzoek();

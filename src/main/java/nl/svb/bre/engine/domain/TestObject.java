@@ -23,6 +23,7 @@ public record TestObject (
         boolean isOvertredingGedeeltelijkVerwijtbaar,
         boolean isOvertredingMedeTeWijtenAanSvb,
         boolean isMeldplichtigeVerhuizingBuitenland,
+        Boolean verhuizingTijdigGemeldNaVerzoek,
         boolean heeftSvbInhoudingenZvwOfWlzOpgevraagd,
         boolean heeftSvbInformatieGevraagdBijBezwaar,
         boolean isBetalingGestaaktOpVerzoek,

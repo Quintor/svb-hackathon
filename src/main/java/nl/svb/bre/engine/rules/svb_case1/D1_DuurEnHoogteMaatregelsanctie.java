@@ -8,10 +8,10 @@ import nl.svb.bre.engine.context.CalculationContext;
 import nl.svb.bre.engine.domain.Dependency;
 import nl.svb.bre.engine.domain.DependencySet;
 import nl.svb.bre.engine.domain.Waarde;
-import nl.svb.bre.engine.domain.enums.CalculationError;
-import nl.svb.bre.engine.errors.FunctionalCalculationException;
 import nl.svb.bre.engine.rules.Rule;
 import org.springframework.stereotype.Component;
+
+import java.util.function.Predicate;
 
 import static nl.svb.bre.domain.enums.Definitiecode.D11_EISEN_MAATREGEL_SANCTIE;
 import static nl.svb.bre.domain.enums.Definitiecode.D1211_MATE_VAN_VERWIJTBAARHEID;
@@ -19,6 +19,9 @@ import static nl.svb.bre.domain.enums.Definitiecode.D12131_RECIDIVE;
 import static nl.svb.bre.domain.enums.Definitiecode.D1213_TYPE_MAATREGELSANCTIE;
 import static nl.svb.bre.domain.enums.Definitiecode.D12_BASISBEDRAG_IS_LAGER_DAN_MINIMUM_BEDRAG;
 import static nl.svb.bre.domain.enums.Definitiecode.D1_DUUR_HOOGTE_MAATREGEL;
+import static nl.svb.bre.engine.utils.CalculationEnginePredicate.basisbedragIsLagerDanMinimum;
+import static nl.svb.bre.engine.utils.CalculationEnginePredicate.hasMaatregelType;
+import static nl.svb.bre.engine.utils.CalculationEnginePredicate.heeftEisenMaatregelSanctie;
 
 @Component
 public class D1_DuurEnHoogteMaatregelsanctie extends Rule<String> {
@@ -32,10 +35,10 @@ public class D1_DuurEnHoogteMaatregelsanctie extends Rule<String> {
     public DependencySet dependsOn() {
         return DependencySet.of(
                 Dependency.of(D11_EISEN_MAATREGEL_SANCTIE),
-                Dependency.of(D1211_MATE_VAN_VERWIJTBAARHEID),
-                Dependency.of(D12_BASISBEDRAG_IS_LAGER_DAN_MINIMUM_BEDRAG),
-                Dependency.of(D1213_TYPE_MAATREGELSANCTIE),
-                Dependency.of(D12131_RECIDIVE)
+                Dependency.of(D1213_TYPE_MAATREGELSANCTIE, heeftEisenMaatregelSanctie),
+                Dependency.of(D12_BASISBEDRAG_IS_LAGER_DAN_MINIMUM_BEDRAG, heeftEisenMaatregelSanctie.and(Predicate.not(hasMaatregelType.apply(D1213_Maatregel.WAARSCHUWING)))),
+                Dependency.of(D12131_RECIDIVE, heeftEisenMaatregelSanctie.and(Predicate.not(hasMaatregelType.apply(D1213_Maatregel.WAARSCHUWING)))),
+                Dependency.of(D1211_MATE_VAN_VERWIJTBAARHEID, heeftEisenMaatregelSanctie.and(Predicate.not(hasMaatregelType.apply(D1213_Maatregel.WAARSCHUWING))).and(Predicate.not(basisbedragIsLagerDanMinimum)))
         );
     }
 

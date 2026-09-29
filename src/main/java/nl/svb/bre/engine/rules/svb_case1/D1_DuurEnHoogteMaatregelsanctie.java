@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static nl.svb.bre.domain.enums.Definitiecode.D11_EISEN_MAATREGEL_SANCTIE;
+import static nl.svb.bre.domain.enums.Definitiecode.D12_BASISBEDRAG_IS_LAGER_DAN_MINIMUM_BEDRAG;
 import static nl.svb.bre.domain.enums.Definitiecode.D1_DUUR_HOOGTE_MAATREGEL;
 
 @Component
@@ -25,7 +26,8 @@ public class D1_DuurEnHoogteMaatregelsanctie extends Rule<Map> {
     @Override
     public DependencySet dependsOn() {
         return DependencySet.of(
-                Dependency.of(D11_EISEN_MAATREGEL_SANCTIE)
+                Dependency.of(D11_EISEN_MAATREGEL_SANCTIE),
+                Dependency.of(D12_BASISBEDRAG_IS_LAGER_DAN_MINIMUM_BEDRAG)
         );
     }
 

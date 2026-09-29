@@ -6,7 +6,9 @@ import nl.svb.bre.engine.domain.Dependency;
 import nl.svb.bre.engine.domain.DependencySet;
 import nl.svb.bre.engine.domain.Waarde;
 import nl.svb.bre.engine.rules.Rule;
+import org.springframework.stereotype.Component;
 
+@Component
 public class D1112_UitzonderingMedewerkingsverplichtingAKW extends Rule<Boolean> {
     @Override
     public Definitiecode getDefinitionCode() {

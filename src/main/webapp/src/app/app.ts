@@ -2,6 +2,7 @@ import { Component, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { GrondslaggegevenNode } from './grondslaggegeven-node/grondslaggegeven-node';
 import { Grondslag, Grondslaggegeven } from './models/grondslag.model';
+import { sortByDefinitiecode } from './models/grondslag.util';
 import { DefinitieService } from './services/definitie.service';
 import { GrondslagService } from './services/grondslag.service';
 
@@ -60,7 +61,9 @@ export class App implements OnInit {
         next: (result) => {
           this.grondslag.set(result.grondslag);
           this.warnings.set(
-            (result.errors ?? []).flatMap((engineError) => engineError.errors.map((e) => e.message)),
+            (result.errors ?? []).flatMap((engineError) =>
+              engineError.errors.map((e) => e.message),
+            ),
           );
           this.selectedGrondslagId = result.grondslag.id;
           this.loading.set(false);
@@ -92,7 +95,9 @@ export class App implements OnInit {
         childIds.add(child.id);
       }
     }
-    return grondslag.grondslaggegevens.filter((gegeven) => !childIds.has(gegeven.id));
+    return sortByDefinitiecode(
+      grondslag.grondslaggegevens.filter((gegeven) => !childIds.has(gegeven.id)),
+    );
   }
 
   protected label(grondslag: Grondslag): string {

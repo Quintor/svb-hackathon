@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Grondslaggegeven } from '../models/grondslag.model';
+import { sortByDefinitiecode } from '../models/grondslag.util';
 
 @Component({
   selector: 'app-grondslaggegeven-node',
@@ -10,4 +11,8 @@ import { Grondslaggegeven } from '../models/grondslag.model';
 })
 export class GrondslaggegevenNode {
   @Input({ required: true }) node!: Grondslaggegeven;
+
+  protected get children(): Grondslaggegeven[] {
+    return sortByDefinitiecode(this.node.onderliggend);
+  }
 }

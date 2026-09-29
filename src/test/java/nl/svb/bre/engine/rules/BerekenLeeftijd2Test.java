@@ -1,21 +1,21 @@
 package nl.svb.bre.engine.rules;
 
 import nl.svb.bre.engine.context.CalculationContext;
-import nl.svb.bre.engine.domain.ExampleObject;
 import nl.svb.bre.engine.domain.TestObject;
 import nl.svb.bre.engine.domain.Waarde;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BerekenLeeftijd2Test {
     @Test
     void executeRule() {
-        CalculationContext calculationContext = new CalculationContext(null, getTestObject(), null);
+        LocalDate pijlDatum = LocalDate.of(2026, Month.SEPTEMBER,28);
+        CalculationContext calculationContext = new CalculationContext(null, getTestObject(), pijlDatum);
         BerekenLeeftijd2 rule = new BerekenLeeftijd2();
         Waarde<Integer> execute = rule.execute(calculationContext);
         assertEquals(execute.value(), Integer.valueOf(2));
@@ -23,14 +23,15 @@ class BerekenLeeftijd2Test {
 
     @Test
     void executeRuleOlder() {
-        CalculationContext calculationContext = new CalculationContext(null, getTestObject2(), null);
+        LocalDate pijlDatum = LocalDate.of(2026, Month.SEPTEMBER,28);
+        CalculationContext calculationContext = new CalculationContext(null, getTestObject2(), pijlDatum);
         BerekenLeeftijd2 rule = new BerekenLeeftijd2();
         Waarde<Integer> execute = rule.execute(calculationContext);
         assertEquals(execute.value(), Integer.valueOf(3));
     }
 
     TestObject getTestObject() {
-        return new TestObject(0l, List.of(1l, 2l), false,
+        return new TestObject(0L, List.of(1L, 2L), false,
                 null, null, null, false, false, "",
                 false, false, false,
                 false, "", false,
@@ -44,7 +45,7 @@ class BerekenLeeftijd2Test {
     }
 
     TestObject getTestObject2() {
-        return new TestObject(0l, List.of(1l, 2l), false,
+        return new TestObject(0L, List.of(1L, 2L), false,
                 null, null, null, false, false, "",
                 false, false, false,
                 false, "", false,

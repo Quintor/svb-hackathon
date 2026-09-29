@@ -22,7 +22,7 @@ class BerekenLeeftijd2Test {
     }
 
     @Test
-    void executeRuleOlder(){
+    void executeRuleOlder() {
         CalculationContext calculationContext = new CalculationContext(null, getTestObject2(), null);
         BerekenLeeftijd2 rule = new BerekenLeeftijd2();
         Waarde<Integer> execute = rule.execute(calculationContext);
@@ -30,30 +30,30 @@ class BerekenLeeftijd2Test {
     }
 
     TestObject getTestObject() {
-        return new TestObject(0l, List.of(1l, 2l),false,
-                false,false, "",
+        return new TestObject(0l, List.of(1l, 2l), false,
+                false, false, "",
                 false, false, false,
                 false, "", false,
                 false, false, false,
                 false, false, false, false,
                 false, false, false,
                 "", false, false,
-                false, false, false,
-                false, false, LocalDate.of(2014, 10,10),
-                LocalDate.of(2024,4,5));
+                false, null, false, false,
+                false, false, LocalDate.of(2014, 10, 10),
+                LocalDate.of(2024, 4, 5));
     }
 
     TestObject getTestObject2() {
-        return new TestObject(0l, List.of(1l, 2l),false,
-                false,false, "",
+        return new TestObject(0l, List.of(1l, 2l), false,
+                false, false, "",
                 false, false, false,
                 false, "", false,
                 false, false, false,
                 false, false, false, false,
                 false, false, false,
                 "", false, false,
-                false, false, false,
-                false, false, LocalDate.of(2014, 10,10),
-                LocalDate.of(2024,12,5));
+                false, null, false, false,
+                false, false, LocalDate.of(2014, 10, 10),
+                LocalDate.of(2024, 12, 5));
     }
 }

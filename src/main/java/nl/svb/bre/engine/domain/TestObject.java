@@ -31,6 +31,7 @@ public record TestObject (
         boolean isMedewerkingsplichtigAkw,
         boolean isInstelling,
         boolean isInhoudingsuitkeringBeeindigd,
+        Boolean uitkeringKanHerleven,
         boolean heeftSvbBoetewaarschuwingVoorZelfdeGedraging,
         boolean heeftSvbBoeteVoorZelfdeGedraging,
         boolean isDringendeRedenAanwezig,

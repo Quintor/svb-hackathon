@@ -29,11 +29,11 @@ public class GrondslagController {
 
     @GetMapping("/calculate")
     public Grondslag calculate(@RequestParam final Definitiecode definitiecode,
-                                @RequestParam final Long persoonId,
-                                @RequestParam final Long persoonIdKind1,
-                                @RequestParam final Long persoonIdKind2,
-                                @RequestParam final Integer testgeval,
-                                @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) final LocalDate peildatum) {
+                               @RequestParam final Long persoonId,
+                               @RequestParam final Long persoonIdKind1,
+                               @RequestParam final Long persoonIdKind2,
+                               @RequestParam final Integer testgeval,
+                               @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) final LocalDate peildatum) {
         return treeCalculator.calculateResult(definitiecode, new TestObject(
                 persoonId,
                 List.of(persoonIdKind1, persoonIdKind2),
@@ -61,12 +61,13 @@ public class GrondslagController {
                 true,
                 false,
                 false,
+                null,
                 false,
                 false,
                 false,
                 false,
-                LocalDate.of(2016, 3,25),
-                LocalDate.of(2018, 4,1)
+                LocalDate.of(2016, 3, 25),
+                LocalDate.of(2018, 4, 1)
         ), peildatum);
     }
 

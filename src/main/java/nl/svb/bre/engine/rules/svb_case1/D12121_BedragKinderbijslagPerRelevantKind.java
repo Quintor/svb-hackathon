@@ -22,7 +22,7 @@ public class D12121_BedragKinderbijslagPerRelevantKind extends Rule<Collection<B
 
     @Override
     public Definitiecode getDefinitionCode() {
-        return Definitiecode.SVB_D12121_BEDRAG_AKW;
+        return Definitiecode.D12121_BEDRAG_AKW;
     }
 
     @Override

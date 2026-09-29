@@ -13,7 +13,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -43,12 +42,14 @@ class D11311_DoorEenBuitengewoneOmstandigheidWasHetNakomenVanDeVerplichtingFeite
         ctx.addCalculatedRule(Definitiecode.D113111_BUITENGEWONE_OMSTANDIGHEID, new Waarde<>(buitengewoneOmstandigheid, null));
 
         when(ctx.getTestObject().nakomenFeitelijkOnmogelijk()).thenReturn(nakomenFeitelijkOnmogelijk);
+
+        assertThat(rule.executeRule(ctx).value()).isEqualTo(expected);
     }
 
     static Stream<Arguments> provideForTestExecuteRule() {
         return Stream.of(
                 Arguments.of(false, null, false),
-                Arguments.of(true, false, true),
+                Arguments.of(true, false, false),
                 Arguments.of(true, true, true)
         );
     }

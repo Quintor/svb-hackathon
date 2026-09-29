@@ -30,7 +30,7 @@ public class D12113_VerminderdToeTeRekenen extends Rule<Boolean> {
             if (b2==null) {
                 throw new FunctionalCalculationException(CalculationError.MISSING_VALUE_D12113);
             }
-            // implement the rest of the beslissings tabel
+            //TODO implement the rest of the beslissings tabel
         }
 
         return null;

@@ -29,6 +29,10 @@ public class D1131_PersoonVerwijtbaar extends Rule<Boolean> {
 
     @Override
     protected Waarde<Boolean> executeRule(CalculationContext calculationContext) {
-        return null;
+        Boolean nakomenOnmogelijkDoorBuitengewoneOmstandigheid = getCalculatedValue(calculationContext, D11311_DOOR_EEN_BUITENGEWONE_OMSTANDIGHEID_WAS_HET_NAKOMEN_VAN_DE_VERPLICHTING_FEITELIJK_ONMOGELIJK);
+        return new Waarde<>(nakomenOnmogelijkDoorBuitengewoneOmstandigheid == null
+                ? null
+                : !nakomenOnmogelijkDoorBuitengewoneOmstandigheid,
+                null);
     }
 }

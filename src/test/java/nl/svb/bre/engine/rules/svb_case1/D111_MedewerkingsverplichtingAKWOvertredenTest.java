@@ -10,6 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Set;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -36,7 +37,7 @@ class D111_MedewerkingsverplichtingAKWOvertredenTest {
     }
 
     @ParameterizedTest
-    @MethodSource("provideForTestExecuteRule")
+    @MethodSource
     void testExecuteRule(Boolean isMedewerkingsplichtigAkw,
                          Boolean uitzonderingMedewerkingsverplichtingAkw,
                          String overtredenSoortVerplichtingAkw,
@@ -46,18 +47,22 @@ class D111_MedewerkingsverplichtingAKWOvertredenTest {
 
         when(mockTestObject.isMedewerkingsplichtigAkw()).thenReturn(isMedewerkingsplichtigAkw);
 
-        ctx.addCalculatedRule(Definitiecode.D1111_OVERTREDEN_SOORT_VERPLICHTING_AKW, new Waarde<>(overtredenSoortVerplichtingAkw, null));
-        ctx.addCalculatedRule(Definitiecode.D1112_UITZONDERING_MEDEWERKINGSVERPLICHTING_AKW, new Waarde<>(uitzonderingMedewerkingsverplichtingAkw, null));
+        if (uitzonderingMedewerkingsverplichtingAkw != null) {
+            ctx.addCalculatedRule(Definitiecode.D1111_OVERTREDEN_SOORT_VERPLICHTING_AKW, new Waarde<>(overtredenSoortVerplichtingAkw, null));
+            if (!uitzonderingMedewerkingsverplichtingAkw) {
+                ctx.addCalculatedRule(Definitiecode.D1112_UITZONDERING_MEDEWERKINGSVERPLICHTING_AKW, new Waarde<>(uitzonderingMedewerkingsverplichtingAkw, null));
+            }
+        }
 
         assertThat(rule.executeRule(ctx).value()).isEqualTo(expected);
     }
 
-    static Stream<Arguments> provideForTestExecuteRule() {
+    static Stream<Arguments> testExecuteRule() {
         return Stream.of(
                 Arguments.of(false, null, null, false),
-                Arguments.of(true, true, null, false),
-                Arguments.of(true, false, "nakomen verplichting tweede categorie", false),
-                Arguments.of(true, false, null, true)
+                Arguments.of(true, true, null, null),
+                Arguments.of(true, false, "something", false),
+                Arguments.of(true, false, "nakomen verplichting tweede categorie", true)
         );
     }
 }

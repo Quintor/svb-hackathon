@@ -6,15 +6,24 @@ import nl.svb.bre.engine.domain.Dependency;
 import nl.svb.bre.engine.domain.DependencySet;
 import nl.svb.bre.engine.domain.Waarde;
 import nl.svb.bre.engine.rules.Rule;
-import nl.svb.bre.engine.utils.RequiredValueUtil;
 import org.springframework.stereotype.Component;
 
+import java.util.Set;
+
+import static java.util.function.Predicate.not;
 import static nl.svb.bre.domain.enums.Definitiecode.D1111_OVERTREDEN_SOORT_VERPLICHTING_AKW;
 import static nl.svb.bre.domain.enums.Definitiecode.D1112_UITZONDERING_MEDEWERKINGSVERPLICHTING_AKW;
 import static nl.svb.bre.domain.enums.Definitiecode.D111_MEDEWERKINGSVERPLICHTING_OVERTREDEN;
+import static nl.svb.bre.engine.utils.CalculationEnginePredicate.isMedewerkingsplichtigVoorAKW;
+import static nl.svb.bre.engine.utils.CalculationEnginePredicate.isuitzonderingMedewerkingsverplichtingAKW;
 
 @Component
 public class D111_MedewerkingsverplichtingAKWOvertreden extends Rule<Boolean> {
+
+    private static final Set<String> UITGEZONDERDE_VERPLICHTINGEN = Set.of(
+            "reageren op een informatieverzoek",
+            "nakomen overige controlevoorschriften",
+            "nakomen verplichting tweede categorie");
 
     @Override
     public Definitiecode getDefinitionCode() {
@@ -24,8 +33,8 @@ public class D111_MedewerkingsverplichtingAKWOvertreden extends Rule<Boolean> {
     @Override
     public DependencySet dependsOn() {
         return DependencySet.of(
-                Dependency.of(D1111_OVERTREDEN_SOORT_VERPLICHTING_AKW),
-                Dependency.of(D1112_UITZONDERING_MEDEWERKINGSVERPLICHTING_AKW)
+                Dependency.of(D1112_UITZONDERING_MEDEWERKINGSVERPLICHTING_AKW, isMedewerkingsplichtigVoorAKW),
+                Dependency.of(D1111_OVERTREDEN_SOORT_VERPLICHTING_AKW, isMedewerkingsplichtigVoorAKW.and(not(isuitzonderingMedewerkingsverplichtingAKW)))
         );
     }
 
@@ -36,17 +45,10 @@ public class D111_MedewerkingsverplichtingAKWOvertreden extends Rule<Boolean> {
             return new Waarde<>(false, null);
         }
 
-        boolean uitzonderingMedewerkingsverplichtingAkw = RequiredValueUtil.requiredValue(
-                getCalculatedValue(calculationContext, Definitiecode.D1112_UITZONDERING_MEDEWERKINGSVERPLICHTING_AKW)
-        );
-        if (uitzonderingMedewerkingsverplichtingAkw) {
-            return new Waarde<>(false, null);
+        if (calculationContext.isCalculated(D1111_OVERTREDEN_SOORT_VERPLICHTING_AKW)) {
+            String overtredenSoortVerplichtingAkw = getCalculatedValue(calculationContext, D1111_OVERTREDEN_SOORT_VERPLICHTING_AKW);
+            return new Waarde<>(overtredenSoortVerplichtingAkw == null ? null : UITGEZONDERDE_VERPLICHTINGEN.contains(overtredenSoortVerplichtingAkw), null);
         }
-
-        String overtredenSoortVerplichtingAkw = getCalculatedValue(calculationContext, Definitiecode.D1111_OVERTREDEN_SOORT_VERPLICHTING_AKW);
-        return new Waarde<>(!("reageren op een informatieverzoek".equals(overtredenSoortVerplichtingAkw)
-                || "nakomen overige controlevoorschriften".equals(overtredenSoortVerplichtingAkw)
-                || "nakomen verplichting tweede categorie".equals(overtredenSoortVerplichtingAkw)),
-                null);
+        return new Waarde<>(false, null);
     }
 }

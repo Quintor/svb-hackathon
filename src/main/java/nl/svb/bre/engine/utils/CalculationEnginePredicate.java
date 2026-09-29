@@ -13,6 +13,11 @@ public final class CalculationEnginePredicate {
 
     private CalculationEnginePredicate() {}
 
+    //
+    public static final Predicate<CalculationContext> isMedewerkingsplichtigVoorAKW = c -> c.getTestObject().isMedewerkingsplichtigAkw();
+    public static final Predicate<CalculationContext> isuitzonderingMedewerkingsverplichtingAKW = c -> getCalculatedValue(c, Definitiecode.D1112_UITZONDERING_MEDEWERKINGSVERPLICHTING_AKW);
+
+
     // Product
     public static final Predicate<CalculationContext> isBicycle = c -> ExampleVehicle.BICYCLE == getCalculatedValue(c, Definitiecode.EXAMPLE_VEHICLE);
     public static final Predicate<CalculationContext> isCar = c -> ExampleVehicle.CAR == getCalculatedValue(c, Definitiecode.EXAMPLE_VEHICLE);

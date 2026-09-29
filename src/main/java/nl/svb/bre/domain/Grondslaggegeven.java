@@ -2,6 +2,8 @@ package nl.svb.bre.domain;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -12,6 +14,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import nl.svb.bre.engine.domain.enums.CalculationError;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -37,4 +40,7 @@ public class Grondslaggegeven<T> {
     private GeldigheidsPeriode geldigheidsPeriode;
 
     private String waarde;
+
+    @Enumerated(EnumType.STRING)
+    private CalculationError calculationError;
 }

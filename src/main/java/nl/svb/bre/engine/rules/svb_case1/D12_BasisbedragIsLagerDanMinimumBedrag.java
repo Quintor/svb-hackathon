@@ -8,6 +8,8 @@ import nl.svb.bre.engine.domain.Waarde;
 import nl.svb.bre.engine.rules.Rule;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+
 import static nl.svb.bre.domain.enums.Definitiecode.D121_BASISBEDRAG_MAATREGEL;
 import static nl.svb.bre.domain.enums.Definitiecode.D122_MINIMUMBEDRAG_MAATREGEL;
 import static nl.svb.bre.domain.enums.Definitiecode.D12_BASISBEDRAG_IS_LAGER_DAN_MINIMUM_BEDRAG;
@@ -31,6 +33,8 @@ public class D12_BasisbedragIsLagerDanMinimumBedrag extends Rule<Boolean> {
     @Override
     protected Waarde<Boolean> executeRule(CalculationContext calculationContext) {
         // D12 het basisbedrag van de maatregel is lager dan het minimumbedrag van de maatregel
-        return null;
+        BigDecimal minimumBedrag = getCalculatedValue(calculationContext, D122_MINIMUMBEDRAG_MAATREGEL);
+        BigDecimal basisBedrag = getCalculatedValue(calculationContext, D121_BASISBEDRAG_MAATREGEL);
+        return new Waarde<>(basisBedrag.subtract(minimumBedrag).doubleValue() < 0.0, null);
     }
 }

@@ -1,6 +1,11 @@
 <li class="node">
   <span class="code">{{ node.definitie.definitiecode }}</span>
   <span class="waarde">= {{ node.waarde }}</span>
+  @if (node.calculationError; as calculationError) {
+    <span class="calculation-error" [title]="'Foutcode ' + calculationError.code">
+      ⚠ {{ calculationError.message }}
+    </span>
+  }
   @if (node.geldigheidsPeriode; as periode) {
     <span class="periode">({{ periode.start ?? '…' }} t/m {{ periode.end ?? '…' }})</span>
   }

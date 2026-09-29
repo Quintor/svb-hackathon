@@ -70,7 +70,7 @@ class TreeCalculatorTest {
         Definitie definitie = definitie(EXAMPLE_VEHICLE);
         when(definitieRepository.findByDefinitiecode(EXAMPLE_VEHICLE)).thenReturn(definitie);
 
-        Grondslag grondslag = treeCalculator.calculateResult(EXAMPLE_VEHICLE, testObject, LocalDate.of(2024, 1, 1));
+        Grondslag grondslag = treeCalculator.calculateResult(EXAMPLE_VEHICLE, testObject, LocalDate.of(2024, 1, 1)).grondslag();
 
         assertThat(grondslag.getGrondslaggegevens(), hasSize(1));
         Grondslaggegeven<?> gegeven = findByDefinitiecode(grondslag, EXAMPLE_VEHICLE);
@@ -96,7 +96,7 @@ class TreeCalculatorTest {
         when(definitieRepository.findByDefinitiecode(EXAMPLE_VEHICLE)).thenReturn(definitie(EXAMPLE_VEHICLE));
         when(definitieRepository.findByDefinitiecode(EXAMPLE_JOURNEY)).thenReturn(definitie(EXAMPLE_JOURNEY));
 
-        Grondslag grondslag = treeCalculator.calculateResult(EXAMPLE_JOURNEY, testObject, LocalDate.of(2024, 1, 1));
+        Grondslag grondslag = treeCalculator.calculateResult(EXAMPLE_JOURNEY, testObject, LocalDate.of(2024, 1, 1)).grondslag();
 
         assertThat(executionOrder, contains(EXAMPLE_VEHICLE, EXAMPLE_JOURNEY));
         Grondslaggegeven<?> journeyGegeven = findByDefinitiecode(grondslag, EXAMPLE_JOURNEY);
@@ -114,7 +114,7 @@ class TreeCalculatorTest {
         calculationRules.put(EXAMPLE_JOURNEY, journeyRule);
         when(definitieRepository.findByDefinitiecode(EXAMPLE_JOURNEY)).thenReturn(definitie(EXAMPLE_JOURNEY));
 
-        Grondslag grondslag = treeCalculator.calculateResult(EXAMPLE_JOURNEY, testObject, LocalDate.of(2024, 1, 1));
+        Grondslag grondslag = treeCalculator.calculateResult(EXAMPLE_JOURNEY, testObject, LocalDate.of(2024, 1, 1)).grondslag();
 
         verify(bicycleRule, never()).execute(any());
         assertThat(findByDefinitiecode(grondslag, EXAMPLE_JOURNEY).getOnderliggend(), is(empty()));
@@ -142,9 +142,9 @@ class TreeCalculatorTest {
         when(failingRule.execute(any())).thenThrow(new FunctionalCalculationException(CalculationError.UNKNOWN_VEHICLE));
         calculationRules.put(EXAMPLE_JOURNEY, failingRule);
 
-        Grondslag grondslag = treeCalculator.calculateResult(EXAMPLE_JOURNEY, testObject, LocalDate.of(2024, 1, 1));
+        Grondslag grondslag = treeCalculator.calculateResult(EXAMPLE_JOURNEY, testObject, LocalDate.of(2024, 1, 1)).grondslag();
 
-        assertThat(grondslag.getGrondslaggegevens(), is(empty()));
+        assertThat(grondslag.getGrondslaggegevens(), is(hasSize(1)));
         verify(grondslagRepository).save(grondslag);
     }
 

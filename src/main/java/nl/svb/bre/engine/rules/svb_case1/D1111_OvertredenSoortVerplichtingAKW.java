@@ -38,7 +38,7 @@ public class D1111_OvertredenSoortVerplichtingAKW extends Rule<String> {
                  "Kind >= 16: het doen invullen en ondertekenen van een schoolverklaring door de onderwijsinstelling voor het kind dat onderwijs volgt. De verklaring moet binnen de gestelde termijn aan de SVB toekomen",
                  "Kind >= 16: het op verzoek verstrekken van het adres van een uitwonend (wordend) kind en het op verzoek overleggen van bewijsstukken waaruit blijkt dat het kind uitwonend is. Dit alles binnen de door de SVB gestelde termijn" ->
                     "reageren op een informatieverzoek";
-            case null, default -> throw new FunctionalCalculationException(CalculationError.UNKNOWN_VALUE);
+            case null, default -> throw new FunctionalCalculationException(CalculationError.MISSING_VALUE_D1111);
         };
         return new Waarde<>(result, null);
     }

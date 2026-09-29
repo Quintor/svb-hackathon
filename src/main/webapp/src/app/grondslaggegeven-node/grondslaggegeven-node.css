@@ -20,6 +20,15 @@
   overflow-wrap: break-word;
 }
 
+.calculation-error {
+  margin-left: 6px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-size: 0.8rem;
+}
+
 .periode {
   margin-left: 6px;
   color: #718096;

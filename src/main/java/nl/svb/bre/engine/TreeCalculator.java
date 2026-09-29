@@ -12,6 +12,7 @@ import nl.svb.bre.engine.domain.EngineResult;
 import nl.svb.bre.engine.domain.ExampleObject;
 import nl.svb.bre.engine.domain.TestObject;
 import nl.svb.bre.engine.domain.Waarde;
+import nl.svb.bre.engine.domain.enums.CalculationError;
 import nl.svb.bre.engine.errors.CalculationException;
 import nl.svb.bre.engine.errors.FunctionalCalculationException;
 import nl.svb.bre.engine.rules.Rule;
@@ -21,7 +22,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -86,14 +86,22 @@ public class TreeCalculator {
                 .map(dep -> execute(grondslag, context, dep.getDefinitiecode(), errors))
                 .collect(Collectors.toSet());
 
-        Waarde<?> waarde = calculate(rule, context, errors);
+        Waarde<?> waarde = null;
+        CalculationError calculationError = null;
+        try {
+            waarde = rule.execute(context);
+        } catch (FunctionalCalculationException ex) {
+            handleFunctionalError(errors, ex);
+            calculationError = ex.getCalculationError();
+        }
 
         var grondslaggegeven = new Grondslaggegeven<>(
                 null,
                 definitieRepository.findByDefinitiecode(definitiecode),
                 onderliggend,
                 waarde != null ? waarde.geldigheidsPeriode() : null,
-                waarde != null ? String.valueOf(waarde.value()) : null);
+                waarde != null ? String.valueOf(waarde.value()) : null,
+                calculationError);
 
         grondslag.getGrondslaggegevens().add(grondslaggegeven);
         return grondslaggegeven;
@@ -103,15 +111,6 @@ public class TreeCalculator {
         var requirement = dependency.getRequirment();
         return (requirement == null || requirement.test(context))
                 && !context.isCalculated(dependency.getDefinitiecode());
-    }
-
-    private Waarde<?> calculate(Rule<?> rule, CalculationContext context, List<EngineError> errors) {
-        try {
-            return rule.execute(context);
-        } catch (FunctionalCalculationException ex) {
-            handleFunctionalError(errors, ex);
-            return null;
-        }
     }
 
     private void handleFunctionalError(final List<EngineError> errors, final CalculationException exception) {

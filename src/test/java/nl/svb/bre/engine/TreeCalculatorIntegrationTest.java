@@ -4,9 +4,10 @@ import nl.svb.bre.domain.Grondslag;
 import nl.svb.bre.domain.Grondslaggegeven;
 import nl.svb.bre.engine.domain.EngineResult;
 import nl.svb.bre.engine.domain.ExampleObject;
-import nl.svb.bre.engine.domain.TestObject;
+import nl.svb.bre.engine.domain.enums.CalculationError;
 import nl.svb.bre.engine.domain.enums.ExampleVehicle;
 import nl.svb.bre.domain.enums.Definitiecode;
+import nl.svb.bre.repository.GrondslagRepository;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,12 +23,16 @@ import java.util.stream.Stream;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 
 @SpringBootTest
 class TreeCalculatorIntegrationTest {
 
     @Autowired
     private TreeCalculator treeCalculator;
+
+    @Autowired
+    private GrondslagRepository grondslagRepository;
 
     private static Stream<Arguments> calculateResults() {
         return Stream.of(
@@ -54,6 +59,17 @@ class TreeCalculatorIntegrationTest {
         String result = findGrondslaggegevenByDefinitiecode(outcome.grondslag(), Definitiecode.EXAMPLE_JOURNEY).getWaarde();
         assertThat(result, is("The journey by bicycle will take PT1H"));
         assertThat(outcome.errors(), is(empty()));
+    }
+
+    @Test
+    void calculationErrorIsPersisted() {
+        long persoonId = new Random().nextLong();
+        EngineResult outcome = treeCalculator.calculateResult(Definitiecode.EXAMPLE_JOURNEY, new ExampleObject(persoonId, 18, false, ExampleVehicle.CAR), LocalDate.of(2024, 1, 1));
+        assertThat(outcome.errors().size(), is(1));
+
+        Grondslaggegeven<?> journey = findGrondslaggegevenByDefinitiecode(grondslagRepository.findByPersoonId(persoonId), Definitiecode.EXAMPLE_JOURNEY);
+        assertThat(journey.getWaarde(), is(nullValue()));
+        assertThat(journey.getCalculationError(), is(CalculationError.UNKNOWN_VEHICLE));
     }
 
     private Grondslaggegeven<?> findGrondslaggegevenByDefinitiecode(Grondslag grondslag, Definitiecode definitiecode) {

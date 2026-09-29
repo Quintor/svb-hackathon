@@ -9,22 +9,23 @@ export interface GeldigheidsPeriode {
   end: string | null;
 }
 
+export interface CalculationError {
+  code: string;
+  message: string;
+}
+
 export interface Grondslaggegeven {
   id: number;
   definitie: Definitie;
   onderliggend: Grondslaggegeven[];
   geldigheidsPeriode: GeldigheidsPeriode | null;
   waarde: string | null;
+  calculationError: CalculationError | null;
 }
 
 export interface Grondslag {
   id: number;
   grondslaggegevens: Grondslaggegeven[];
-}
-
-export interface CalculationError {
-  code: string;
-  message: string;
 }
 
 export interface CalculationException {

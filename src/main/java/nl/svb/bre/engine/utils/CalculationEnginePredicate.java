@@ -16,6 +16,9 @@ public final class CalculationEnginePredicate {
     public static final Predicate<CalculationContext> isuitzonderingMedewerkingsverplichtingAKW = c -> getCalculatedValue(c, Definitiecode.D1112_UITZONDERING_MEDEWERKINGSVERPLICHTING_AKW);
     public static final Predicate<CalculationContext> heeftSvbBoetewaarschuwingVoorZelfdeGedraging = c -> c.getTestObject().heeftSvbBoetewaarschuwingVoorZelfdeGedraging();
     public static final Predicate<CalculationContext> heeftSvbBoeteVoorZelfdeGedraging = c -> c.getTestObject().heeftSvbBoeteVoorZelfdeGedraging();
+    public static final Predicate<CalculationContext> medewerkingsverplichtingAkwOvertreden = c -> c.isCalculated(Definitiecode.D111_MEDEWERKINGSVERPLICHTING_OVERTREDEN) && Boolean.TRUE.equals(getCalculatedValue(c, Definitiecode.D111_MEDEWERKINGSVERPLICHTING_OVERTREDEN));
+    public static final Predicate<CalculationContext> uitkeringswaardeBijMaatregel = c -> c.isCalculated(Definitiecode.D112_UITKERING_WAARDE_OP_MAATREGEL_SANCTIE) && Boolean.TRUE.equals(getCalculatedValue(c, Definitiecode.D112_UITKERING_WAARDE_OP_MAATREGEL_SANCTIE));
+    public static final Predicate<CalculationContext> isInstelling = c -> c.getTestObject().isInstelling();
 
     // Product
     public static final Predicate<CalculationContext> isBicycle = c -> ExampleVehicle.BICYCLE == getCalculatedValue(c, Definitiecode.EXAMPLE_VEHICLE);

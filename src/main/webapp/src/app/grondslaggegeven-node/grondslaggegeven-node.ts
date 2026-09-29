@@ -10,4 +10,8 @@ import { Grondslaggegeven } from '../models/grondslag.model';
 })
 export class GrondslaggegevenNode {
   @Input({ required: true }) node!: Grondslaggegeven;
+
+  protected get ontbreekt(): boolean {
+    return this.node.waarde == null || this.node.waarde === 'null';
+  }
 }

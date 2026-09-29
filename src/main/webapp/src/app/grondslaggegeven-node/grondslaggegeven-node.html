@@ -1,6 +1,10 @@
 <li class="node">
   <span class="code">{{ node.definitie.definitiecode }}</span>
-  <span class="waarde">= {{ node.waarde }}</span>
+  @if (ontbreekt) {
+    <span class="waarde">= <span class="ontbreekt">&lt;gegeven ontbreekt&gt;</span></span>
+  } @else {
+    <span class="waarde">= {{ node.waarde }}</span>
+  }
   @if (node.geldigheidsPeriode; as periode) {
     <span class="periode">({{ periode.start ?? '…' }} t/m {{ periode.end ?? '…' }})</span>
   }

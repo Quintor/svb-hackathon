@@ -20,6 +20,11 @@
   overflow-wrap: break-word;
 }
 
+.ontbreekt {
+  color: #ea580c;
+  font-style: italic;
+}
+
 .periode {
   margin-left: 6px;
   color: #718096;

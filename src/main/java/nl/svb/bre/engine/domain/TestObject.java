@@ -22,7 +22,7 @@ public record TestObject(
         boolean heeftRecidiveNietTijdigReagerenBinnenTweeJaar,
         boolean heeftRecidiveNietReagerenBinnenTweeJaar,
         boolean heeftMaatregelwaarschuwingBinnenTweeJaar,
-        boolean schorsingsbeslissingGenomen,
+        Boolean schorsingsbeslissingGenomen,
         boolean isOvertredingGedeeltelijkVerwijtbaar,
         boolean isOvertredingMedeTeWijtenAanSvb,
         boolean isMeldplichtigeVerhuizingBuitenland,

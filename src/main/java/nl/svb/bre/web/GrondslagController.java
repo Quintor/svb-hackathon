@@ -4,10 +4,14 @@ import lombok.RequiredArgsConstructor;
 import nl.svb.bre.domain.Grondslag;
 import nl.svb.bre.domain.enums.Definitiecode;
 import nl.svb.bre.engine.TreeCalculator;
+import nl.svb.bre.engine.domain.EngineResult;
 import nl.svb.bre.engine.domain.ExampleObject;
 import nl.svb.bre.engine.domain.TestObject;
 import nl.svb.bre.engine.domain.enums.ExampleVehicle;
 import nl.svb.bre.repository.GrondslagRepository;
+import nl.svb.bre.web.mocks.TestCase1;
+import nl.svb.bre.web.mocks.TestCase2;
+import nl.svb.bre.web.mocks.TestCase3;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,55 +32,25 @@ public class GrondslagController {
     private final GrondslagRepository grondslagRepository;
 
     @GetMapping("/calculate")
-    public Grondslag calculate(@RequestParam final Definitiecode definitiecode,
-                               @RequestParam final Long persoonId,
-                               @RequestParam final Long persoonIdKind1,
-                               @RequestParam final Long persoonIdKind2,
-                               @RequestParam final Integer testgeval,
-                               @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) final LocalDate peildatum) {
-        return treeCalculator.calculateResult(definitiecode, new TestObject(
-                persoonId,
-                List.of(persoonIdKind1, persoonIdKind2),
-                true,
-                null,
-                null,
-                null,
-                false,
-                false,
-                "andere reden",
-                false,
-                false,
-                true,
-                true,
-                "reageren op een informatieverzoek",
-                false,
-                false,
-                false,
-                true,
-                false,
-                false,
-                false,
-                null,
-                false,
-                false,
-                false,
-                "Een wijziging in het adres van de niet in de BRP ingeschreven kinderbijslaggerechtigde onverwijld melden",
-                true,
-                false,
-                false,
-                null,
-                false,
-                false,
-                false,
-                false,
-                LocalDate.of(2016, 3, 25),
-                LocalDate.of(2018, 4, 1)
-        ), peildatum);
+    public EngineResult calculate(@RequestParam final Definitiecode definitiecode,
+                                  @RequestParam final Long persoonId,
+                                  @RequestParam final Long persoonIdKind1,
+                                  @RequestParam final Long persoonIdKind2,
+                                  @RequestParam final Integer testgeval,
+                                  @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) final LocalDate peildatum) {
+        TestObject testObject =
+        switch (testgeval) {
+            case 1 -> TestCase1.TEST_OBJECT(persoonId, persoonIdKind1, persoonIdKind2);
+            case 2 -> TestCase2.TEST_OBJECT(persoonId, persoonIdKind1, persoonIdKind2);
+            default -> TestCase3.TEST_OBJECT(persoonId, persoonIdKind1, persoonIdKind2); // Uitworp
+        };
+
+        return treeCalculator.calculateResult(definitiecode, testObject, peildatum);
     }
 
 
     @GetMapping("/calculate_journey")
-    public Grondslag calculate(@RequestParam final Definitiecode definitiecode,
+    public EngineResult calculate(@RequestParam final Definitiecode definitiecode,
                                @RequestParam final Long persoonId,
                                @RequestParam final Integer distance,
                                @RequestParam final Boolean electric,

@@ -43,7 +43,7 @@ class D1111_OvertredenSoortVerplichtingAKWTest {
 
         var ex = catchThrowableOfType(FunctionalCalculationException.class, () -> rule.execute(ctx));
 
-        assertThat(ex.getCalculationError()).isEqualTo(CalculationError.UNKNOWN_VALUE);
+        assertThat(ex.getCalculationError()).isEqualTo(CalculationError.MISSING_VALUE_D1111);
     }
 
     static Stream<Arguments> provideForTestExecuteRule() {

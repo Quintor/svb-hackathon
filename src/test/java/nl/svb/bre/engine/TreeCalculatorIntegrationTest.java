@@ -2,6 +2,7 @@ package nl.svb.bre.engine;
 
 import nl.svb.bre.domain.Grondslag;
 import nl.svb.bre.domain.Grondslaggegeven;
+import nl.svb.bre.engine.domain.EngineResult;
 import nl.svb.bre.engine.domain.ExampleObject;
 import nl.svb.bre.engine.domain.TestObject;
 import nl.svb.bre.engine.domain.enums.ExampleVehicle;
@@ -19,6 +20,7 @@ import java.util.Random;
 import java.util.stream.Stream;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
 
 @SpringBootTest
@@ -40,16 +42,18 @@ class TreeCalculatorIntegrationTest {
     @ParameterizedTest
     @MethodSource
     void calculateResults(Integer distance, boolean electric, String duration) {
-        Grondslag outcome = treeCalculator.calculateResult(Definitiecode.EXAMPLE_JOURNEY, new ExampleObject(new Random().nextLong(), distance, electric, ExampleVehicle.BICYCLE), LocalDate.of(2024, 1, 1));
-        String result = findGrondslaggegevenByDefinitiecode(outcome, Definitiecode.EXAMPLE_JOURNEY).getWaarde();
+        EngineResult outcome = treeCalculator.calculateResult(Definitiecode.EXAMPLE_JOURNEY, new ExampleObject(new Random().nextLong(), distance, electric, ExampleVehicle.BICYCLE), LocalDate.of(2024, 1, 1));
+        String result = findGrondslaggegevenByDefinitiecode(outcome.grondslag(), Definitiecode.EXAMPLE_JOURNEY).getWaarde();
         assertThat(result, is("The journey by bicycle will take " + duration));
+        assertThat(outcome.errors(), is(empty()));
     }
 
     @RepeatedTest(2)
     void calculateResultsFor42() {
-        Grondslag outcome = treeCalculator.calculateResult(Definitiecode.EXAMPLE_JOURNEY, new ExampleObject(42L, 18, false, ExampleVehicle.BICYCLE), LocalDate.of(2024, 1, 1));
-        String result = findGrondslaggegevenByDefinitiecode(outcome, Definitiecode.EXAMPLE_JOURNEY).getWaarde();
+        EngineResult outcome = treeCalculator.calculateResult(Definitiecode.EXAMPLE_JOURNEY, new ExampleObject(42L, 18, false, ExampleVehicle.BICYCLE), LocalDate.of(2024, 1, 1));
+        String result = findGrondslaggegevenByDefinitiecode(outcome.grondslag(), Definitiecode.EXAMPLE_JOURNEY).getWaarde();
         assertThat(result, is("The journey by bicycle will take PT1H"));
+        assertThat(outcome.errors(), is(empty()));
     }
 
     private Grondslaggegeven<?> findGrondslaggegevenByDefinitiecode(Grondslag grondslag, Definitiecode definitiecode) {

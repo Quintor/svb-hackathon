@@ -6,7 +6,9 @@ import nl.svb.bre.engine.domain.Waarde;
 import nl.svb.bre.engine.domain.enums.CalculationError;
 import nl.svb.bre.engine.errors.FunctionalCalculationException;
 import nl.svb.bre.engine.rules.Rule;
+import org.springframework.stereotype.Component;
 
+@Component
 public class D1111_OvertredenSoortVerplichtingAKW extends Rule<String> {
     @Override
     public Definitiecode getDefinitionCode() {

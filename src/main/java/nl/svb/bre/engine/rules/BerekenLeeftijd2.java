@@ -18,10 +18,11 @@ public class BerekenLeeftijd2 extends Rule<Integer> {
     @Override
     protected Waarde<Integer> executeRule(CalculationContext calculationContext) {
         LocalDate geboorteDatum =  calculationContext.getTestObject().geboortedatumKind2();
-        LocalDate today =  LocalDate.now();
-        if(today.getDayOfYear() < geboorteDatum.getDayOfYear()) {
-            return new Waarde<>(today.minusYears(geboorteDatum.getYear()).getYear()+1, null);
+        LocalDate pijlDatum = calculationContext.getPeildatum();
+        pijlDatum = pijlDatum.minusDays(pijlDatum.getDayOfMonth()+1);
+        if(pijlDatum.getDayOfYear() < geboorteDatum.getDayOfYear()) {
+            return new Waarde<>(pijlDatum.minusYears(geboorteDatum.getYear()).getYear()+1, null);
         }
-        return new Waarde<>(today.minusYears(geboorteDatum.getYear()).getYear(), null);
+        return new Waarde<>(pijlDatum.minusYears(geboorteDatum.getYear()).getYear(), null);
     }
 }

@@ -13,6 +13,9 @@ public final class CalculationEnginePredicate {
 
     private CalculationEnginePredicate() {}
 
+    public static final Predicate<CalculationContext> heeftSvbBoetewaarschuwingVoorZelfdeGedraging = c -> c.getTestObject().heeftSvbBoetewaarschuwingVoorZelfdeGedraging();
+    public static final Predicate<CalculationContext> heeftSvbBoeteVoorZelfdeGedraging = c -> c.getTestObject().heeftSvbBoeteVoorZelfdeGedraging();
+
     // Product
     public static final Predicate<CalculationContext> isBicycle = c -> ExampleVehicle.BICYCLE == getCalculatedValue(c, Definitiecode.EXAMPLE_VEHICLE);
     public static final Predicate<CalculationContext> isCar = c -> ExampleVehicle.CAR == getCalculatedValue(c, Definitiecode.EXAMPLE_VEHICLE);

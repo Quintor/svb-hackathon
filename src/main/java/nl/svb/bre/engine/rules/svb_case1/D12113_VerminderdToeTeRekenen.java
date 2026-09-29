@@ -22,13 +22,13 @@ public class D12113_VerminderdToeTeRekenen extends Rule<Boolean> {
         boolean b1 = calculationContext.getTestObject().heeftOnjuisteInlichtingenTijdigHersteld();
         Boolean b2 = null;
         Boolean b3 = null;
-        boolean b4 = calculationContext.getTestObject().heeftInlichtingenVerstrektBijSvbControle;
+        boolean b4 = calculationContext.getTestObject().heeftInlichtingenVerstrektBijSvbControle();
 
         if( b1 ) {
             return new Waarde<>(!b4, null);
         } else {
             if (b2==null) {
-                throw new FunctionalCalculationException(new CalculationError("Waarde ontbreekt: de persoon heeft inlichtingen verstrekt die onvolledig waren maar uit eigen beweging alsnog de juiste inlichtingen verstrekt voordat de overtreding is geconstateerd"));
+                throw new FunctionalCalculationException(CalculationError.MISSING_VALUE_D12113);
             }
             // implement the rest of the beslissings tabel
         }

@@ -3,11 +3,13 @@ package nl.svb.bre.engine.domain;
 import java.time.LocalDate;
 import java.util.List;
 
-public record TestObject (
+public record TestObject(
         Long persoonId,
         List<Long> kindIds,
 
         boolean normaalLevenspatroonPersoon,
+        Boolean gewensteOmstandigheid,
+        Boolean voorzieneOmstandigheid,
         boolean svbWasTijdigOpDeHoogte,
         boolean emotioneleOntwrichting,
         String beleidsvoorbeeldEmotioneleOntwrichting,
@@ -39,4 +41,5 @@ public record TestObject (
 
         LocalDate geboortedatumKind1,
         LocalDate geboortedatumKind2
-) { }
+) {
+}

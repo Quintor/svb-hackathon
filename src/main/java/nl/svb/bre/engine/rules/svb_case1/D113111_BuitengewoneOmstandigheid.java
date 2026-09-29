@@ -17,6 +17,9 @@ public class D113111_BuitengewoneOmstandigheid extends Rule<Boolean> {
 
     @Override
     protected Waarde<Boolean> executeRule(CalculationContext calculationContext) {
-        return null;
+        return new Waarde<>(!(calculationContext.getTestObject().normaalLevenspatroonPersoon()
+                || calculationContext.getTestObject().voorzieneOmstandigheid()
+                || calculationContext.getTestObject().gewensteOmstandigheid()),
+                null);
     }
 }

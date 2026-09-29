@@ -38,6 +38,8 @@ public class GrondslagController {
                 persoonId,
                 List.of(persoonIdKind1, persoonIdKind2),
                 true,
+                null,
+                null,
                 false,
                 false,
                 "andere reden",

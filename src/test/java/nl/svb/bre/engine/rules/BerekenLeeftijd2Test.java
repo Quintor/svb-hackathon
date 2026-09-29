@@ -31,7 +31,7 @@ class BerekenLeeftijd2Test {
 
     TestObject getTestObject() {
         return new TestObject(0l, List.of(1l, 2l), false,
-                false, false, "",
+                null, null, false, false, "",
                 false, false, false,
                 false, "", false,
                 false, false, false,
@@ -45,7 +45,7 @@ class BerekenLeeftijd2Test {
 
     TestObject getTestObject2() {
         return new TestObject(0l, List.of(1l, 2l), false,
-                false, false, "",
+                null, null, false, false, "",
                 false, false, false,
                 false, "", false,
                 false, false, false,

@@ -2,6 +2,7 @@ package nl.svb.bre.engine.rules.svb_case1;
 
 import nl.svb.bre.domain.enums.Definitiecode;
 import nl.svb.bre.engine.context.CalculationContext;
+import nl.svb.bre.engine.domain.Dependency;
 import nl.svb.bre.engine.domain.TestObject;
 import nl.svb.bre.engine.domain.Waarde;
 import org.junit.jupiter.api.Test;
@@ -22,6 +23,15 @@ class D1112_UitzonderingMedewerkingsverplichtingAKWTest {
     @Test
     void testGetDefinitionCode() {
         assertThat(rule.getDefinitionCode()).isEqualTo(Definitiecode.D1112_UITZONDERING_MEDEWERKINGSVERPLICHTING_AKW);
+    }
+
+    @Test
+    void testDependsOn() {
+        assertThat(rule.dependsOn())
+                .map(Dependency::getDefinitiecode)
+                .containsExactlyInAnyOrder(
+                        Definitiecode.D11121_UITZONDERING_MEDEWERKINGSVERPLICHTING_VERHUIZING_BUITENLAND_AKW
+                );
     }
 
     @ParameterizedTest

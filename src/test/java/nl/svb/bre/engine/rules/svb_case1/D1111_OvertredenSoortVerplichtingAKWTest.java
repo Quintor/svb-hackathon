@@ -17,13 +17,13 @@ import static org.assertj.core.api.Assertions.catchThrowableOfType;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class D111_MedewerkingsverplichtingAKWOvertredenTest {
+class D1111_OvertredenSoortVerplichtingAKWTest {
 
-    private final D111_MedewerkingsverplichtingAKWOvertreden rule = new D111_MedewerkingsverplichtingAKWOvertreden();
+    private final D1111_OvertredenSoortVerplichtingAKW rule = new D1111_OvertredenSoortVerplichtingAKW();
 
     @Test
     void testGetDefinitionCode() {
-        assertThat(rule.getDefinitionCode()).isEqualTo(Definitiecode.D111_MEDEWERKINGSVERPLICHTING_OVERTREDEN);
+        assertThat(rule.getDefinitionCode()).isEqualTo(Definitiecode.D1111_OVERTREDEN_SOORT_VERPLICHTING_AKW);
     }
 
     @ParameterizedTest

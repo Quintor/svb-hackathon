@@ -27,6 +27,8 @@ public class D11311_DoorEenBuitengewoneOmstandigheidWasHetNakomenVanDeVerplichti
 
     @Override
     protected Waarde<Boolean> executeRule(CalculationContext calculationContext) {
-        return null;
+        return new Waarde<>(this.<Boolean>getCalculatedValue(calculationContext, D113111_BUITENGEWONE_OMSTANDIGHEID)
+                && calculationContext.getTestObject().nakomenFeitelijkOnmogelijk(),
+                null);
     }
 }

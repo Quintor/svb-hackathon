@@ -10,6 +10,7 @@ public record TestObject(
         boolean normaalLevenspatroonPersoon,
         Boolean gewensteOmstandigheid,
         Boolean voorzieneOmstandigheid,
+        Boolean nakomenFeitelijkOnmogelijk,
         boolean svbWasTijdigOpDeHoogte,
         boolean emotioneleOntwrichting,
         String beleidsvoorbeeldEmotioneleOntwrichting,

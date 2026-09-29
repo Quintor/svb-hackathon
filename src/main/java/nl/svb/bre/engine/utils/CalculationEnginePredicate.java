@@ -1,18 +1,19 @@
 package nl.svb.bre.engine.utils;
 
-
-
-import nl.svb.bre.engine.context.CalculationContext;
-import nl.svb.bre.engine.domain.Waarde;
-import nl.svb.bre.engine.domain.enums.ExampleVehicle;
 import nl.svb.bre.domain.enums.Definitiecode;
+import nl.svb.bre.engine.context.CalculationContext;
+import nl.svb.bre.engine.domain.enums.ExampleVehicle;
 
 import java.util.function.Predicate;
 
 public final class CalculationEnginePredicate {
 
-    private CalculationEnginePredicate() {}
+    private CalculationEnginePredicate() {
+    }
 
+    // SVB
+    public static final Predicate<CalculationContext> isMedewerkingsplichtigVoorAKW = c -> c.getTestObject().isMedewerkingsplichtigAkw();
+    public static final Predicate<CalculationContext> isuitzonderingMedewerkingsverplichtingAKW = c -> getCalculatedValue(c, Definitiecode.D1112_UITZONDERING_MEDEWERKINGSVERPLICHTING_AKW);
     public static final Predicate<CalculationContext> heeftSvbBoetewaarschuwingVoorZelfdeGedraging = c -> c.getTestObject().heeftSvbBoetewaarschuwingVoorZelfdeGedraging();
     public static final Predicate<CalculationContext> heeftSvbBoeteVoorZelfdeGedraging = c -> c.getTestObject().heeftSvbBoeteVoorZelfdeGedraging();
 

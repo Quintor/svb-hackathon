@@ -9,6 +9,8 @@ public enum CalculationError {
 
     UNKNOWN_VEHICLE("1000", "The requested vehicle is unsupported"),
     NO_ELECTRIC_BICYCLE("2000", "This is not an electric bicycle"),
+    MISSING_VALUE_D12111("D12111", "conditie D113111 is null"),
+    MISSING_VALUE_D12112("D12112", "Benodigde waarde ontbreekt: 'tijdelijk geestelijk onbekwaam'" ),
     MISSING_VALUE_D12113("D12113", "Er ontbreekt een waarde voor 'de persoon heeft inlichtingen verstrekt die onvolledig waren maar uit eigen beweging alsnog de juiste inlichtingen verstrekt voordat de overtreding is geconstateerd'"),
     UNKNOWN_VALUE("8000", "Unknown value"),
     UNKNOWN_ERROR("9000", "Unknown error");

@@ -17,6 +17,6 @@ public class D11312_BetrokkeneKanErInRedelijkheidVanUitgaanDatDeSVBAlOpDeHoogteI
 
     @Override
     protected Waarde<Boolean> executeRule(CalculationContext calculationContext) {
-        return null;
+        return new Waarde<>(calculationContext.getTestObject().svbWasTijdigOpDeHoogte(), null);
     }
 }

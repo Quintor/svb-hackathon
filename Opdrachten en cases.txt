@@ -1,0 +1,84 @@
+Case 1: Type, duur en hoogte van de maatregelsanctie AKW 
+
+Link naar het beslismodel 
+https://svb.trisotech.com/kommunicator/#model=eyJmIjp7InBhdGgiOiIvSGFja2F0aG9uIiwic2t1IjoiaHR0cDovL3d3dy50cmlzb3RlY2guY29tL2RlZmluaXRpb25zL180YTM3YTYxYS1hNjdkLTQzY2YtYjUyMi1lMDJiNTkwOTQ2ZjAiLCJuYW1lIjoiVHlwZSwgZHV1ciBlbiBob29ndGUgbWFhdHJlZ2Vsc2FuY3RpZSBBS1ciLCJtaW1ldHlwZSI6ImFwcGxpY2F0aW9uL2Rtbit4bWwifSwiciI6eyJuYW1lIjoiQmVzbGlzbW9kZWxsZW4iLCJ1cmwiOiJodHRwczovL3N2Yi50cmlzb3RlY2guY29tL3B1YmxpY2FwaSIsInJlcG9zaXRvcnlJZCI6IjJjMWVmMjY2LTUwN2UtNDcxZS1hYjA0LTBhOTRlNGU4N2VkZCJ9LCJ0IjoicHVibGljYXBpIn0%3D 
+
+ 
+
+Link naar het beslismodel ná wijziging 
+
+https://svb.trisotech.com/kommunicator/#model=eyJmIjp7InBhdGgiOiIvSGFja2F0aG9uIiwic2t1IjoiaHR0cDovL3d3dy50cmlzb3RlY2guY29tL2RlZmluaXRpb25zL18yNjFhODViMi03N2VmLTQ1MjctOTk3Yy1jZWNjNWJiYjE2MzciLCJuYW1lIjoiVHlwZSwgZHV1ciBlbiBob29ndGUgbWFhdHJlZ2Vsc2FuY3RpZSBBS1cgbmEgd2lqemlnaW5nIiwibWltZXR5cGUiOiJhcHBsaWNhdGlvbi9kbW4reG1sIn0sInIiOnsibmFtZSI6IkJlc2xpc21vZGVsbGVuIiwidXJsIjoiaHR0cHM6Ly9zdmIudHJpc290ZWNoLmNvbS9wdWJsaWNhcGkiLCJyZXBvc2l0b3J5SWQiOiIyYzFlZjI2Ni01MDdlLTQ3MWUtYWIwNC0wYTk0ZTRlODdlZGQifSwidCI6InB1YmxpY2FwaSJ9 
+
+Kenmerken: 
+
+Specificatie: DMN beslismodel 
+
+Er staan grotendeels regels in het model die in de uitvoering worden gebruikt als kennisondersteuning bij het vaststellen van een maatregelsanctie. Fictieve regels zijn toegevoegd (maatregel per kind) 
+
+De fictieve regels m.b.t. maatregel per kind zijn bedoeld om het itereren over instanties te kunnen beproeven. 
+
+ 
+
+Opdrachten: 
+
+Hello world beslismodel 
+
+Implementeer het volledige beslismodel 
+
+Gebruik de complete set aan gegevens 
+
+Rapporteer over de aanpak en de resultaten. 
+
+Evalueren gegevens 
+
+Evalueer het beslismodel terwijl niet alle benodigde grondslaggegevens beschikbaar zijn 
+
+Signaleer welke gegevens ontbreken die verdere evaluatie in de weg staan 
+
+Vul de gesignaleerde ontbrekende gegevens aan 
+
+Evalueer de het beslismodel opnieuw 
+
+Repeat tot er een beslissing genomen kan worden. 
+
+Aanpassing van een eerder gegeven (in intussen geïmplementeerde) beslismodel 
+
+De regels uit het model worden aangepast 
+
+Beschrijf hoog over de stappen die je hebt genomen voor de aanpassing en noteer hoe lang dit heeft geduurd. 
+
+Terugschakelen naar een vorige versie van een regelset 
+
+Uitgangspunt: de regels zijn aangepast naar een nieuwe versie 
+
+Gebruik de vorige versie van de regelset om een beslissing te nemen. 
+
+ 
+
+ 
+
+Case 2: De persoon heeft recht op toeslag 
+
+Link naar het beslismodel: 
+
+https://svb.trisotech.com/kommunicator/#model=eyJmIjp7InBhdGgiOiIvSGFja2F0aG9uIiwic2t1IjoiaHR0cDovL3d3dy50cmlzb3RlY2guY29tL2RlZmluaXRpb25zL19hNDc4OTdkYS1mOWEyLTQ3MGItOTQ0Yi00ZDRmNGNhMjU4ODQiLCJuYW1lIjoiSGFja2F0aG9uIEJSRSB0ZW1wb3JlZWwgcmVkZW5lcmVuIiwibWltZXR5cGUiOiJhcHBsaWNhdGlvbi9kbW4reG1sIn0sInIiOnsibmFtZSI6IkJlc2xpc21vZGVsbGVuIiwidXJsIjoiaHR0cHM6Ly9zdmIudHJpc290ZWNoLmNvbS9wdWJsaWNhcGkiLCJyZXBvc2l0b3J5SWQiOiIyYzFlZjI2Ni01MDdlLTQ3MWUtYWIwNC0wYTk0ZTRlODdlZGQifSwidCI6InB1YmxpY2FwaSJ9  
+
+Kenmerken: 
+
+Specificatie: DMN beslismodel 
+
+Er staan fictieve beslissingen en regels in het model. 
+
+ 
+
+Opdrachten: 
+
+Bestudeer het document ‘Info en demo time based reasoning’ 
+
+Bekijk het beslismodel en de demo Temporeel Redeneren 
+
+Implementeer de regels 
+
+Gebruik voor het gemak het voorhanden testgeval 
+
+Rapporteer over de aanpak en de resultaten. 

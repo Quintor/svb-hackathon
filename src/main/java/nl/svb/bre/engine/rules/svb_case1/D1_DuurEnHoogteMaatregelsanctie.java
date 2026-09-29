@@ -1,5 +1,8 @@
 package nl.svb.bre.engine.rules.svb_case1;
 
+import nl.svb.bre.domain.enums.D1211_Verwijtbaarheid;
+import nl.svb.bre.domain.enums.D12131_RecidiveSoort;
+import nl.svb.bre.domain.enums.D1213_Maatregel;
 import nl.svb.bre.domain.enums.Definitiecode;
 import nl.svb.bre.engine.context.CalculationContext;
 import nl.svb.bre.engine.domain.Dependency;
@@ -19,8 +22,6 @@ import static nl.svb.bre.domain.enums.Definitiecode.D1_DUUR_HOOGTE_MAATREGEL;
 
 @Component
 public class D1_DuurEnHoogteMaatregelsanctie extends Rule<String> {
-    private static final String RECIDIVE_NA_MAATREGEL = "recidive na maatregel";
-    private static final String VERMINDERD_VERWIJTBAAR = "verminderd verwijtbaar";
 
     @Override
     public Definitiecode getDefinitionCode() {
@@ -45,28 +46,28 @@ public class D1_DuurEnHoogteMaatregelsanctie extends Rule<String> {
             return new Waarde<>("geen maatregel/maatregelwaarschuwing", null);
         }
 
-        String typeMaatregelSanctie = getCalculatedValue(calculationContext, D1213_TYPE_MAATREGELSANCTIE);
+        D1213_Maatregel typeMaatregelSanctie = getCalculatedValue(calculationContext, D1213_TYPE_MAATREGELSANCTIE);
         var result = switch (typeMaatregelSanctie) {
-            case "maatregelwaarschuwing" -> "maatregelwaarschuwing";
-            case "maatregel eerste categorie" -> {
+            case D1213_Maatregel.WAARSCHUWING -> "maatregelwaarschuwing";
+            case D1213_Maatregel.SANCTIE_EERSTE_CATEGORIE -> {
                 boolean basisbedragIsLagerDanMinimum = getCalculatedValue(calculationContext, D12_BASISBEDRAG_IS_LAGER_DAN_MINIMUM_BEDRAG);
-                String recidive = getCalculatedValue(calculationContext, D12131_RECIDIVE);
+                D12131_RecidiveSoort recidive = getCalculatedValue(calculationContext, D12131_RECIDIVE);
                 if (basisbedragIsLagerDanMinimum) {
-                    if (!RECIDIVE_NA_MAATREGEL.equals(recidive)) {
+                    if (recidive != D12131_RecidiveSoort.RECIDIVE_NA_MAATREGEL) {
                         yield "maatregel eerste categorie ter hoogte van het minimumbedrag van de maatregel gedurende één uitkeringstermijn";
                     } else {
                         yield "maatregel eerste categorie ter hoogte van anderhalf keer het minimumbedrag van de maatregel gedurende één uitkeringstermijn";
                     }
                 } else {
-                    String mateVanVerwijtbaarheid = getCalculatedValue(calculationContext, D1211_MATE_VAN_VERWIJTBAARHEID);
-                    if (!RECIDIVE_NA_MAATREGEL.equals(recidive)) {
-                        if (VERMINDERD_VERWIJTBAAR.equals(mateVanVerwijtbaarheid)) {
+                    D1211_Verwijtbaarheid mateVanVerwijtbaarheid = getCalculatedValue(calculationContext, D1211_MATE_VAN_VERWIJTBAARHEID);
+                    if (recidive != D12131_RecidiveSoort.RECIDIVE_NA_MAATREGEL) {
+                        if (mateVanVerwijtbaarheid == D1211_Verwijtbaarheid.VERMINDERD_VERWIJTBAAR) {
                             yield "maatregel eerste categorie ter hoogte van 2% van het In aanmerking te nemen uitkeringsbedrag gedurende één uitkeringstermijn";
                         } else {
                             yield "maatregel eerste categorie ter hoogte van 5% van het In aanmerking te nemen uitkeringsbedrag gedurende één uitkeringstermijn";
                         }
                     } else {
-                        if (VERMINDERD_VERWIJTBAAR.equals(mateVanVerwijtbaarheid)) {
+                        if (mateVanVerwijtbaarheid == D1211_Verwijtbaarheid.VERMINDERD_VERWIJTBAAR) {
                             yield "maatregel eerste categorie ter hoogte van 3% van het In aanmerking te nemen uitkeringsbedrag gedurende één uitkeringstermijn";
                         } else {
                             yield "maatregel eerste categorie ter hoogte van 7.5% van het In aanmerking te nemen uitkeringsbedrag gedurende één uitkeringstermijn";
@@ -74,25 +75,25 @@ public class D1_DuurEnHoogteMaatregelsanctie extends Rule<String> {
                     }
                 }
             }
-            case "maatregel tweede categorie" -> {
+            case D1213_Maatregel.SANCTIE_TWEEDE_CATEGORIE -> {
                 boolean basisbedragIsLagerDanMinimum = getCalculatedValue(calculationContext, D12_BASISBEDRAG_IS_LAGER_DAN_MINIMUM_BEDRAG);
-                String recidive = getCalculatedValue(calculationContext, D12131_RECIDIVE);
+                D12131_RecidiveSoort recidive = getCalculatedValue(calculationContext, D12131_RECIDIVE);
                 if (basisbedragIsLagerDanMinimum) {
-                    if (!RECIDIVE_NA_MAATREGEL.equals(recidive)) {
+                    if (recidive != D12131_RecidiveSoort.RECIDIVE_NA_MAATREGEL) {
                         yield "maatregel tweede categorie ter hoogte van het minimumbedrag van de maatregel gedurende twee uitkeringstermijnen";
                     } else {
                         yield "maatregel tweede categorie ter hoogte van anderhalf keer het minimumbedrag van de maatregel gedurende twee uitkeringstermijnen";
                     }
                 } else {
-                    String mateVanVerwijtbaarheid = getCalculatedValue(calculationContext, D1211_MATE_VAN_VERWIJTBAARHEID);
-                    if (!RECIDIVE_NA_MAATREGEL.equals(recidive)) {
-                        if (VERMINDERD_VERWIJTBAAR.equals(mateVanVerwijtbaarheid)) {
+                    D1211_Verwijtbaarheid mateVanVerwijtbaarheid = getCalculatedValue(calculationContext, D1211_MATE_VAN_VERWIJTBAARHEID);
+                    if (recidive != D12131_RecidiveSoort.RECIDIVE_NA_MAATREGEL) {
+                        if (mateVanVerwijtbaarheid == D1211_Verwijtbaarheid.VERMINDERD_VERWIJTBAAR) {
                             yield "maatregel tweede categorie ter hoogte van 5% van het In aanmerking te nemen uitkeringsbedrag gedurende twee uitkeringstermijnen";
                         } else {
                             yield "maatregel tweede categorie ter hoogte van 10% van het In aanmerking te nemen uitkeringsbedrag gedurende twee uitkeringstermijnen";
                         }
                     } else {
-                        if (VERMINDERD_VERWIJTBAAR.equals(mateVanVerwijtbaarheid)) {
+                        if (mateVanVerwijtbaarheid == D1211_Verwijtbaarheid.VERMINDERD_VERWIJTBAAR) {
                             yield "maatregel tweede categorie ter hoogte van 7.5% van het In aanmerking te nemen uitkeringsbedrag gedurende twee uitkeringstermijnen";
                         } else {
                             yield "maatregel tweede categorie ter hoogte van 15% van het In aanmerking te nemen uitkeringsbedrag gedurende twee uitkeringstermijnen";
@@ -100,7 +101,6 @@ public class D1_DuurEnHoogteMaatregelsanctie extends Rule<String> {
                     }
                 }
             }
-            case null, default -> throw new FunctionalCalculationException(CalculationError.UNKNOWN_VALUE);
         };
         return new Waarde<>(result, null);
     }

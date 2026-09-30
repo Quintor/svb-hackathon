@@ -37,6 +37,10 @@ public class D2_PersoonHeeftRechtOpToeslag extends Rule<Boolean> {
         Boolean voldoetAanInkomenseis = getCalculatedValue(calculationContext, D22_PERSOON_VOLDOET_AAN_DE_INKOMENSEIS);
         Boolean voldoetAanVerzekerdeis = getCalculatedValue(calculationContext, D23_PERSOON_IS_MINIMAAL_50_DAGEN_ACHTEREENVOLGENS_VERZEKERD_GEWEEST);
 
-        return new Waarde<>(voldoetAanLeeftijdseis && voldoetAanInkomenseis && voldoetAanVerzekerdeis, new GeldigheidsPeriode(calculationContext.getPeildatum(), calculationContext.getPeildatum()));
+        boolean heeftRecht = Boolean.TRUE.equals(voldoetAanLeeftijdseis)
+                && Boolean.TRUE.equals(voldoetAanInkomenseis)
+                && Boolean.TRUE.equals(voldoetAanVerzekerdeis);
+
+        return new Waarde<>(heeftRecht, new GeldigheidsPeriode(calculationContext.getPeildatum(), calculationContext.getPeildatum()));
     }
 }

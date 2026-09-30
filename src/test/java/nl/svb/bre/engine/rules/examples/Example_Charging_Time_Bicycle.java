@@ -14,7 +14,6 @@ import nl.svb.bre.engine.utils.PeriodeUtil;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.time.Period;
 
 @Component
 public class Example_Charging_Time_Bicycle extends Rule<Integer> {

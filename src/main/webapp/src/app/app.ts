@@ -19,7 +19,7 @@ export class App implements OnInit {
   protected readonly definitiecodes = signal<string[]>([]);
   protected readonly testgevallen = TESTGEVALLEN;
 
-  protected definitiecode = 'EXAMPLE_JOURNEY';
+  protected definitiecode = '';
   protected persoonId = 1;
   protected persoonIdKind1 = 2;
   protected persoonIdKind2 = 3;
@@ -107,10 +107,9 @@ export class App implements OnInit {
   private loadDefinitiecodes(): void {
     this.definitieService.definitiecodes().subscribe({
       next: (codes) => {
-        this.definitiecodes.set(codes);
-        if (!codes.includes(this.definitiecode) && codes.length > 0) {
-          this.definitiecode = codes[0];
-        }
+        const sorted = [...codes].sort((a, b) => a.localeCompare(b));
+        this.definitiecodes.set(sorted);
+        this.definitiecode = sorted[0] ?? '';
       },
       error: (err) => this.error.set(`Failed to load definitiecodes: ${err?.message ?? err}`),
     });

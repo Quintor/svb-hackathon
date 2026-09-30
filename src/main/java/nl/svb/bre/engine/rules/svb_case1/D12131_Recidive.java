@@ -27,7 +27,7 @@ public class D12131_Recidive extends Rule<D12131_RecidiveSoort> {
                     throw new FunctionalCalculationException(CalculationError.MISSING_VALUE_D12131_A);
             case "nakomen overige controlevoorschriften" ->
                     throw new FunctionalCalculationException(CalculationError.MISSING_VALUE_D12131_B);
-            default -> new Waarde<>(D12131_RecidiveSoort.GEEN_RECIDIVE, null);
+            case null, default -> new Waarde<>(null, null);
         };
     }
 

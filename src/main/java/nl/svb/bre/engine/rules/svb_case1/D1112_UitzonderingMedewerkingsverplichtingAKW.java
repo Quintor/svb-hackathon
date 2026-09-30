@@ -21,13 +21,34 @@ public class D1112_UitzonderingMedewerkingsverplichtingAKW extends Rule<Boolean>
                 Dependency.of(Definitiecode.D11121_UITZONDERING_MEDEWERKINGSVERPLICHTING_VERHUIZING_BUITENLAND_AKW)
         );
     }
-    
+
     @Override
     protected Waarde<Boolean> executeRule(CalculationContext calculationContext) {
-        var result = this.<Boolean>getCalculatedValue(calculationContext, Definitiecode.D11121_UITZONDERING_MEDEWERKINGSVERPLICHTING_VERHUIZING_BUITENLAND_AKW)
-                || calculationContext.getTestObject().heeftSvbInhoudingenZvwOfWlzOpgevraagd()
-                || calculationContext.getTestObject().heeftSvbInformatieGevraagdBijBezwaar()
-                || calculationContext.getTestObject().isBetalingGestaaktOpVerzoek();
-        return new Waarde<>(result, null);
+        var uitzonderingMedewerkingsverplichting = this.<Boolean>getCalculatedValue(calculationContext, Definitiecode.D11121_UITZONDERING_MEDEWERKINGSVERPLICHTING_VERHUIZING_BUITENLAND_AKW);
+        if (uitzonderingMedewerkingsverplichting == null) {
+            return new Waarde<>(null, null);
+        } else if (uitzonderingMedewerkingsverplichting) {
+            return new Waarde<>(true, null);
+        }
+
+        var heeftSvbInhoudingenZvwOfWlzOpgevraagd = calculationContext.getTestObject().heeftSvbInhoudingenZvwOfWlzOpgevraagd();
+        if (heeftSvbInhoudingenZvwOfWlzOpgevraagd == null) {
+            return new Waarde<>(null, null);
+        } else if (heeftSvbInhoudingenZvwOfWlzOpgevraagd) {
+            return new Waarde<>(true, null);
+        }
+
+        var heeftSvbInformatieGevraagdBijBezwaar = calculationContext.getTestObject().heeftSvbInformatieGevraagdBijBezwaar();
+        if (heeftSvbInformatieGevraagdBijBezwaar == null) {
+            return new Waarde<>(null, null);
+        } else if (heeftSvbInformatieGevraagdBijBezwaar) {
+            return new Waarde<>(true, null);
+        }
+
+        var isBetalingGestaaktOpVerzoek = calculationContext.getTestObject().isBetalingGestaaktOpVerzoek();
+        if (isBetalingGestaaktOpVerzoek == null) {
+            return new Waarde<>(null, null);
+        }
+        return new Waarde<>(isBetalingGestaaktOpVerzoek, null);
     }
 }

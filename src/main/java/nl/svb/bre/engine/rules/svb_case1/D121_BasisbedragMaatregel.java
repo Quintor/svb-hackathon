@@ -41,22 +41,25 @@ public class D121_BasisbedragMaatregel extends Rule<BigDecimal> {
         BigDecimal uitkeringsbedrag = getCalculatedValue(calculationContext, D1212_AANMERKING_UITKERINGSBEDRAG);
         D1213_Maatregel maatregel = getCalculatedValue(calculationContext, D1213_TYPE_MAATREGELSANCTIE);
 
-        return switch(maatregel) {
+        return switch (maatregel) {
             case WAARSCHUWING -> new Waarde<>(BigDecimal.ZERO, null);
-            case D1213_Maatregel.SANCTIE_EERSTE_CATEGORIE -> maatregelEersteCategorie(verwijtbaarheid, uitkeringsbedrag);
-            case D1213_Maatregel.SANCTIE_TWEEDE_CATEGORIE -> maatregelTweedeCategorie(verwijtbaarheid, uitkeringsbedrag);
+            case D1213_Maatregel.SANCTIE_EERSTE_CATEGORIE ->
+                    maatregelEersteCategorie(verwijtbaarheid, uitkeringsbedrag);
+            case D1213_Maatregel.SANCTIE_TWEEDE_CATEGORIE ->
+                    maatregelTweedeCategorie(verwijtbaarheid, uitkeringsbedrag);
+            case null -> new Waarde<>(null, null);
         };
     }
 
     private Waarde<BigDecimal> maatregelEersteCategorie(D1211_Verwijtbaarheid verwijtbaarheid, BigDecimal uitkeringsbedrag) {
-        return switch(verwijtbaarheid) {
+        return switch (verwijtbaarheid) {
             case VOLLEDIG_VERWIJTBAAR -> new Waarde<>(uitkeringsbedrag.multiply(new BigDecimal("0.05")), null);
             case VERMINDERD_VERWIJTBAAR -> new Waarde<>(uitkeringsbedrag.multiply(new BigDecimal("0.02")), null);
         };
     }
 
     private Waarde<BigDecimal> maatregelTweedeCategorie(D1211_Verwijtbaarheid verwijtbaarheid, BigDecimal uitkeringsbedrag) {
-        return switch(verwijtbaarheid) {
+        return switch (verwijtbaarheid) {
             case VOLLEDIG_VERWIJTBAAR -> new Waarde<>(uitkeringsbedrag.multiply(new BigDecimal("0.10")), null);
             case VERMINDERD_VERWIJTBAAR -> new Waarde<>(uitkeringsbedrag.multiply(new BigDecimal("0.05")), null);
         };

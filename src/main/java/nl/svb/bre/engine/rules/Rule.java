@@ -5,6 +5,7 @@ import nl.svb.bre.engine.context.CalculationContext;
 import nl.svb.bre.domain.enums.Definitiecode;
 import nl.svb.bre.engine.domain.DependencySet;
 import nl.svb.bre.engine.domain.Waarde;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Optional;
 
@@ -36,6 +37,7 @@ public abstract class Rule<T> {
         return dependency.orElse(false);
     }
 
+    @Nullable
     public <R> R getCalculatedValue(final CalculationContext calculationContext, final Definitiecode definitiecode) {
         if (calculationContext.isCalculated(definitiecode)) {
             return (R) calculationContext.getCalculated(definitiecode);

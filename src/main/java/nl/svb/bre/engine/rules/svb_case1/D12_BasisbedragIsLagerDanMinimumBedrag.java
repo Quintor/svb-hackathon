@@ -35,6 +35,9 @@ public class D12_BasisbedragIsLagerDanMinimumBedrag extends Rule<Boolean> {
         // D12 het basisbedrag van de maatregel is lager dan het minimumbedrag van de maatregel
         BigDecimal minimumBedrag = getCalculatedValue(calculationContext, D122_MINIMUMBEDRAG_MAATREGEL);
         BigDecimal basisBedrag = getCalculatedValue(calculationContext, D121_BASISBEDRAG_MAATREGEL);
+        if (basisBedrag == null) {
+            return new Waarde<>(null, null);
+        }
         return new Waarde<>(basisBedrag.subtract(minimumBedrag).doubleValue() < 0.0, null);
     }
 }

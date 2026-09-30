@@ -42,25 +42,25 @@ public class D1213_TypeMaatregelsanctie extends Rule<D1213_Maatregel> {
         return switch (soortOvertreding) {
             case "reageren op een informatieverzoek" -> informatieVerzoek(calculationContext);
             case "nakomen verplichting tweede categorie" ->
-                  new Waarde<>(D1213_Maatregel.SANCTIE_TWEEDE_CATEGORIE, null);
+                    new Waarde<>(D1213_Maatregel.SANCTIE_TWEEDE_CATEGORIE, null);
             case "nakomen overige controlevoorschriften" ->
                     new Waarde<>(D1213_Maatregel.SANCTIE_EERSTE_CATEGORIE, null);
-            case null, default -> throw new FunctionalCalculationException(CalculationError.MISSING_VALUE_D1213);
+            case null, default -> new Waarde<>(null, null);
         };
     }
 
     private Waarde<D1213_Maatregel> informatieVerzoek(CalculationContext calculationContext) {
         D12131_RecidiveSoort recidiveSoort = getCalculatedValue(calculationContext, D12131_RECIDIVE);
 
-        if(recidiveSoort.equals(RECIDIVE_NA_MAATREGEL) ||recidiveSoort.equals(RECIDIVE_NA_MAATREGELWAARSCHUWING) ) {
+        if (recidiveSoort.equals(RECIDIVE_NA_MAATREGEL) || recidiveSoort.equals(RECIDIVE_NA_MAATREGELWAARSCHUWING)) {
             return new Waarde<>(D1213_Maatregel.SANCTIE_EERSTE_CATEGORIE, null);
         }
 
-        if (calculationContext.getTestObject().schorsingsbeslissingGenomen()){
+        if (calculationContext.getTestObject().schorsingsbeslissingGenomen()) {
             return new Waarde<>(D1213_Maatregel.SANCTIE_EERSTE_CATEGORIE, null);
         }
 
-        if (calculationContext.getTestObject().heeftOvertredingBenadelingsbedrag()){
+        if (calculationContext.getTestObject().heeftOvertredingBenadelingsbedrag()) {
             return new Waarde<>(D1213_Maatregel.SANCTIE_EERSTE_CATEGORIE, null);
         }
 

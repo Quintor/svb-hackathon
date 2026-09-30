@@ -104,6 +104,7 @@ public class D1_DuurEnHoogteMaatregelsanctie extends Rule<String> {
                     }
                 }
             }
+            case null -> null;
         };
         return new Waarde<>(result, null);
     }

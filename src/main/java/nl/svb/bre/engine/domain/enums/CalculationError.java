@@ -21,6 +21,7 @@ public enum CalculationError {
     MISSING_VALUE_D1213("D1213", "Benodidigde Waarde ontbreekt: 'soort overtreden verplichting'"),
     MISSING_VALUE_D12131_A("D12131", "Benodidigde Waarde ontbreekt: gedurende de afgelopen twee jaar voor de huidige overtreding is er minimaal één maatregel bekendgemaakt vanwege het niet nakomen van een verplichting van de tweede categorie o.g.v. dezelfde wet"),
     MISSING_VALUE_D12131_B("D12131", "Benodidigde Waarde ontbreekt: gedurende de afgelopen twee jaar voor de huidige overtreding is er minimaal één maatregel bekendgemaakt vanwege het niet nakomen van de overige controlevoorschriften o.g.v. dezelfde wet"),
+    MISSING_D12121_WOONLAND("D12121", "Benodigde Waarde woonland kind ontbreekt"),
     UNKNOWN_VALUE("8000", "Unknown value"),
     UNKNOWN_ERROR("9000", "Unknown error");
 

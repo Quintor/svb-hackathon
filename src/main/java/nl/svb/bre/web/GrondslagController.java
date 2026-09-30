@@ -11,6 +11,7 @@ import nl.svb.bre.repository.GrondslagRepository;
 import nl.svb.bre.web.mocks.TestCase1;
 import nl.svb.bre.web.mocks.TestCase2;
 import nl.svb.bre.web.mocks.TestCase3;
+import nl.svb.bre.web.mocks.TestCase4;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,7 +42,8 @@ public class GrondslagController {
         switch (testgeval) {
             case 1 -> TestCase1.TEST_OBJECT(persoonId, persoonIdKind1, persoonIdKind2);
             case 2 -> TestCase2.TEST_OBJECT(persoonId, persoonIdKind1, persoonIdKind2);
-            default -> TestCase3.TEST_OBJECT(persoonId, persoonIdKind1, persoonIdKind2); // Uitworp
+            case 3 -> TestCase3.TEST_OBJECT(persoonId, persoonIdKind1, persoonIdKind2); // Uitworp
+            default -> TestCase4.TEST_OBJECT(persoonId, persoonIdKind1, persoonIdKind2);
         };
 
         if (Definitiecode.D2_PERSOON_HEEFT_RECHT_OP_TOESLAG == definitiecode) {

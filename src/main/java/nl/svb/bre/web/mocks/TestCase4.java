@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @UtilityClass
-public class TestCase1 {
+public class TestCase4 {
 
         public static TestObject TEST_OBJECT(final Long persoonId, final Long persoonIdKind1, final Long persoonIdKind2) {
             return new TestObject(
@@ -47,8 +47,8 @@ public class TestCase1 {
                 false,
                 LocalDate.of(2016, 3, 25),
                 LocalDate.of(2018, 4, 1),
-        null,
-        null
+        true,
+        false
         );
     }
 

@@ -6,7 +6,7 @@ import { sortByDefinitiecode } from './models/grondslag.util';
 import { DefinitieService } from './services/definitie.service';
 import { GrondslagService } from './services/grondslag.service';
 
-const TESTGEVALLEN = [1, 2, 3];
+const TESTGEVALLEN = [1, 2, 3, 4];
 
 @Component({
   selector: 'app-root',

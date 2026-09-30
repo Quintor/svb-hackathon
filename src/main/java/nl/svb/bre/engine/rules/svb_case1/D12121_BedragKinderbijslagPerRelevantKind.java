@@ -5,6 +5,8 @@ import nl.svb.bre.engine.context.CalculationContext;
 import nl.svb.bre.engine.domain.Dependency;
 import nl.svb.bre.engine.domain.DependencySet;
 import nl.svb.bre.engine.domain.Waarde;
+import nl.svb.bre.engine.domain.enums.CalculationError;
+import nl.svb.bre.engine.errors.FunctionalCalculationException;
 import nl.svb.bre.engine.rules.Rule;
 import org.springframework.stereotype.Component;
 
@@ -116,6 +118,9 @@ public class D12121_BedragKinderbijslagPerRelevantKind extends Rule<Collection<B
 
     private BigDecimal bedragLeeftijdV2(Integer leeftijd, Woonland woonland) {
         LeeftijdCat categorie = LeeftijdCat.getCategorie(leeftijd);
+        if (woonland == null) {
+            throw new FunctionalCalculationException(CalculationError.MISSING_D12121_WOONLAND);
+        }
         return bedragenV2.get(woonland).get(categorie);
     }
 

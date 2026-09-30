@@ -29,6 +29,9 @@ public class D1212_AanmerkingUitkeringsbedrag extends Rule<BigDecimal> {
     @Override
     protected Waarde<BigDecimal> executeRule(CalculationContext calculationContext) {
         Collection<BigDecimal> bedragen = getCalculatedValue(calculationContext, Definitiecode.D12121_BEDRAG_AKW);
+        if(bedragen == null){
+            return Waarde.NIET_TE_BEPALEN();
+        }
         return new Waarde<>(bedragen.stream()
                 .reduce(BigDecimal.ZERO, BigDecimal::add), null);
     }

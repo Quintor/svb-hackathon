@@ -44,6 +44,12 @@ public class GrondslagController {
             default -> TestCase3.TEST_OBJECT(persoonId, persoonIdKind1, persoonIdKind2); // Uitworp
         };
 
+        if (Definitiecode.D2_PERSOON_HEEFT_RECHT_OP_TOESLAG == definitiecode) {
+            treeCalculator.calculateResult(Definitiecode.D3_VERZEKERD_IN_PERIODE, testObject, LocalDate.of(2025, 7, 1));
+            treeCalculator.calculateResult(Definitiecode.D3_VERZEKERD_IN_PERIODE, testObject, LocalDate.of(2026, 1, 8));
+            treeCalculator.calculateResult(Definitiecode.D3_VERZEKERD_IN_PERIODE, testObject, LocalDate.of(2026, 7, 1));
+        }
+
         return treeCalculator.calculateResult(definitiecode, testObject, peildatum);
     }
 

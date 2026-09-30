@@ -32,6 +32,6 @@ public class Grondslag {
     @Column(unique=true)
     private Long persoonId;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<Grondslaggegeven<?>> grondslaggegevens = new HashSet<>();
 }

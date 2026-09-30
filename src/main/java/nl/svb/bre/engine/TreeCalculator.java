@@ -1,6 +1,7 @@
 package nl.svb.bre.engine;
 
 import lombok.RequiredArgsConstructor;
+import nl.svb.bre.domain.GeldigheidsPeriode;
 import nl.svb.bre.domain.Grondslag;
 import nl.svb.bre.domain.Grondslaggegeven;
 import nl.svb.bre.domain.enums.Definitiecode;
@@ -12,6 +13,7 @@ import nl.svb.bre.engine.domain.Waarde;
 import nl.svb.bre.engine.domain.enums.CalculationError;
 import nl.svb.bre.engine.errors.FunctionalCalculationException;
 import nl.svb.bre.engine.rules.Rule;
+import nl.svb.bre.engine.utils.PeriodeUtil;
 import nl.svb.bre.repository.DefinitieRepository;
 import nl.svb.bre.repository.GrondslagRepository;
 import org.springframework.stereotype.Component;
@@ -20,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -76,18 +79,19 @@ public class TreeCalculator {
             calculationError = ex.getCalculationError();
             context.addCalculatedRule(definitiecode, Waarde.NIET_TE_BEPALEN());
         }
-
-        var grondslaggegeven = findOrCreate(grondslag, definitiecode, onderliggend);
+        var periode = waarde != null ? waarde.geldigheidsPeriode() : null;
+        var grondslaggegeven = findOrCreate(grondslag, definitiecode, onderliggend, periode);
         grondslaggegeven.setWaarde(waarde != null ? String.valueOf(waarde.value()) : null);
-        grondslaggegeven.setGeldigheidsPeriode(waarde != null ? waarde.geldigheidsPeriode() : null);
+        grondslaggegeven.setGeldigheidsPeriode(periode);
         grondslaggegeven.setCalculationError(calculationError);
 
         return grondslaggegeven;
     }
 
-    private Grondslaggegeven<?> findOrCreate(final Grondslag grondslag, final Definitiecode definitiecode, final Set<Grondslaggegeven<?>> onderliggend) {
+    private Grondslaggegeven<?> findOrCreate(final Grondslag grondslag, final Definitiecode definitiecode, final Set<Grondslaggegeven<?>> onderliggend, final GeldigheidsPeriode periode) {
         return grondslag.getGrondslaggegevens().stream()
                 .filter(grondslaggegeven -> grondslaggegeven.getDefinitie().getDefinitiecode() == definitiecode)
+                .filter(grondslaggegeven -> Objects.equals(grondslaggegeven.getGeldigheidsPeriode(), periode))
                 .findFirst()
                 .orElseGet(() -> {
                     var created = new Grondslaggegeven<>(null, definitieRepository.findByDefinitiecode(definitiecode), onderliggend, null, null, null);

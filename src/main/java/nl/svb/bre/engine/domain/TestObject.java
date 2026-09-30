@@ -41,6 +41,9 @@ public record TestObject(
         Boolean heeftOvertredingBenadelingsbedrag,
 
         LocalDate geboortedatumKind1,
-        LocalDate geboortedatumKind2
+        LocalDate geboortedatumKind2,
+
+        Boolean kindInNL1,
+        Boolean kindInNl2
 ) {
 }

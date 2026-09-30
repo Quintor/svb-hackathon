@@ -1,5 +1,6 @@
 package nl.svb.bre.engine.rules.examples;
 
+import nl.svb.bre.domain.Grondslag;
 import nl.svb.bre.engine.context.CalculationContext;
 import nl.svb.bre.engine.domain.ExampleObject;
 import nl.svb.bre.engine.domain.TestObject;
@@ -24,7 +25,7 @@ class Example_DistanceTest {
 
     @Test
     void executeRule_returnsDistanceFromTestObject() {
-        CalculationContext context = new CalculationContext(new ExampleObject(100, false, ExampleVehicle.CAR), null, LocalDate.of(2024, 1, 1));
+        CalculationContext context = new CalculationContext(new ExampleObject(100, false, ExampleVehicle.CAR), null, LocalDate.of(2024, 1, 1), null);
 
         assertThat(rule.execute(context).value(), is(100));
     }

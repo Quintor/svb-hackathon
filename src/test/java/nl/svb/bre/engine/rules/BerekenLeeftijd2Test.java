@@ -1,5 +1,6 @@
 package nl.svb.bre.engine.rules;
 
+import nl.svb.bre.domain.Grondslag;
 import nl.svb.bre.engine.context.CalculationContext;
 import nl.svb.bre.engine.domain.TestObject;
 import nl.svb.bre.engine.domain.Waarde;
@@ -15,7 +16,7 @@ class BerekenLeeftijd2Test {
     @Test
     void executeRule() {
         LocalDate pijlDatum = LocalDate.of(2026, Month.SEPTEMBER,28);
-        CalculationContext calculationContext = new CalculationContext(null, getTestObject(), pijlDatum);
+        CalculationContext calculationContext = new CalculationContext(null, getTestObject(), pijlDatum, null);
         BerekenLeeftijd2 rule = new BerekenLeeftijd2();
         Waarde<Integer> execute = rule.execute(calculationContext);
         assertEquals(execute.value(), Integer.valueOf(2));
@@ -24,7 +25,7 @@ class BerekenLeeftijd2Test {
     @Test
     void executeRuleOlder() {
         LocalDate pijlDatum = LocalDate.of(2026, Month.SEPTEMBER,28);
-        CalculationContext calculationContext = new CalculationContext(null, getTestObject2(), pijlDatum);
+        CalculationContext calculationContext = new CalculationContext(null, getTestObject2(), pijlDatum, null);
         BerekenLeeftijd2 rule = new BerekenLeeftijd2();
         Waarde<Integer> execute = rule.execute(calculationContext);
         assertEquals(execute.value(), Integer.valueOf(3));

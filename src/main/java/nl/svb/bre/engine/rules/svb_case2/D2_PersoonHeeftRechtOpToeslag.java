@@ -1,5 +1,6 @@
 package nl.svb.bre.engine.rules.svb_case2;
 
+import nl.svb.bre.domain.GeldigheidsPeriode;
 import nl.svb.bre.domain.enums.Definitiecode;
 import nl.svb.bre.engine.context.CalculationContext;
 import nl.svb.bre.engine.domain.Dependency;
@@ -32,6 +33,10 @@ public class D2_PersoonHeeftRechtOpToeslag extends Rule<Boolean> {
 
     @Override
     protected Waarde<Boolean> executeRule(CalculationContext calculationContext) {
-        return new Waarde<>(true, null);
+        Boolean voldoetAanLeeftijdseis = getCalculatedValue(calculationContext, D21_PERSOON_VOLDOET_AAN_DE_LEEFTIJDSEIS);
+        Boolean voldoetAanInkomenseis = getCalculatedValue(calculationContext, D22_PERSOON_VOLDOET_AAN_DE_INKOMENSEIS);
+        Boolean voldoetAanVerzekerdeis = getCalculatedValue(calculationContext, D23_PERSOON_IS_MINIMAAL_50_DAGEN_ACHTEREENVOLGENS_VERZEKERD_GEWEEST);
+
+        return new Waarde<>(voldoetAanLeeftijdseis && voldoetAanInkomenseis && voldoetAanVerzekerdeis, new GeldigheidsPeriode(calculationContext.getPeildatum(), calculationContext.getPeildatum()));
     }
 }

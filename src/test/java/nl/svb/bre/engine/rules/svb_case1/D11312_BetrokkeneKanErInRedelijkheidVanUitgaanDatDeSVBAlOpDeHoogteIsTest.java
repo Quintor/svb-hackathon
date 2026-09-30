@@ -24,7 +24,7 @@ class D11312_BetrokkeneKanErInRedelijkheidVanUitgaanDatDeSVBAlOpDeHoogteIsTest {
     @ValueSource(booleans = {true, false})
     void testExecuteRule(boolean value) {
         var mockTestObject = mock(TestObject.class);
-        var ctx = new CalculationContext(null, mockTestObject, null);
+        var ctx = new CalculationContext(null, mockTestObject, null, null);
 
         when(ctx.getTestObject().svbWasTijdigOpDeHoogte()).thenReturn(value);
 

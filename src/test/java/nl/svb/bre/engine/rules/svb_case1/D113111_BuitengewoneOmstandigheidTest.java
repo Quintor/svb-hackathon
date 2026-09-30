@@ -30,7 +30,7 @@ class D113111_BuitengewoneOmstandigheidTest {
                          Boolean gewensteOmstandigheid,
                          Boolean expected) {
         var mockTestObject = mock(TestObject.class);
-        var ctx = new CalculationContext(null, mockTestObject, null);
+        var ctx = new CalculationContext(null, mockTestObject, null, null);
 
         when(mockTestObject.normaalLevenspatroonPersoon()).thenReturn(normaalLevenspatroonPersoon);
         when(mockTestObject.voorzieneOmstandigheid()).thenReturn(voorzieneOmstandigheid);

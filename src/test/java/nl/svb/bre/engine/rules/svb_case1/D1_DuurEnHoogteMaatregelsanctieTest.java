@@ -51,7 +51,7 @@ class D1_DuurEnHoogteMaatregelsanctieTest {
                          D12131_RecidiveSoort soortRecidive,
                          D1211_Verwijtbaarheid verwijtbaarheid,
                          String expected) {
-        var ctx = new CalculationContext(null, null, null);
+        var ctx = new CalculationContext(null, null, null, null);
         ctx.addCalculatedRule(D11_EISEN_MAATREGEL_SANCTIE, new Waarde<>(eisenMaatregelSanctie, null));
         if (maatregel != null) {
             ctx.addCalculatedRule(Definitiecode.D1213_TYPE_MAATREGELSANCTIE, new Waarde<>(maatregel, null));

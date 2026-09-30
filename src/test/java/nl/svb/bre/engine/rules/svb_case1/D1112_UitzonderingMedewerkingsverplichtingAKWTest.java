@@ -42,7 +42,7 @@ class D1112_UitzonderingMedewerkingsverplichtingAKWTest {
                          Boolean isBetalingGestaaktOpVerzoek,
                          Boolean expected) {
         var mockTestObject = mock(TestObject.class);
-        var ctx = new CalculationContext(null, mockTestObject, null);
+        var ctx = new CalculationContext(null, mockTestObject, null, null);
         ctx.addCalculatedRule(Definitiecode.D11121_UITZONDERING_MEDEWERKINGSVERPLICHTING_VERHUIZING_BUITENLAND_AKW,
                 new Waarde<>(uitzonderingMedewerkingsverplichtingVerhuizingBuitenlandAkw, null));
 

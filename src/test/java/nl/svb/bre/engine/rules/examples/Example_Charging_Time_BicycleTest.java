@@ -1,5 +1,6 @@
 package nl.svb.bre.engine.rules.examples;
 
+import nl.svb.bre.domain.Grondslag;
 import nl.svb.bre.engine.context.CalculationContext;
 import nl.svb.bre.engine.domain.ExampleObject;
 import nl.svb.bre.engine.domain.TestObject;
@@ -51,7 +52,7 @@ class Example_Charging_Time_BicycleTest {
     }
 
     private CalculationContext contextWith(final ExampleVehicle vehicle, final boolean electric) {
-        CalculationContext context = new CalculationContext(new ExampleObject(100, electric, vehicle), null, LocalDate.of(2024, 1, 1));
+        CalculationContext context = new CalculationContext(new ExampleObject(100, electric, vehicle), null, LocalDate.of(2024, 1, 1), null);
         context.addCalculatedRule(Definitiecode.EXAMPLE_VEHICLE, new Waarde<>(vehicle, null));
         context.addCalculatedRule(Definitiecode.EXAMPLE_ELECTRIC, new Waarde<>(electric, null));
         return context;

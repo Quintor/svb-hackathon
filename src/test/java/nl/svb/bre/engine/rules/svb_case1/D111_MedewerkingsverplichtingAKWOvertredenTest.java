@@ -43,7 +43,7 @@ class D111_MedewerkingsverplichtingAKWOvertredenTest {
                          String overtredenSoortVerplichtingAkw,
                          Boolean expected) {
         var mockTestObject = mock(TestObject.class);
-        var ctx = new CalculationContext(null, mockTestObject, null);
+        var ctx = new CalculationContext(null, mockTestObject, null, null);
 
         when(mockTestObject.isMedewerkingsplichtigAkw()).thenReturn(isMedewerkingsplichtigAkw);
 

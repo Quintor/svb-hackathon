@@ -44,8 +44,10 @@ public class D1_DuurEnHoogteMaatregelsanctie extends Rule<String> {
 
     @Override
     protected Waarde<String> executeRule(CalculationContext calculationContext) {
-        boolean eisenMaatregelSanctie = getCalculatedValue(calculationContext, D11_EISEN_MAATREGEL_SANCTIE);
-        if (!eisenMaatregelSanctie) {
+        Boolean eisenMaatregelSanctie = getCalculatedValue(calculationContext, D11_EISEN_MAATREGEL_SANCTIE);
+        if (eisenMaatregelSanctie == null) {
+            return Waarde.NIET_TE_BEPALEN();
+        } else if (!eisenMaatregelSanctie) {
             return new Waarde<>("geen maatregel/maatregelwaarschuwing", null);
         }
 
@@ -53,7 +55,9 @@ public class D1_DuurEnHoogteMaatregelsanctie extends Rule<String> {
         var result = switch (typeMaatregelSanctie) {
             case D1213_Maatregel.WAARSCHUWING -> "maatregelwaarschuwing";
             case D1213_Maatregel.SANCTIE_EERSTE_CATEGORIE -> {
-                boolean basisbedragIsLagerDanMinimum = getCalculatedValue(calculationContext, D12_BASISBEDRAG_IS_LAGER_DAN_MINIMUM_BEDRAG);
+                Boolean basisbedragIsLagerDanMinimum = getCalculatedValue(calculationContext, D12_BASISBEDRAG_IS_LAGER_DAN_MINIMUM_BEDRAG);
+                if (basisbedragIsLagerDanMinimum == null) yield null;
+
                 D12131_RecidiveSoort recidive = getCalculatedValue(calculationContext, D12131_RECIDIVE);
                 if (basisbedragIsLagerDanMinimum) {
                     if (recidive != D12131_RecidiveSoort.RECIDIVE_NA_MAATREGEL) {
@@ -79,7 +83,9 @@ public class D1_DuurEnHoogteMaatregelsanctie extends Rule<String> {
                 }
             }
             case D1213_Maatregel.SANCTIE_TWEEDE_CATEGORIE -> {
-                boolean basisbedragIsLagerDanMinimum = getCalculatedValue(calculationContext, D12_BASISBEDRAG_IS_LAGER_DAN_MINIMUM_BEDRAG);
+                Boolean basisbedragIsLagerDanMinimum = getCalculatedValue(calculationContext, D12_BASISBEDRAG_IS_LAGER_DAN_MINIMUM_BEDRAG);
+                if (basisbedragIsLagerDanMinimum == null) yield null;
+
                 D12131_RecidiveSoort recidive = getCalculatedValue(calculationContext, D12131_RECIDIVE);
                 if (basisbedragIsLagerDanMinimum) {
                     if (recidive != D12131_RecidiveSoort.RECIDIVE_NA_MAATREGEL) {

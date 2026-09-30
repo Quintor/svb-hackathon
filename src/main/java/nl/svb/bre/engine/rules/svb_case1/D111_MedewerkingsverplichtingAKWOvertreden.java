@@ -45,6 +45,13 @@ public class D111_MedewerkingsverplichtingAKWOvertreden extends Rule<Boolean> {
             return new Waarde<>(false, null);
         }
 
+        Boolean uitzonderingMedewerkingsverplichtingAkw = getCalculatedValue(calculationContext, Definitiecode.D1112_UITZONDERING_MEDEWERKINGSVERPLICHTING_AKW);
+        if (uitzonderingMedewerkingsverplichtingAkw == null) {
+            return Waarde.NIET_TE_BEPALEN();
+        } else if (uitzonderingMedewerkingsverplichtingAkw) {
+            return new Waarde<>(false, null);
+        }
+
         if (calculationContext.isCalculated(D1111_OVERTREDEN_SOORT_VERPLICHTING_AKW)) {
             String overtredenSoortVerplichtingAkw = getCalculatedValue(calculationContext, D1111_OVERTREDEN_SOORT_VERPLICHTING_AKW);
             return new Waarde<>(overtredenSoortVerplichtingAkw == null ? null : UITGEZONDERDE_VERPLICHTINGEN.contains(overtredenSoortVerplichtingAkw), null);

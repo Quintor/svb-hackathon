@@ -1,8 +1,8 @@
 package nl.svb.bre.engine.rules;
 
 import lombok.extern.slf4j.Slf4j;
-import nl.svb.bre.engine.context.CalculationContext;
 import nl.svb.bre.domain.enums.Definitiecode;
+import nl.svb.bre.engine.context.CalculationContext;
 import nl.svb.bre.engine.domain.DependencySet;
 import nl.svb.bre.engine.domain.Waarde;
 import org.jspecify.annotations.Nullable;

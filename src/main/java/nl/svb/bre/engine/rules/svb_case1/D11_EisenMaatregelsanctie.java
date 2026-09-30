@@ -5,6 +5,8 @@ import nl.svb.bre.engine.context.CalculationContext;
 import nl.svb.bre.engine.domain.Dependency;
 import nl.svb.bre.engine.domain.DependencySet;
 import nl.svb.bre.engine.domain.Waarde;
+import nl.svb.bre.engine.domain.enums.CalculationError;
+import nl.svb.bre.engine.errors.FunctionalCalculationException;
 import nl.svb.bre.engine.rules.Rule;
 import org.springframework.stereotype.Component;
 
@@ -37,10 +39,31 @@ public class D11_EisenMaatregelsanctie extends Rule<Boolean> {
 
     @Override
     protected Waarde<Boolean> executeRule(CalculationContext calculationContext) {
-        return new Waarde<>(this.<Boolean>getCalculatedValue(calculationContext, D111_MEDEWERKINGSVERPLICHTING_OVERTREDEN)
-                && !calculationContext.getTestObject().isInstelling()
-                && !this.<Boolean>getCalculatedValue(calculationContext, D112_UITKERING_WAARDE_OP_MAATREGEL_SANCTIE)
-                && !this.<Boolean>getCalculatedValue(calculationContext, D113_SVB_ZIET_AF_VAN_HET_OPLEGGEN_VAN_EEN_MAATREGEL),
-                null);
+        Boolean medewerkingsverplichtingOvertreden = getCalculatedValue(calculationContext, D111_MEDEWERKINGSVERPLICHTING_OVERTREDEN);
+        if (medewerkingsverplichtingOvertreden == null) {
+            return Waarde.NIET_TE_BEPALEN();
+        } else if (!medewerkingsverplichtingOvertreden) {
+            return new Waarde<>(false, null);
+        }
+
+        var isInstelling = calculationContext.getTestObject().isInstelling();
+        if (isInstelling == null) {
+            throw new FunctionalCalculationException(CalculationError.UNKNOWN_VALUE);
+        } else if (isInstelling) {
+            return new Waarde<>(false, null);
+        }
+
+        Boolean uitkeringWaardeOpMaatregelSanctie = getCalculatedValue(calculationContext, D112_UITKERING_WAARDE_OP_MAATREGEL_SANCTIE);
+        if (uitkeringWaardeOpMaatregelSanctie == null) {
+            return Waarde.NIET_TE_BEPALEN();
+        } else if (uitkeringWaardeOpMaatregelSanctie) {
+            return new Waarde<>(false, null);
+        }
+
+        Boolean svbZietAfVanHetOpleggenVanEenMaatregel = getCalculatedValue(calculationContext, D113_SVB_ZIET_AF_VAN_HET_OPLEGGEN_VAN_EEN_MAATREGEL);
+        if (svbZietAfVanHetOpleggenVanEenMaatregel == null) {
+            return Waarde.NIET_TE_BEPALEN();
+        }
+        return new Waarde<>(!svbZietAfVanHetOpleggenVanEenMaatregel, null);
     }
 }

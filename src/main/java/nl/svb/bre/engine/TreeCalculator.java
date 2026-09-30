@@ -74,6 +74,7 @@ public class TreeCalculator {
             waarde = rule.execute(context);
         } catch (final FunctionalCalculationException ex) {
             calculationError = ex.getCalculationError();
+            context.addCalculatedRule(definitiecode, Waarde.NIET_TE_BEPALEN());
         }
 
         var grondslaggegeven = findOrCreate(grondslag, definitiecode, onderliggend);

@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<semantic:definitions xmlns:boxedext="https://www.trisotech.com/spec/DMN/20191111/EXT/" xmlns:dc="https://www.omg.org/spec/SCE/DC/" xmlns:di="https://www.omg.org/spec/SCE/DI/" xmlns:dmndi="https://www.omg.org/spec/DMN/DMNDI/" xmlns:drools="http://www.drools.org/kie/dmn/1.1" xmlns:feel="https://www.omg.org/spec/DMN/FEEL/" xmlns:i18n="http://www.omg.org/spec/BPMN/non-normative/extensions/i18n/1.0" xmlns:openapi="https://openapis.org/omg/extension/1.0" xmlns:rss="http://purl.org/rss/2.0/" xmlns:sdmn="https://www.omg.org/spec/SDMN/" xmlns:semantic="https://www.omg.org/spec/DMN/20240513/MODEL/" xmlns:tc="http://www.omg.org/spec/DMN/20160719/testcase" xmlns:triso="http://www.trisotech.com/2015/triso/modeling" xmlns:trisodmn="http://www.trisotech.com/2016/triso/dmn" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"                  xmlns:ns1="https://www.omg.org/spec/DMN/20230324/DMNDI/"  xmlns:ns2="http://www.omg.org/spec/DMN/20180521/DI/"  xmlns:ns3="http://www.omg.org/spec/DMN/20180521/DC/"  xmlns:ns4="https://www.omg.org/spec/DMN/20240513/FEEL/"  xmlns="http://www.trisotech.com/definitions/_a47897da-f9a2-470b-944b-4d4f4ca25884" id="_a47897da-f9a2-470b-944b-4d4f4ca25884" name="Hackathon BRE temporeel redeneren" namespace="http://www.trisotech.com/definitions/_a47897da-f9a2-470b-944b-4d4f4ca25884" exporter="Decision Modeler" exporterVersion="13.1.0" triso:modelVersion="6.02" expressionLanguage="https://www.omg.org/spec/DMN/20240513/B-FEEL/" xml:lang="en" triso:translationLanguages="" triso:logoChoice="Default">
+    <semantic:extensionElements>
+        <tc:testCases>
+            <tc:testCase id="_6161fcec-7b97-497d-907c-7a52ef56cba8" name="Test case 1" type="decisionService" invocableName="Diagram Hackathon BRE temporeel redeneren">
+                <tc:inputNode name="de geboortedatum van de persoon">
+                    <tc:value xsi:type="xsd:date">2008-09-01</tc:value>
+                </tc:inputNode>
+                <tc:inputNode name="het maandinkomen van de persoon">
+                    <tc:value xsi:type="xsd:double">1000</tc:value>
+                </tc:inputNode>
+                <tc:inputNode name="de beoordelingsdatum">
+                    <tc:value xsi:type="xsd:date">2026-09-23</tc:value>
+                </tc:inputNode>
+                <tc:inputNode name="de persoon is minimaal 50 dagen achtereenvolgens verzekerd geweest">
+                    <tc:value xsi:type="xsd:boolean">true</tc:value>
+                </tc:inputNode>
+                <tc:resultNode id="_15243568-4750-4ecd-85ee-c4a6042a1c76" name="de persoon heeft recht op toeslag">
+                    <tc:expected>
+                        <tc:value xsi:type="xsd:boolean">true</tc:value>
+                    </tc:expected>
+                </tc:resultNode>
+            </tc:testCase>
+            <tc:testCase id="_cfacde39-e9d5-422d-8730-748f4ca386fa" name="Test case 2" type="decisionService" invocableName="Diagram Hackathon BRE temporeel redeneren">
+                <tc:inputNode name="de geboortedatum van de persoon">
+                    <tc:value xsi:type="xsd:date">2010-01-14</tc:value>
+                </tc:inputNode>
+                <tc:inputNode name="het maandinkomen van de persoon">
+                    <tc:value xsi:type="xsd:double">900</tc:value>
+                </tc:inputNode>
+                <tc:inputNode name="de beoordelingsdatum">
+                    <tc:value xsi:type="xsd:date">2026-09-23</tc:value>
+                </tc:inputNode>
+                <tc:inputNode name="de persoon is minimaal 50 dagen achtereenvolgens verzekerd geweest">
+                    <tc:value xsi:type="xsd:boolean">true</tc:value>
+                </tc:inputNode>
+                <tc:resultNode id="_f1074113-ab15-4898-ac03-6fe6aa0c5630" name="de persoon heeft recht op toeslag">
+                    <tc:expected>
+                        <tc:value xsi:type="xsd:boolean">false</tc:value>
+                    </tc:expected>
+                </tc:resultNode>
+            </tc:testCase>
+            <tc:testCase id="_94b10565-424d-4866-a293-0fc928353701" name="Test case 3" type="decisionService" invocableName="Diagram Hackathon BRE temporeel redeneren">
+                <tc:inputNode name="de geboortedatum van de persoon">
+                    <tc:value xsi:type="xsd:date">2007-05-10</tc:value>
+                </tc:inputNode>
+                <tc:inputNode name="het maandinkomen van de persoon">
+                    <tc:value xsi:type="xsd:double">1200</tc:value>
+                </tc:inputNode>
+                <tc:inputNode name="de beoordelingsdatum">
+                    <tc:value xsi:type="xsd:date">2026-09-23</tc:value>
+                </tc:inputNode>
+                <tc:inputNode name="de persoon is minimaal 50 dagen achtereenvolgens verzekerd geweest">
+                    <tc:value xsi:type="xsd:boolean">true</tc:value>
+                </tc:inputNode>
+                <tc:resultNode id="_de34b588-162b-4c89-8187-9ea528f790f7" name="de persoon heeft recht op toeslag">
+                    <tc:expected>
+                        <tc:value xsi:type="xsd:boolean">false</tc:value>
+                    </tc:expected>
+                </tc:resultNode>
+            </tc:testCase>
+            <tc:testCase id="_17065880-dfaa-44e9-bd17-ad812936c424" name="Test case 4" type="decisionService" invocableName="Diagram Hackathon BRE temporeel redeneren">
+                <tc:inputNode name="de geboortedatum van de persoon">
+                    <tc:value xsi:type="xsd:date">2006-06-25</tc:value>
+                </tc:inputNode>
+                <tc:inputNode name="het maandinkomen van de persoon">
+                    <tc:value xsi:type="xsd:double">300</tc:value>
+                </tc:inputNode>
+                <tc:inputNode name="de beoordelingsdatum">
+                    <tc:value xsi:type="xsd:date">2026-09-23</tc:value>
+                </tc:inputNode>
+                <tc:inputNode name="de persoon is minimaal 50 dagen achtereenvolgens verzekerd geweest">
+                    <tc:value xsi:type="xsd:boolean">false</tc:value>
+                </tc:inputNode>
+                <tc:resultNode id="_b650b459-5729-4378-876c-304dff241601" name="de persoon heeft recht op toeslag">
+                    <tc:expected>
+                        <tc:value xsi:type="xsd:boolean">false</tc:value>
+                    </tc:expected>
+                </tc:resultNode>
+            </tc:testCase>
+        </tc:testCases>
+        <triso:groups>
+            <triso:group id="_6c30a826-cfd2-4737-8f10-37df6ad1ec46" name="per dag vanaf de beoordelingsdatum minus 50 dagen tot en met de beoordelingsdatum" triso:readOnly="false"/>
+            <triso:group id="_0d8bda89-70da-4dfc-8e7e-6f277173dabe" name="per maandinkomen" triso:readOnly="false"/>
+            <triso:group id="_e29c5faa-9e6f-408d-aea1-94a787166513" name="per verzekeringstijdvak" triso:readOnly="false"/>
+            <triso:group id="_83691e73-9b5e-454a-a51e-bb7410e325aa" name="op de beoordelingsdatum" triso:readOnly="false"/>
+        </triso:groups>
+    </semantic:extensionElements>
+    <semantic:decisionService id="_a47897da-f9a2-470b-944b-4d4f4ca25884_DS" name="Whole Model Decision Service" triso:dynamicDecisionService="true" triso:wholeModelService="true" triso:defaultDecisionService="true">
+        <semantic:variable name="Whole Model Decision Service" id="_a47897da-f9a2-470b-944b-4d4f4ca25884_DS_VAR" typeRef="Any"/>
+        <semantic:outputDecision href="#_c559d5d1-3cd5-4281-8bf0-e6d0c84b8d4e"/>
+        <semantic:outputDecision href="#_65d4ec89-46a4-4b69-8c11-7092efe6c610"/>
+        <semantic:encapsulatedDecision href="#_b92e9141-8802-4af1-9f67-04c494b73902"/>
+        <semantic:encapsulatedDecision href="#_25a3c9fe-cceb-4b24-9ed7-b129d5c06b02"/>
+        <semantic:encapsulatedDecision href="#_8979ec6c-6d79-4acf-a00d-bcc329164698"/>
+        <semantic:encapsulatedDecision href="#_9665a963-cae4-493a-b0d0-b3666b6c4d09"/>
+        <semantic:inputData href="#_70c79921-fc72-4ead-98c6-ee282b63ce7c"/>
+        <semantic:inputData href="#_12cfdb8c-a4bd-4027-83fb-1413fc1fb3d0"/>
+        <semantic:inputData href="#_cf35d535-b22b-441f-bf56-63d62d959743"/>
+        <semantic:inputData href="#_658eb8fa-dfdc-4253-85e8-64365ed6626e"/>
+        <semantic:inputData href="#_6f17d72e-622a-4caa-b224-0fc92eb3a1a9"/>
+    </semantic:decisionService>
+    <semantic:decisionService id="_2015320a-9200-4452-b53d-90ea55503e12_DS" name="Diagram Hackathon BRE temporeel redeneren" triso:dynamicDecisionService="true">
+        <semantic:variable name="Diagram Hackathon BRE temporeel redeneren" id="_2015320a-9200-4452-b53d-90ea55503e12_DS_VAR" typeRef="Any"/>
+        <semantic:outputDecision href="#_c559d5d1-3cd5-4281-8bf0-e6d0c84b8d4e"/>
+        <semantic:outputDecision href="#_65d4ec89-46a4-4b69-8c11-7092efe6c610"/>
+        <semantic:encapsulatedDecision href="#_b92e9141-8802-4af1-9f67-04c494b73902"/>
+        <semantic:encapsulatedDecision href="#_25a3c9fe-cceb-4b24-9ed7-b129d5c06b02"/>
+        <semantic:encapsulatedDecision href="#_8979ec6c-6d79-4acf-a00d-bcc329164698"/>
+        <semantic:encapsulatedDecision href="#_9665a963-cae4-493a-b0d0-b3666b6c4d09"/>
+        <semantic:inputData href="#_70c79921-fc72-4ead-98c6-ee282b63ce7c"/>
+        <semantic:inputData href="#_12cfdb8c-a4bd-4027-83fb-1413fc1fb3d0"/>
+        <semantic:inputData href="#_cf35d535-b22b-441f-bf56-63d62d959743"/>
+        <semantic:inputData href="#_658eb8fa-dfdc-4253-85e8-64365ed6626e"/>
+        <semantic:inputData href="#_6f17d72e-622a-4caa-b224-0fc92eb3a1a9"/>
+    </semantic:decisionService>
+    <semantic:decision id="_c559d5d1-3cd5-4281-8bf0-e6d0c84b8d4e" name="de persoon heeft recht op toeslag" triso:readOnly="false" triso:useOutputTypeAsAnswer="false">
+        <semantic:variable name="de persoon heeft recht op toeslag" id="_0295eb08-69e7-4a91-9304-0c5f53c4f48c" typeRef="boolean"/>
+        <semantic:informationRequirement id="_687b7868-cbb6-4376-a8cc-146fcbd025b5" triso:readOnly="false">
+            <semantic:requiredDecision href="#_b92e9141-8802-4af1-9f67-04c494b73902"/>
+        </semantic:informationRequirement>
+        <semantic:informationRequirement id="_8bd86e3f-70b2-4224-8c74-b4deb29e2cc7" triso:readOnly="false">
+            <semantic:requiredDecision href="#_25a3c9fe-cceb-4b24-9ed7-b129d5c06b02"/>
+        </semantic:informationRequirement>
+        <semantic:informationRequirement id="_0bfcd27f-12c8-4998-bd07-ba0d26f66e45" triso:readOnly="false">
+            <semantic:requiredInput href="#_6f17d72e-622a-4caa-b224-0fc92eb3a1a9"/>
+        </semantic:informationRequirement>
+        <semantic:decisionTable triso:descriptionVisible="false" id="_75a36c77-e301-4bf2-a2bb-2eb81f6d0d33" hitPolicy="UNIQUE" outputLabel="de persoon heeft recht op toeslag" typeRef="boolean" triso:expressionId="_8f86647f-3112-4531-b61f-d73577e566b5">
+            <semantic:input id="_00cbda42-099f-45f1-abc1-04d9aab54bed" label="de persoon voldoet aan de leeftijdseis">
+                <semantic:inputExpression typeRef="boolean">
+                    <semantic:text>de persoon voldoet aan de leeftijdseis</semantic:text>
+                </semantic:inputExpression>
+            </semantic:input>
+            <semantic:input id="_c645a81f-6e1e-4001-b345-17d354386042" label="de persoon voldoet aan de inkomenseis">
+                <semantic:inputExpression typeRef="boolean">
+                    <semantic:text>de persoon voldoet aan de inkomenseis</semantic:text>
+                </semantic:inputExpression>
+            </semantic:input>
+            <semantic:input id="_7e4435b3-5a10-4e8c-95f4-a7c62eac25b8" triso:allowNull="true" label="de persoon is minimaal 50 dagen achtereenvolgens verzekerd geweest">
+                <semantic:inputExpression typeRef="boolean">
+                    <semantic:text>de persoon is minimaal 50 dagen achtereenvolgens verzekerd geweest</semantic:text>
+                </semantic:inputExpression>
+            </semantic:input>
+            <semantic:output id="_37857439-eaa3-4ac6-be06-60df5b0ded04" triso:allowNull="true" typeRef="boolean"/>
+            <semantic:annotation name="Description"/>
+            <semantic:rule id="_9d64bb4e-8188-4731-9f89-026f435ccfb7">
+                <semantic:inputEntry id="_7319c71d-e5a4-4315-a190-224418900a92">
+                    <semantic:text>false</semantic:text>
+                </semantic:inputEntry>
+                <semantic:inputEntry id="_fb8606f3-f6e2-44bd-a8b8-ee427f63c097" triso:empty="true">
+                    <semantic:text>-</semantic:text>
+                </semantic:inputEntry>
+                <semantic:inputEntry id="_a31ccbd6-2d9a-49c3-b6ad-f558ae8909c8" triso:empty="true">
+                    <semantic:text>-</semantic:text>
+                </semantic:inputEntry>
+                <semantic:outputEntry id="_9586c9d9-3ef8-41d7-80e7-9591443f267e">
+                    <semantic:text>false</semantic:text>
+                </semantic:outputEntry>
+                <semantic:annotationEntry>
+                    <semantic:text/>
+                </semantic:annotationEntry>
+            </semantic:rule>
+            <semantic:rule id="_70912030-cc37-4c03-b66f-bf0303fec1cb">
+                <semantic:inputEntry id="_30ac1590-eac9-4b45-94f0-682a8e69afda">
+                    <semantic:text>true</semantic:text>
+                </semantic:inputEntry>
+                <semantic:inputEntry id="_c84cc9db-08c4-4b0a-8f35-9041d4d61170">
+                    <semantic:text>false</semantic:text>
+                </semantic:inputEntry>
+                <semantic:inputEntry id="_5515b82e-8ede-432f-b6b2-c30d3f410412" triso:empty="true">
+                    <semantic:text>-</semantic:text>
+                </semantic:inputEntry>
+                <semantic:outputEntry id="_b6aeabd9-9ebc-41f7-9e3e-fd53f183646f">
+                    <semantic:text>false</semantic:text>
+                </semantic:outputEntry>
+                <semantic:annotationEntry>
+                    <semantic:text/>
+                </semantic:annotationEntry>
+            </semantic:rule>
+            <semantic:rule id="_d8f8545b-a8c8-4c2a-8b8b-d87cff247659">
+                <semantic:inputEntry id="_37afa565-61ff-4fe0-adab-eec6cc3f3b0b">
+                    <semantic:text>true</semantic:text>
+                </semantic:inputEntry>
+                <semantic:inputEntry id="_eeff410a-6d2e-4ffc-87e5-127698e845b4">
+                    <semantic:text>true</semantic:text>
+                </semantic:inputEntry>
+                <semantic:inputEntry id="_c7e873a4-e0ef-49e7-a28f-d84b0fdacd37">
+                    <semantic:text>false</semantic:text>
+                </semantic:inputEntry>
+                <semantic:outputEntry id="_6519dccb-74a3-4066-8350-f43f80a86d3b">
+                    <semantic:text>false</semantic:text>
+                </semantic:outputEntry>
+                <semantic:annotationEntry>
+                    <semantic:text/>
+                </semantic:annotationEntry>
+            </semantic:rule>
+            <semantic:rule id="_6ae88e36-ceed-478a-bbc3-3026638c8dc8">
+                <semantic:inputEntry id="_9867a2cf-c4da-4744-80ba-5f360ed21011">
+                    <semantic:text>true</semantic:text>
+                </semantic:inputEntry>
+                <semantic:inputEntry id="_6fc15cb4-b980-4f2a-9aec-7402f9c54c3b">
+                    <semantic:text>true</semantic:text>
+                </semantic:inputEntry>
+                <semantic:inputEntry id="_27bc4678-ae7a-4419-8050-309c6060e9ff">
+                    <semantic:text>true</semantic:text>
+                </semantic:inputEntry>
+                <semantic:outputEntry id="_a824dbb7-482c-4b05-b5e5-0d19d9811754">
+                    <semantic:text>true</semantic:text>
+                </semantic:outputEntry>
+                <semantic:annotationEntry>
+                    <semantic:text/>
+                </semantic:annotationEntry>
+            </semantic:rule>
+        </semantic:decisionTable>
+    </semantic:decision>
+    <semantic:decision id="_b92e9141-8802-4af1-9f67-04c494b73902" name="de persoon voldoet aan de leeftijdseis" triso:readOnly="false" triso:useOutputTypeAsAnswer="false">
+        <semantic:variable name="de persoon voldoet aan de leeftijdseis" id="_187dad10-6b4b-4d7a-b374-4707d9647bb5" typeRef="boolean"/>
+        <semantic:informationRequirement id="_91378c4d-6a19-4fb1-9a05-fc46d32290bb" triso:readOnly="false">
+            <semantic:requiredDecision href="#_9665a963-cae4-493a-b0d0-b3666b6c4d09"/>
+        </semantic:informationRequirement>
+        <semantic:decisionTable triso:descriptionVisible="false" id="_622f7167-f846-46c7-952f-b5e5c75ee57a" hitPolicy="UNIQUE" outputLabel="de persoon voldoet aan de leeftijdseis" typeRef="boolean" triso:expressionId="_0c7342d1-931e-42c6-8ca2-ba38988cb408">
+            <semantic:input id="_4ee5f92b-0d7d-4586-8be8-6e4b2c2bbf89" label="de leeftijd van de persoon">
+                <semantic:inputExpression typeRef="number">
+                    <semantic:text>de leeftijd van de persoon</semantic:text>
+                </semantic:inputExpression>
+            </semantic:input>
+            <semantic:output id="_abfd44eb-3f25-4b00-8c0d-2c1aa166f7b3" triso:allowNull="true" typeRef="boolean"/>
+            <semantic:annotation name="Description"/>
+            <semantic:rule id="_0298c10f-2b12-4302-b23b-c931f4a3f830">
+                <semantic:inputEntry id="_b8434286-019c-4650-a9d3-a5d26f49cf59">
+                    <semantic:text>&lt; 18</semantic:text>
+                </semantic:inputEntry>
+                <semantic:outputEntry id="_791394d7-a618-4890-b26a-df1cb6fcaf2a">
+                    <semantic:text>false</semantic:text>
+                </semantic:outputEntry>
+                <semantic:annotationEntry>
+                    <semantic:text/>
+                </semantic:annotationEntry>
+            </semantic:rule>
+            <semantic:rule id="_47b9ad7f-607d-4920-8af6-f75268f8d56b">
+                <semantic:inputEntry id="_646f6559-42a3-4056-87de-58ebabe165db">
+                    <semantic:text>&gt;= 18</semantic:text>
+                </semantic:inputEntry>
+                <semantic:outputEntry id="_6b42da54-f60b-4896-8315-35f00c408048">
+                    <semantic:text>true</semantic:text>
+                </semantic:outputEntry>
+                <semantic:annotationEntry>
+                    <semantic:text/>
+                </semantic:annotationEntry>
+            </semantic:rule>
+        </semantic:decisionTable>
+    </semantic:decision>
+    <semantic:decision id="_25a3c9fe-cceb-4b24-9ed7-b129d5c06b02" name="de persoon voldoet aan de inkomenseis" triso:readOnly="false" triso:useOutputTypeAsAnswer="false">
+        <semantic:variable name="de persoon voldoet aan de inkomenseis" id="_1c3fbc5d-7896-4fc5-b03f-9c06db9f7957" typeRef="boolean"/>
+        <semantic:informationRequirement id="_a5ee6dd0-73c4-4434-b5a8-8b4f62ef98fb" triso:readOnly="false">
+            <semantic:requiredDecision href="#_8979ec6c-6d79-4acf-a00d-bcc329164698"/>
+        </semantic:informationRequirement>
+        <semantic:decisionTable triso:descriptionVisible="false" id="_1d89cb63-9840-41ee-9998-54acd1abb157" hitPolicy="UNIQUE" outputLabel="de persoon voldoet aan de inkomenseis" typeRef="boolean" triso:expressionId="_097b61df-f572-4eb0-8d1b-cee596133fa4">
+            <semantic:input id="_56a3635d-1698-48c2-9b41-000b90a0918b" label="het maandinkomen van de persoon">
+                <semantic:inputExpression typeRef="number">
+                    <semantic:text>het maandinkomen van de persoon</semantic:text>
+                </semantic:inputExpression>
+            </semantic:input>
+            <semantic:output id="_0b51b19c-0214-4979-b734-88e543b46d7e" triso:allowNull="true" typeRef="boolean"/>
+            <semantic:annotation name="Description"/>
+            <semantic:rule id="_de9bcfd9-c795-46dc-aaa4-70a35417a08d">
+                <semantic:inputEntry id="_f19820db-8173-4a01-ab4e-3d5667474d6d">
+                    <semantic:text>&lt;= 1000</semantic:text>
+                </semantic:inputEntry>
+                <semantic:outputEntry id="_ea4c200e-d912-4d18-8be5-4614cedce9f9">
+                    <semantic:text>true</semantic:text>
+                </semantic:outputEntry>
+                <semantic:annotationEntry>
+                    <semantic:text/>
+                </semantic:annotationEntry>
+            </semantic:rule>
+            <semantic:rule id="_1683a4b7-dc5a-4425-a1d9-327cdb558da1">
+                <semantic:inputEntry id="_b8f88db0-fdfa-46c8-88c0-f85bbbe6948b">
+                    <semantic:text>&gt; 1000</semantic:text>
+                </semantic:inputEntry>
+                <semantic:outputEntry id="_eeb8c56f-bfff-4544-a50c-702dc055ee78">
+                    <semantic:text>false</semantic:text>
+                </semantic:outputEntry>
+                <semantic:annotationEntry>
+                    <semantic:text/>
+                </semantic:annotationEntry>
+            </semantic:rule>
+        </semantic:decisionTable>
+    </semantic:decision>
+    <semantic:inputData id="_70c79921-fc72-4ead-98c6-ee282b63ce7c" name="de geboortedatum van de persoon" triso:readOnly="false">
+        <semantic:variable name="de geboortedatum van de persoon" id="_cea4bc9c-78f7-4507-b8a6-14bc2fa705a6" typeRef="date"/>
+    </semantic:inputData>
+    <semantic:decision id="_8979ec6c-6d79-4acf-a00d-bcc329164698" name="het maandinkomen van de persoon" triso:readOnly="false" triso:useOutputTypeAsAnswer="false">
+        <semantic:variable name="het maandinkomen van de persoon" id="_d862d79d-6caa-4111-b176-3dbaec75ce90" typeRef="number"/>
+        <semantic:informationRequirement id="_078fa634-640e-4ddf-88ef-6ec34e7e3906" triso:readOnly="false">
+            <semantic:requiredInput href="#_658eb8fa-dfdc-4253-85e8-64365ed6626e"/>
+        </semantic:informationRequirement>
+        <semantic:literalExpression id="_7508affd-2035-4fae-a4c7-c6b8b94a9a9f" typeRef="number" triso:expressionId="_46e4d780-9cda-450c-89f3-f73f029bbe47" triso:descriptionVisible="false">
+            <semantic:text>het inkomen van de persoon in de maand</semantic:text>
+        </semantic:literalExpression>
+    </semantic:decision>
+    <semantic:decision id="_9665a963-cae4-493a-b0d0-b3666b6c4d09" name="de leeftijd van de persoon" triso:readOnly="false" triso:useOutputTypeAsAnswer="false">
+        <semantic:variable name="de leeftijd van de persoon" id="_99874d0c-f596-4b81-86c5-01f9668239ab" typeRef="number"/>
+        <semantic:informationRequirement id="_e5c6fbed-00cc-4fc0-8f81-a9bbb3a989b6" triso:readOnly="false">
+            <semantic:requiredInput href="#_70c79921-fc72-4ead-98c6-ee282b63ce7c"/>
+        </semantic:informationRequirement>
+        <semantic:informationRequirement id="_10e97461-05b0-4db5-8926-750060e81c15" triso:readOnly="false">
+            <semantic:requiredInput href="#_12cfdb8c-a4bd-4027-83fb-1413fc1fb3d0"/>
+        </semantic:informationRequirement>
+        <semantic:literalExpression id="_511cd9b7-10f3-45d6-947d-5457e40d71f6" typeRef="number" triso:expressionId="_b6e1aa09-d37c-42d3-98a6-e59a1aa393ba" triso:descriptionVisible="false">
+            <semantic:text>years and months duration(de geboortedatum van de persoon, de beoordelingsdatum).years</semantic:text>
+        </semantic:literalExpression>
+    </semantic:decision>
+    <semantic:inputData id="_12cfdb8c-a4bd-4027-83fb-1413fc1fb3d0" name="de beoordelingsdatum" triso:readOnly="false">
+        <semantic:variable name="de beoordelingsdatum" id="_bbe20157-3ffe-466c-a79f-f91fb30fd8e6" typeRef="date"/>
+    </semantic:inputData>
+    <semantic:inputData id="_cf35d535-b22b-441f-bf56-63d62d959743" name="de persoon is verzekerd in het tijdvak" triso:readOnly="false">
+        <semantic:variable name="de persoon is verzekerd in het tijdvak" id="_3b844219-24ed-49f8-ae25-ddaa3195f499" typeRef="boolean"/>
+    </semantic:inputData>
+    <semantic:inputData id="_658eb8fa-dfdc-4253-85e8-64365ed6626e" name="het inkomen van de persoon in de maand" triso:readOnly="false">
+        <semantic:variable name="het inkomen van de persoon in de maand" id="_c5a1db7a-2491-4aaf-b3eb-9cdb5fa0de29" typeRef="number"/>
+    </semantic:inputData>
+    <semantic:inputData id="_6f17d72e-622a-4caa-b224-0fc92eb3a1a9" name="de persoon is minimaal 50 dagen achtereenvolgens verzekerd geweest" triso:readOnly="false">
+        <semantic:variable name="de persoon is minimaal 50 dagen achtereenvolgens verzekerd geweest" id="_5859bf4e-8553-4e7f-8be5-a31a8bac8e0a" typeRef="boolean"/>
+    </semantic:inputData>
+    <semantic:inputData id="_aaffc617-ce84-4073-b769-bd1bb673094e" name="de ingangsdatum van de verzekering" triso:readOnly="false">
+        <semantic:variable name="de ingangsdatum van de verzekering" id="_2cd8c331-c70a-4dd4-b4d3-a7d66db3c79d" typeRef="date"/>
+    </semantic:inputData>
+    <semantic:inputData id="_a2206fbc-e2f8-4892-82da-1d6cb920a20a" name="de einddatum van de verzekering" triso:readOnly="false">
+        <semantic:variable name="de einddatum van de verzekering" id="_eac829e1-d32f-4734-be74-f03a695d5377" typeRef="date"/>
+    </semantic:inputData>
+    <semantic:inputData id="_678c1096-3568-4021-a617-0e1298505f91" name="de eerste dag van de maand van het maandinkomen" triso:readOnly="false">
+        <semantic:variable name="de eerste dag van de maand van het maandinkomen" id="_77aafc96-7909-41aa-88a0-e9c10ebca208" typeRef="date"/>
+    </semantic:inputData>
+    <semantic:decision id="_65d4ec89-46a4-4b69-8c11-7092efe6c610" name="de persoon is verzekerd" triso:readOnly="false" triso:useOutputTypeAsAnswer="false">
+        <semantic:variable name="de persoon is verzekerd" id="_dfdc2f23-aa38-4841-95fd-dc6376ea6d70" typeRef="boolean"/>
+        <semantic:informationRequirement id="_94d1919c-8920-48db-aabd-99796b27d10d" triso:readOnly="false">
+            <semantic:requiredInput href="#_cf35d535-b22b-441f-bf56-63d62d959743"/>
+        </semantic:informationRequirement>
+        <semantic:literalExpression id="_0a15ee8a-b74f-497c-9fff-29bbc64f8bed" typeRef="boolean" triso:expressionId="_d9e67142-b47b-4bbb-a850-f11b5df027af" triso:descriptionVisible="false">
+            <semantic:text>de persoon is verzekerd in het tijdvak</semantic:text>
+        </semantic:literalExpression>
+    </semantic:decision>
+    <semantic:association id="_35a06d53-eab1-4315-9d98-29521d9adb8a" triso:readOnly="false">
+        <semantic:sourceRef href="#_6f17d72e-622a-4caa-b224-0fc92eb3a1a9"/>
+        <semantic:targetRef href="#_65d4ec89-46a4-4b69-8c11-7092efe6c610"/>
+    </semantic:association>
+    <semantic:association id="_25b1869a-de9f-4c26-a98c-a295e04687d7" triso:readOnly="false">
+        <semantic:sourceRef href="#_aaffc617-ce84-4073-b769-bd1bb673094e"/>
+        <semantic:targetRef href="#_cf35d535-b22b-441f-bf56-63d62d959743"/>
+    </semantic:association>
+    <semantic:association id="_54acec78-719f-459c-bb25-ed98125ee9a5" triso:readOnly="false">
+        <semantic:sourceRef href="#_a2206fbc-e2f8-4892-82da-1d6cb920a20a"/>
+        <semantic:targetRef href="#_cf35d535-b22b-441f-bf56-63d62d959743"/>
+    </semantic:association>
+    <semantic:association id="_c1d47c2d-0f00-4b1b-ab0a-0026c11f7e71" triso:readOnly="false">
+        <semantic:sourceRef href="#_678c1096-3568-4021-a617-0e1298505f91"/>
+        <semantic:targetRef href="#_8979ec6c-6d79-4acf-a00d-bcc329164698"/>
+    </semantic:association>
+    <semantic:association id="_f91e2144-335a-4d62-8b0f-cc854a5ddc7a" triso:readOnly="false">
+        <semantic:sourceRef href="#_aaffc617-ce84-4073-b769-bd1bb673094e"/>
+        <semantic:targetRef href="#_65d4ec89-46a4-4b69-8c11-7092efe6c610"/>
+    </semantic:association>
+    <semantic:association id="_9cfe64c4-de73-4582-a142-589f33138022" triso:readOnly="false">
+        <semantic:sourceRef href="#_a2206fbc-e2f8-4892-82da-1d6cb920a20a"/>
+        <semantic:targetRef href="#_65d4ec89-46a4-4b69-8c11-7092efe6c610"/>
+    </semantic:association>
+    <ns1:DMNDI>
+        <ns1:DMNDiagram id="_2015320a-9200-4452-b53d-90ea55503e12" triso:modelElementRef="_51bb40ac-fbde-46c4-89ea-b156c97106cb" name="Hackathon BRE temporeel redeneren">
+            <ns2:extension/>
+            <ns1:Size height="1050" width="1879.964694077149"/>
+            <ns1:DMNShape id="_affbe7db-b11c-4499-898d-d305bd4f031e" dmnElementRef="_c559d5d1-3cd5-4281-8bf0-e6d0c84b8d4e">
+                <ns1:DMNStyle>
+                    <ns1:FillColor red="153" green="204" blue="255"/>
+                </ns1:DMNStyle>
+                <ns3:Bounds x="494.3749735981581" y="100.74999806823004" width="163.99999976687985" height="65.9999998940362"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0" trisodmn:defaultBounds="true">
+                    <ns1:DMNStyle labelHorizontalAlignement="center" labelVerticalAlignment="center"/>
+                </ns1:DMNLabel>
+            </ns1:DMNShape>
+            <ns1:DMNShape id="_2f92c8cb-4a48-47a2-ac4e-ed54498140ef" dmnElementRef="_b92e9141-8802-4af1-9f67-04c494b73902">
+                <ns1:DMNStyle>
+                    <ns1:FillColor red="204" green="255" blue="204"/>
+                </ns1:DMNStyle>
+                <ns3:Bounds x="200.87499698437753" y="330.7499847672885" width="152.99999999999997" height="60"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0" trisodmn:defaultBounds="true">
+                    <ns1:DMNStyle labelHorizontalAlignement="center" labelVerticalAlignment="center"/>
+                </ns1:DMNLabel>
+            </ns1:DMNShape>
+            <ns1:DMNShape id="_8121aa79-f0e2-4fa9-81a2-b9d0279c89d6" dmnElementRef="_25a3c9fe-cceb-4b24-9ed7-b129d5c06b02">
+                <ns1:DMNStyle>
+                    <ns1:FillColor red="204" green="255" blue="204"/>
+                </ns1:DMNStyle>
+                <ns3:Bounds x="499.87499141134333" y="330.74999462440616" width="153" height="60"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0" trisodmn:defaultBounds="true">
+                    <ns1:DMNStyle labelHorizontalAlignement="center" labelVerticalAlignment="center"/>
+                </ns1:DMNLabel>
+            </ns1:DMNShape>
+            <ns1:DMNShape id="_2ffa0059-987d-42e0-a46b-27c632ffbe55" dmnElementRef="_70c79921-fc72-4ead-98c6-ee282b63ce7c">
+                <ns3:Bounds x="207.6338160407898" y="662.7499760054058" width="135.48234176635745" height="60.00000762939453"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0" trisodmn:defaultBounds="true">
+                    <ns1:DMNStyle labelHorizontalAlignement="center" labelVerticalAlignment="center"/>
+                </ns1:DMNLabel>
+            </ns1:DMNShape>
+            <ns1:DMNShape id="_71afb334-afdc-4f57-bbfb-716a49f6c027" dmnElementRef="_8979ec6c-6d79-4acf-a00d-bcc329164698">
+                <ns1:DMNStyle>
+                    <ns1:FillColor red="204" green="255" blue="204"/>
+                </ns1:DMNStyle>
+                <ns3:Bounds x="500.13381319479936" y="502.98564512383564" width="152.48234152793884" height="67.52866488536085"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0" trisodmn:defaultBounds="true">
+                    <ns1:DMNStyle labelHorizontalAlignement="center" labelVerticalAlignment="center"/>
+                </ns1:DMNLabel>
+            </ns1:DMNShape>
+            <ns1:DMNShape id="_5c39f72b-ffdd-4ff0-9174-238f5f3c2fa0" dmnElementRef="_9665a963-cae4-493a-b0d0-b3666b6c4d09">
+                <ns1:DMNStyle>
+                    <ns1:FillColor red="204" green="255" blue="204"/>
+                </ns1:DMNStyle>
+                <ns3:Bounds x="207.63381777876916" y="506.7499713897713" width="135.48234176635745" height="60.00000762939453"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0" trisodmn:defaultBounds="true">
+                    <ns1:DMNStyle labelHorizontalAlignement="center" labelVerticalAlignment="center"/>
+                </ns1:DMNLabel>
+            </ns1:DMNShape>
+            <ns1:DMNShape id="_ce5e921c-98f6-4f5c-8205-ff049d9761fb" dmnElementRef="_12cfdb8c-a4bd-4027-83fb-1413fc1fb3d0">
+                <ns3:Bounds x="41.63382262524023" y="662.7499760054058" width="135.48234176635742" height="60.00000762939453"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0" trisodmn:defaultBounds="true">
+                    <ns1:DMNStyle labelHorizontalAlignement="center" labelVerticalAlignment="center"/>
+                </ns1:DMNLabel>
+            </ns1:DMNShape>
+            <ns1:DMNShape id="_e6bcadfe-7d5b-4e9e-ad09-e5e9774a3269" dmnElementRef="_cf35d535-b22b-441f-bf56-63d62d959743">
+                <ns3:Bounds x="1026.8535005818821" y="684.9999451107511" width="135.48234176635742" height="60.00000762939453"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0" trisodmn:defaultBounds="true">
+                    <ns1:DMNStyle labelHorizontalAlignement="center" labelVerticalAlignment="center"/>
+                </ns1:DMNLabel>
+            </ns1:DMNShape>
+            <ns1:DMNShape id="_2e3c4010-6b9e-4cd7-8017-a9f86441a682" dmnElementRef="_6c30a826-cfd2-4737-8f10-37df6ad1ec46">
+                <ns3:Bounds x="847.3396794237199" y="485.24999107047927" width="705.999993479252" height="351.99999810391034"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0" trisodmn:defaultBounds="true">
+                    <ns1:DMNStyle labelHorizontalAlignement="end" labelVerticalAlignment="end"/>
+                </ns1:DMNLabel>
+            </ns1:DMNShape>
+            <ns1:DMNShape id="_56115de7-5e12-4f9e-9045-9f219834c706" dmnElementRef="_658eb8fa-dfdc-4253-85e8-64365ed6626e">
+                <ns3:Bounds x="616.6161550812443" y="687.2499444891222" width="151.28861262758255" height="67.00000748104515"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0" trisodmn:defaultBounds="true">
+                    <ns1:DMNStyle labelHorizontalAlignement="center" labelVerticalAlignment="center"/>
+                </ns1:DMNLabel>
+            </ns1:DMNShape>
+            <ns1:DMNShape id="_ba0e00e4-7dfb-4665-bab7-e9a7d58983ee" dmnElementRef="_0d8bda89-70da-4dfc-8e7e-6f277173dabe">
+                <ns3:Bounds x="419.37499139346187" y="662.749961959904" width="375.96469438742406" height="155.33334564103006"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0" trisodmn:defaultBounds="true">
+                    <ns1:DMNStyle labelHorizontalAlignement="end" labelVerticalAlignment="end"/>
+                </ns1:DMNLabel>
+            </ns1:DMNShape>
+            <ns1:DMNShape id="_c6ce6531-0b90-4e61-9eb7-0e77d0f4ef06" dmnElementRef="_6f17d72e-622a-4caa-b224-0fc92eb3a1a9">
+                <ns3:Bounds x="859.0984632764828" y="320.56415371841416" width="181.4823406358562" height="80.37166822470482"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0" trisodmn:defaultBounds="true">
+                    <ns1:DMNStyle labelHorizontalAlignement="center" labelVerticalAlignment="center"/>
+                </ns1:DMNLabel>
+            </ns1:DMNShape>
+            <ns1:DMNShape id="_4d00920d-0236-4065-84dc-bfa63ff074a9" dmnElementRef="_aaffc617-ce84-4073-b769-bd1bb673094e">
+                <ns3:Bounds x="882.0984809179008" y="684.9999596277914" width="135.48234176635742" height="60.00000762939453"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0" trisodmn:defaultBounds="true">
+                    <ns1:DMNStyle labelHorizontalAlignement="center" labelVerticalAlignment="center"/>
+                </ns1:DMNLabel>
+            </ns1:DMNShape>
+            <ns1:DMNShape id="_d502f6a1-cc56-4df1-a5f7-30401b3446c3" dmnElementRef="_a2206fbc-e2f8-4892-82da-1d6cb920a20a">
+                <ns3:Bounds x="1177.1123680042701" y="684.9999741448321" width="135.48234176635742" height="60.00000762939453"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0" trisodmn:defaultBounds="true">
+                    <ns1:DMNStyle labelHorizontalAlignement="center" labelVerticalAlignment="center"/>
+                </ns1:DMNLabel>
+            </ns1:DMNShape>
+            <ns1:DMNShape id="_b0b98a00-ad2d-4991-8557-95788426b8e1" dmnElementRef="_e29c5faa-9e6f-408d-aea1-94a787166513">
+                <ns3:Bounds x="862.5946542227435" y="662.7499479144026" width="463.9999979231094" height="156.000001504686"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0" trisodmn:defaultBounds="true">
+                    <ns1:DMNStyle labelHorizontalAlignement="end" labelVerticalAlignment="end"/>
+                </ns1:DMNLabel>
+            </ns1:DMNShape>
+            <ns1:DMNShape id="_e3c4dc4a-71db-4317-b4f1-6e1e9b222376" dmnElementRef="_678c1096-3568-4021-a617-0e1298505f91">
+                <ns3:Bounds x="436.27773014929824" y="690.4166293389021" width="160.3207674532797" height="71.00000741746692"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0" trisodmn:defaultBounds="true">
+                    <ns1:DMNStyle labelHorizontalAlignement="center" labelVerticalAlignment="center"/>
+                </ns1:DMNLabel>
+            </ns1:DMNShape>
+            <ns1:DMNShape id="_7912c7cc-ca1b-4e48-b1bf-d66c8e4976cf" dmnElementRef="_65d4ec89-46a4-4b69-8c11-7092efe6c610">
+                <ns1:DMNStyle>
+                    <ns1:FillColor red="204" green="255" blue="204"/>
+                </ns1:DMNStyle>
+                <ns3:Bounds x="1026.8534788200216" y="521.5555417472942" width="135.48234176635742" height="60.00000762939453"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0" trisodmn:defaultBounds="true">
+                    <ns1:DMNStyle labelHorizontalAlignement="center" labelVerticalAlignment="center"/>
+                </ns1:DMNLabel>
+            </ns1:DMNShape>
+            <ns1:DMNShape id="_4397a036-d0cb-40f7-912e-32972d0a1548" dmnElementRef="_83691e73-9b5e-454a-a51e-bb7410e325aa">
+                <ns3:Bounds x="12.999980629815708" y="485.2499807866922" width="809.9999905056432" height="351.99999735090506"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0" trisodmn:defaultBounds="true">
+                    <ns1:DMNStyle labelHorizontalAlignement="end" labelVerticalAlignment="end"/>
+                </ns1:DMNLabel>
+            </ns1:DMNShape>
+            <ns1:DMNEdge id="_9c09c013-411c-4b00-a09d-9d8450222551" dmnElementRef="_a5ee6dd0-73c4-4434-b5a8-8b4f62ef98fb">
+                <ns2:waypoint x="576.3713839794758" y="502.98564512383564"/>
+                <ns2:waypoint x="576.3749914113433" y="390.74999462440616"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0">
+                    <ns1:DMNStyle labelHorizontalAlignement="center" labelVerticalAlignment="start"/>
+                </ns1:DMNLabel>
+            </ns1:DMNEdge>
+            <ns1:DMNEdge id="_414cae39-78cf-46a5-9c11-e45d7014fd45" dmnElementRef="_e5c6fbed-00cc-4fc0-8f81-a9bbb3a989b6">
+                <ns2:waypoint x="275.3717883003113" y="662.7499760054058"/>
+                <ns2:waypoint x="275.3749886619479" y="566.7499790191658"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0">
+                    <ns1:DMNStyle labelHorizontalAlignement="center" labelVerticalAlignment="start"/>
+                </ns1:DMNLabel>
+            </ns1:DMNEdge>
+            <ns1:DMNEdge id="_171f3690-870c-4011-9204-eadac2c51291" dmnElementRef="_91378c4d-6a19-4fb1-9a05-fc46d32290bb">
+                <ns2:waypoint x="275.3749886619479" y="506.7499713897713"/>
+                <ns2:waypoint x="277.3749969843775" y="390.7499847672885"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0">
+                    <ns1:DMNStyle labelHorizontalAlignement="center" labelVerticalAlignment="start"/>
+                </ns1:DMNLabel>
+            </ns1:DMNEdge>
+            <ns1:DMNEdge id="_7111c79d-d284-416d-9a28-6b4df9b56c4c" dmnElementRef="_687b7868-cbb6-4376-a8cc-146fcbd025b5">
+                <ns2:waypoint x="277.3749969843775" y="330.7499847672885"/>
+                <ns2:waypoint x="576.374973481598" y="166.74999796226624"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0">
+                    <ns1:DMNStyle labelHorizontalAlignement="center" labelVerticalAlignment="start"/>
+                </ns1:DMNLabel>
+            </ns1:DMNEdge>
+            <ns1:DMNEdge id="_c89bd6c7-64b9-439c-b3ed-2e7a2c79424e" dmnElementRef="_8bd86e3f-70b2-4224-8c74-b4deb29e2cc7">
+                <ns2:waypoint x="576.3749914113433" y="330.74999462440616"/>
+                <ns2:waypoint x="576.374973481598" y="166.74999796226624"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0">
+                    <ns1:DMNStyle labelHorizontalAlignement="center" labelVerticalAlignment="start"/>
+                </ns1:DMNLabel>
+            </ns1:DMNEdge>
+            <ns1:DMNEdge id="_f99880f5-437c-48e5-87f9-318f1b1bc12e" dmnElementRef="_10e97461-05b0-4db5-8926-750060e81c15">
+                <ns2:waypoint x="119.37179488476171" y="662.7499760054058"/>
+                <ns2:waypoint x="275.3749886619479" y="566.7499790191658"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0">
+                    <ns1:DMNStyle labelHorizontalAlignement="center" labelVerticalAlignment="start"/>
+                </ns1:DMNLabel>
+            </ns1:DMNEdge>
+            <ns1:DMNEdge id="_68454029-186b-4432-b500-4dbb6118a10e" dmnElementRef="_078fa634-640e-4ddf-88ef-6ec34e7e3906">
+                <ns2:waypoint x="692.2568895986738" y="687.2499444891223"/>
+                <ns2:waypoint x="576.3713839794758" y="570.5143023798021"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0">
+                    <ns1:DMNStyle labelHorizontalAlignement="center" labelVerticalAlignment="start"/>
+                </ns1:DMNLabel>
+            </ns1:DMNEdge>
+            <ns1:DMNEdge id="_91410c90-da6e-43f5-995e-fa30acedd4c0" dmnElementRef="_0bfcd27f-12c8-4998-bd07-ba0d26f66e45">
+                <ns2:waypoint x="936.4400726154798" y="320.56415371841416"/>
+                <ns2:waypoint x="576.374973481598" y="166.74999796226624"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0">
+                    <ns1:DMNStyle labelHorizontalAlignement="center" labelVerticalAlignment="start"/>
+                </ns1:DMNLabel>
+            </ns1:DMNEdge>
+            <ns1:DMNEdge id="_dce7210e-0fc7-43b7-85fb-2a8c193acc36" dmnElementRef="_35a06d53-eab1-4315-9d98-29521d9adb8a">
+                <ns2:waypoint x="949.8353489496332" y="400.93581326127764"/>
+                <ns2:waypoint x="1085.7395946857912" y="521.5555417472942"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0">
+                    <ns1:DMNStyle labelHorizontalAlignement="center" labelVerticalAlignment="start"/>
+                </ns1:DMNLabel>
+            </ns1:DMNEdge>
+            <ns1:DMNEdge id="_7bf695cf-d160-4417-b482-36badb619678" dmnElementRef="_25b1869a-de9f-4c26-a98c-a295e04687d7">
+                <ns2:waypoint x="949.8364531774223" y="684.9999596277914"/>
+                <ns2:waypoint x="1094.5914728414036" y="744.9999451107511"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0">
+                    <ns1:DMNStyle labelHorizontalAlignement="center" labelVerticalAlignment="start"/>
+                </ns1:DMNLabel>
+            </ns1:DMNEdge>
+            <ns1:DMNEdge id="_708e4efa-07eb-4312-9e5b-3e12f7783687" dmnElementRef="_54acec78-719f-459c-bb25-ed98125ee9a5">
+                <ns2:waypoint x="1244.8503402637916" y="684.9999741448321"/>
+                <ns2:waypoint x="1094.5914728414036" y="744.9999451107511"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0">
+                    <ns1:DMNStyle labelHorizontalAlignement="center" labelVerticalAlignment="start"/>
+                </ns1:DMNLabel>
+            </ns1:DMNEdge>
+            <ns1:DMNEdge id="_602c7509-ef93-4eac-a301-9a9adcd0bcb2" dmnElementRef="_c1d47c2d-0f00-4b1b-ab0a-0026c11f7e71">
+                <ns2:waypoint x="516.4343288380296" y="690.4166293389021"/>
+                <ns2:waypoint x="565.1166079297011" y="570.514302379802"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0">
+                    <ns1:DMNStyle labelHorizontalAlignement="center" labelVerticalAlignment="start"/>
+                </ns1:DMNLabel>
+            </ns1:DMNEdge>
+            <ns1:DMNEdge id="_a9f6a42f-e1e4-4836-931d-7152f8a87e12" dmnElementRef="_94d1919c-8920-48db-aabd-99796b27d10d">
+                <ns2:waypoint x="1094.5914728414036" y="684.9999451107511"/>
+                <ns2:waypoint x="1094.5946497032003" y="581.5555493766888"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0">
+                    <ns1:DMNStyle labelHorizontalAlignement="center" labelVerticalAlignment="start"/>
+                </ns1:DMNLabel>
+            </ns1:DMNEdge>
+            <ns1:DMNEdge id="_05d31f39-f593-40c7-aba0-9dceaeaeda19" dmnElementRef="_f91e2144-335a-4d62-8b0f-cc854a5ddc7a">
+                <ns2:waypoint x="959.8364531774223" y="684.9999596277914"/>
+                <ns2:waypoint x="1085.739594685791" y="581.5555493766888"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0">
+                    <ns1:DMNStyle labelHorizontalAlignement="center" labelVerticalAlignment="start"/>
+                </ns1:DMNLabel>
+            </ns1:DMNEdge>
+            <ns1:DMNEdge id="_bf34788a-12e5-47ff-941a-d64bdd66f388" dmnElementRef="_9cfe64c4-de73-4582-a142-589f33138022">
+                <ns2:waypoint x="1254.8503402637916" y="684.9999741448321"/>
+                <ns2:waypoint x="1103.4497047206091" y="581.5555493766888"/>
+                <ns1:DMNLabel sharedStyle="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0">
+                    <ns1:DMNStyle labelHorizontalAlignement="center" labelVerticalAlignment="start"/>
+                </ns1:DMNLabel>
+            </ns1:DMNEdge>
+        </ns1:DMNDiagram>
+        <ns1:DMNStyle id="LS_a47897da-f9a2-470b-944b-4d4f4ca25884_0" fontFamily="arial,helvetica,sans-serif" fontSize="11" fontBold="false" fontItalic="false" fontUnderline="false" fontStrikeThrough="false"/>
+    </ns1:DMNDI>
+</semantic:definitions>

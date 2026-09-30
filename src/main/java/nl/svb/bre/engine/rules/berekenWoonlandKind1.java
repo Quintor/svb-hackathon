@@ -17,7 +17,7 @@ public class berekenWoonlandKind1 extends Rule<D12121_BedragKinderbijslagPerRele
     @Override
     protected Waarde<D12121_BedragKinderbijslagPerRelevantKind.Woonland> executeRule(CalculationContext calculationContext) {
         if (calculationContext.getTestObject().kindInNL1() == null){
-           return new Waarde<>(null, null);
+           return Waarde.NIET_TE_BEPALEN();
         }
         return new Waarde<>(calculationContext.getTestObject().kindInNL1() ? D12121_BedragKinderbijslagPerRelevantKind.Woonland.IN_NL : D12121_BedragKinderbijslagPerRelevantKind.Woonland.BUITEN_NL, null);
     }

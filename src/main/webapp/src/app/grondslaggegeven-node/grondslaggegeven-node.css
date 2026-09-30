@@ -9,6 +9,10 @@
   font-size: 0.9rem;
 }
 
+:host(.root) > .node {
+  padding-top: 20px;
+}
+
 .code {
   font-weight: 600;
   color: #1f2d3d;

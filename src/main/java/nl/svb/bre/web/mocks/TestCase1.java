@@ -50,7 +50,7 @@ public class TestCase1 {
                 true,
                 false,
                 35,
-                5500
+                500
         );
     }
 

@@ -1,5 +1,6 @@
 package nl.svb.bre.engine.rules.examples;
 
+import nl.svb.bre.domain.Grondslag;
 import nl.svb.bre.engine.context.CalculationContext;
 import nl.svb.bre.engine.domain.ExampleObject;
 import nl.svb.bre.engine.domain.TestObject;
@@ -26,7 +27,7 @@ class Example_Journey_BicycleTest {
 
     @Test
     void executeRule_returnsJourneyDescriptionWithDuration() {
-        CalculationContext context = new CalculationContext(new ExampleObject(100, false, ExampleVehicle.BICYCLE), null,  LocalDate.of(2024, 1, 1));
+        CalculationContext context = new CalculationContext(new ExampleObject(100, false, ExampleVehicle.BICYCLE), null,  LocalDate.of(2024, 1, 1), null);
         context.addCalculatedRule(Definitiecode.EXAMPLE_DURATION, new Waarde<>(Duration.ofMinutes(45L), null));
 
         assertThat(rule.execute(context).value(), is("The journey by bicycle will take PT45M"));

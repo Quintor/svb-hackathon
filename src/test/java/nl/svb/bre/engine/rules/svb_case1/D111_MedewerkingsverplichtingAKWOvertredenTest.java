@@ -42,7 +42,7 @@ class D111_MedewerkingsverplichtingAKWOvertredenTest {
                          String overtredenSoortVerplichtingAkw,
                          Boolean expected) {
         var mockTestObject = mock(TestObject.class);
-        var ctx = new CalculationContext(null, mockTestObject, null);
+        var ctx = new CalculationContext(null, mockTestObject, null, null);
         ctx.addCalculatedRule(Definitiecode.D1112_UITZONDERING_MEDEWERKINGSVERPLICHTING_AKW, new Waarde<>(uitzonderingMedewerkingsverplichtingAkw, null));
         if (Boolean.FALSE.equals(uitzonderingMedewerkingsverplichtingAkw)) {
             ctx.addCalculatedRule(Definitiecode.D1111_OVERTREDEN_SOORT_VERPLICHTING_AKW, new Waarde<>(overtredenSoortVerplichtingAkw, null));

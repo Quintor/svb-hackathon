@@ -7,7 +7,11 @@
     </span>
   }
   @if (node.geldigheidsPeriode; as periode) {
-    <span class="periode">({{ periode.start ?? '…' }} t/m {{ periode.end ?? '…' }})</span>
+    @if (periode.start != null && periode.start === periode.end) {
+      <span class="periode">({{ periode.start }})</span>
+    } @else {
+      <span class="periode">({{ periode.start ?? '…' }} t/m {{ periode.end ?? '…' }})</span>
+    }
   }
   @if (node.onderliggend.length > 0) {
     <ul class="children">

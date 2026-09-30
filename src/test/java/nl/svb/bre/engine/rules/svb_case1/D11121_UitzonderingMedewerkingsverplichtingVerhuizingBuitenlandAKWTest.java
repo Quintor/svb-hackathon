@@ -24,7 +24,7 @@ class D11121_UitzonderingMedewerkingsverplichtingVerhuizingBuitenlandAKWTest {
     @Test
     void testExecuteRule_uitzonderingMedewerkingsverplichting_nietVanToepassing() {
         var mockTestObject = mock(TestObject.class);
-        var ctx = new CalculationContext(null, mockTestObject, null);
+        var ctx = new CalculationContext(null, mockTestObject, null, null);
 
         when(mockTestObject.isMeldplichtigeVerhuizingBuitenland()).thenReturn(false);
 
@@ -34,7 +34,7 @@ class D11121_UitzonderingMedewerkingsverplichtingVerhuizingBuitenlandAKWTest {
     @Test
     void testExecuteRule_uitzonderingMedewerkingsverplichting_nietVanToepassingDoorOntijdigMelden() {
         var mockTestObject = mock(TestObject.class);
-        var ctx = new CalculationContext(null, mockTestObject, null);
+        var ctx = new CalculationContext(null, mockTestObject, null, null);
 
         when(mockTestObject.isMeldplichtigeVerhuizingBuitenland()).thenReturn(true);
         when(mockTestObject.verhuizingTijdigGemeldNaVerzoek()).thenReturn(false);
@@ -45,7 +45,7 @@ class D11121_UitzonderingMedewerkingsverplichtingVerhuizingBuitenlandAKWTest {
     @Test
     void testExecuteRule_uitzonderingMedewerkingsverplichting_vanToepassing() {
         var mockTestObject = mock(TestObject.class);
-        var ctx = new CalculationContext(null, mockTestObject, null);
+        var ctx = new CalculationContext(null, mockTestObject, null, null);
 
         when(mockTestObject.isMeldplichtigeVerhuizingBuitenland()).thenReturn(true);
         when(mockTestObject.verhuizingTijdigGemeldNaVerzoek()).thenReturn(true);
@@ -56,7 +56,7 @@ class D11121_UitzonderingMedewerkingsverplichtingVerhuizingBuitenlandAKWTest {
     @Test
     void testExecuteRule_uitzonderingMedewerkingsverplichting_unknownRequiredValue() {
         var mockTestObject = mock(TestObject.class);
-        var ctx = new CalculationContext(null, mockTestObject, null);
+        var ctx = new CalculationContext(null, mockTestObject, null, null);
 
         when(mockTestObject.isMeldplichtigeVerhuizingBuitenland()).thenReturn(true);
         when(mockTestObject.verhuizingTijdigGemeldNaVerzoek()).thenReturn(null);

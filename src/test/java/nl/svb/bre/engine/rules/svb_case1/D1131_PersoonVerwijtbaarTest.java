@@ -32,7 +32,7 @@ class D1131_PersoonVerwijtbaarTest {
     @ParameterizedTest
     @ValueSource(booleans = {true, false})
     void testExecuteRule(boolean value) {
-        var ctx = new CalculationContext(null, null, null);
+        var ctx = new CalculationContext(null, null, null, null);
         ctx.addCalculatedRule(Definitiecode.D11311_DOOR_EEN_BUITENGEWONE_OMSTANDIGHEID_WAS_HET_NAKOMEN_VAN_DE_VERPLICHTING_FEITELIJK_ONMOGELIJK, new Waarde<>(value, null));
         ctx.addCalculatedRule(Definitiecode.D11312_BETROKKENE_KAN_ER_IN_REGELIJKHEID_VAN_UITGAAN_DAT_DE_SVB_AL_OP_DE_HOOGTE_IS, new Waarde<>(null, null));
 
@@ -41,7 +41,7 @@ class D1131_PersoonVerwijtbaarTest {
 
     @Test
     void testExecuteRule_rejectsWhenNull() {
-        var ctx = new CalculationContext(null, null, null);
+        var ctx = new CalculationContext(null, null, null, null);
         ctx.addCalculatedRule(Definitiecode.D11311_DOOR_EEN_BUITENGEWONE_OMSTANDIGHEID_WAS_HET_NAKOMEN_VAN_DE_VERPLICHTING_FEITELIJK_ONMOGELIJK, new Waarde<>(null, null));
         ctx.addCalculatedRule(Definitiecode.D11312_BETROKKENE_KAN_ER_IN_REGELIJKHEID_VAN_UITGAAN_DAT_DE_SVB_AL_OP_DE_HOOGTE_IS, new Waarde<>(null, null));
 

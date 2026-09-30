@@ -40,6 +40,9 @@ public class D121_BasisbedragMaatregel extends Rule<BigDecimal> {
         D1211_Verwijtbaarheid verwijtbaarheid = getCalculatedValue(calculationContext, D1211_MATE_VAN_VERWIJTBAARHEID);
         BigDecimal uitkeringsbedrag = getCalculatedValue(calculationContext, D1212_AANMERKING_UITKERINGSBEDRAG);
         D1213_Maatregel maatregel = getCalculatedValue(calculationContext, D1213_TYPE_MAATREGELSANCTIE);
+        if(uitkeringsbedrag == null){
+            return Waarde.NIET_TE_BEPALEN();
+        }
 
         return switch (maatregel) {
             case WAARSCHUWING -> new Waarde<>(BigDecimal.ZERO, null);

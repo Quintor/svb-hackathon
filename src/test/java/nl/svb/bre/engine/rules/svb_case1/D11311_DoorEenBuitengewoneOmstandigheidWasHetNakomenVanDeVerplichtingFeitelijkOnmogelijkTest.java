@@ -38,7 +38,7 @@ class D11311_DoorEenBuitengewoneOmstandigheidWasHetNakomenVanDeVerplichtingFeite
                          Boolean nakomenFeitelijkOnmogelijk,
                          Boolean expected) {
         var mockTestObject = mock(TestObject.class);
-        var ctx = new CalculationContext(null, mockTestObject, null);
+        var ctx = new CalculationContext(null, mockTestObject, null, null);
         ctx.addCalculatedRule(Definitiecode.D113111_BUITENGEWONE_OMSTANDIGHEID, new Waarde<>(buitengewoneOmstandigheid, null));
 
         when(ctx.getTestObject().nakomenFeitelijkOnmogelijk()).thenReturn(nakomenFeitelijkOnmogelijk);

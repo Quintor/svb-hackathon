@@ -1,5 +1,6 @@
 package nl.svb.bre.engine.rules.examples;
 
+import nl.svb.bre.domain.Grondslag;
 import nl.svb.bre.engine.context.CalculationContext;
 import nl.svb.bre.engine.domain.ExampleObject;
 import nl.svb.bre.engine.domain.TestObject;
@@ -27,7 +28,7 @@ class Example_JourneyTest {
 
     @Test
     void executeRule_bicycle_returnsJourneyBicycleResult() {
-        CalculationContext context = new CalculationContext(new ExampleObject(100, false, ExampleVehicle.BICYCLE), null, LocalDate.of(2024, 1, 1));
+        CalculationContext context = new CalculationContext(new ExampleObject(100, false, ExampleVehicle.BICYCLE), null, LocalDate.of(2024, 1, 1), null);
         context.addCalculatedRule(Definitiecode.EXAMPLE_VEHICLE, new Waarde<>(ExampleVehicle.BICYCLE, null));
         context.addCalculatedRule(Definitiecode.EXAMPLE_JOURNEY_BICYCLE, new Waarde<>("The journey by bicycle will take PT45M", null));
 
@@ -36,7 +37,7 @@ class Example_JourneyTest {
 
     @Test
     void executeRule_car_throwsUnknownVehicle() {
-        CalculationContext context = new CalculationContext(new ExampleObject(100, false, ExampleVehicle.CAR), null, LocalDate.of(2024, 1, 1));
+        CalculationContext context = new CalculationContext(new ExampleObject(100, false, ExampleVehicle.CAR), null, LocalDate.of(2024, 1, 1), null);
         context.addCalculatedRule(Definitiecode.EXAMPLE_VEHICLE, new Waarde<>(ExampleVehicle.CAR, null));
 
         FunctionalCalculationException exception = assertThrows(FunctionalCalculationException.class, () -> rule.execute(context));

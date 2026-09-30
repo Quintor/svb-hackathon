@@ -40,7 +40,7 @@ class D113_SVBZietAfVanHetOpleggenVanEenMaatregelTest {
                          Boolean isDringendeRedenAanwezig,
                          Boolean expected) {
         var mockTestObject = mock(TestObject.class);
-        var ctx = new CalculationContext(null, mockTestObject, null);
+        var ctx = new CalculationContext(null, mockTestObject, null, null);
         if (persoonVerwijtbaar != null) {
             ctx.addCalculatedRule(Definitiecode.D1131_PERSOON_VERWIJTBAAR, new Waarde<>(persoonVerwijtbaar, null));
         }

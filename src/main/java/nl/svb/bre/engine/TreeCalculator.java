@@ -45,16 +45,21 @@ public class TreeCalculator {
     }
 
     public Grondslag calculateResults(final Set<Definitiecode> definitiecodes, final TestObject testObject, final LocalDate peildatum) {
-        return calculateResults(testObject.persoonId(), definitiecodes, new CalculationContext(null, testObject, peildatum));
+        var persoonId = testObject.persoonId();
+        var grondslag = Optional.ofNullable(grondslagRepository.findByPersoonId(persoonId))
+            .orElseGet(() -> new Grondslag(null, persoonId, new HashSet<>()));
+        return calculateResults(definitiecodes, new CalculationContext(null, testObject, peildatum, grondslag));
     }
 
     public Grondslag calculateResults(final Set<Definitiecode> definitiecodes, final ExampleObject exampleObject, final LocalDate peildatum) {
-        return calculateResults(exampleObject.persoonId(), definitiecodes, new CalculationContext(exampleObject, null, peildatum));
-    }
-
-    private Grondslag calculateResults(final Long persoonId, final Set<Definitiecode> definitiecodes, final CalculationContext context) {
+        var persoonId = exampleObject.persoonId();
         var grondslag = Optional.ofNullable(grondslagRepository.findByPersoonId(persoonId))
                 .orElseGet(() -> new Grondslag(null, persoonId, new HashSet<>()));
+        return calculateResults(definitiecodes, new CalculationContext(exampleObject, null, peildatum, grondslag));
+    }
+
+    private Grondslag calculateResults(final Set<Definitiecode> definitiecodes, final CalculationContext context) {
+        var grondslag = context.getGrondslag();
 
         definitiecodes.stream()
                 .filter(definitiecode -> !context.isCalculated(definitiecode))

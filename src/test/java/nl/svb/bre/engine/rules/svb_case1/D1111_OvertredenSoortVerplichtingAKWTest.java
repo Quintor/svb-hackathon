@@ -30,7 +30,7 @@ class D1111_OvertredenSoortVerplichtingAKWTest {
     @MethodSource("provideForTestExecuteRule")
     void testExecuteRule(String overtredenAkwVerplichting, String expected) {
         var mockTestObject = mock(TestObject.class);
-        var ctx = new CalculationContext(null, mockTestObject, null);
+        var ctx = new CalculationContext(null, mockTestObject, null, null);
 
         when(ctx.getTestObject().overtredenAkwVerplichting()).thenReturn(overtredenAkwVerplichting);
 
@@ -39,7 +39,7 @@ class D1111_OvertredenSoortVerplichtingAKWTest {
 
     @Test
     void testExecuteRule_failsWhenInputUnknown() {
-        var ctx = new CalculationContext(null, mock(TestObject.class), null);
+        var ctx = new CalculationContext(null, mock(TestObject.class), null, null);
 
         var ex = catchThrowableOfType(FunctionalCalculationException.class, () -> rule.execute(ctx));
 

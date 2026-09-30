@@ -44,7 +44,7 @@ class D11_EisenMaatregelsanctieTest {
                          Boolean svbZietAfVanMaatregel,
                          Boolean expected) {
         var mockTestObject = mock(TestObject.class);
-        var ctx = new CalculationContext(null, mockTestObject, null);
+        var ctx = new CalculationContext(null, mockTestObject, null, null);
         ctx.addCalculatedRule(Definitiecode.D111_MEDEWERKINGSVERPLICHTING_OVERTREDEN, new Waarde<>(medewerkingsverplichtingAkwOvertreden, null));
         if (uitkeringDefinitiefBeeindigd != null) {
             ctx.addCalculatedRule(Definitiecode.D112_UITKERING_WAARDE_OP_MAATREGEL_SANCTIE, new Waarde<>(uitkeringDefinitiefBeeindigd, null));

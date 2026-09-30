@@ -1,5 +1,6 @@
 package nl.svb.bre.engine.rules.examples;
 
+import nl.svb.bre.domain.Grondslag;
 import nl.svb.bre.engine.context.CalculationContext;
 import nl.svb.bre.engine.domain.ExampleObject;
 import nl.svb.bre.engine.domain.TestObject;
@@ -29,7 +30,7 @@ class Example_Charging_TimeTest {
 
     @Test
     void executeRule_notElectric_returnsZero() {
-        CalculationContext context = new CalculationContext(new ExampleObject(210, false, ExampleVehicle.BICYCLE), null, LocalDate.of(2024, 1, 1));
+        CalculationContext context = new CalculationContext(new ExampleObject(210, false, ExampleVehicle.BICYCLE), null, LocalDate.of(2024, 1, 1), null);
         context.addCalculatedRule(Definitiecode.EXAMPLE_VEHICLE, new Waarde<>(ExampleVehicle.BICYCLE, null));
         context.addCalculatedRule(Definitiecode.EXAMPLE_ELECTRIC, new Waarde<>(false, null));
         context.addCalculatedRule(Definitiecode.EXAMPLE_DISTANCE, new Waarde<>(210, null));
@@ -39,7 +40,7 @@ class Example_Charging_TimeTest {
 
     @Test
     void executeRule_electricBicycle_returnsChargingTimeForNumberOfCharges() {
-        CalculationContext context = new CalculationContext(new ExampleObject(210, true, ExampleVehicle.BICYCLE), null, LocalDate.of(2024, 1, 1));
+        CalculationContext context = new CalculationContext(new ExampleObject(210, true, ExampleVehicle.BICYCLE), null, LocalDate.of(2024, 1, 1), null);
         context.addCalculatedRule(Definitiecode.EXAMPLE_VEHICLE, new Waarde<>(ExampleVehicle.BICYCLE, null));
         context.addCalculatedRule(Definitiecode.EXAMPLE_ELECTRIC, new Waarde<>(true, null));
         context.addCalculatedRule(Definitiecode.EXAMPLE_DISTANCE, new Waarde<>(210, null));
@@ -51,7 +52,7 @@ class Example_Charging_TimeTest {
 
     @Test
     void executeRule_electricCar_throwsUnknownVehicle() {
-        CalculationContext context = new CalculationContext(new ExampleObject(210, true, ExampleVehicle.CAR), null, LocalDate.of(2024, 1, 1));
+        CalculationContext context = new CalculationContext(new ExampleObject(210, true, ExampleVehicle.CAR), null, LocalDate.of(2024, 1, 1), null);
         context.addCalculatedRule(Definitiecode.EXAMPLE_VEHICLE, new Waarde<>(ExampleVehicle.CAR, null));
         context.addCalculatedRule(Definitiecode.EXAMPLE_ELECTRIC, new Waarde<>(true, null));
         context.addCalculatedRule(Definitiecode.EXAMPLE_DISTANCE, new Waarde<>(210, null));

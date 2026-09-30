@@ -5,6 +5,8 @@ import nl.svb.bre.engine.context.CalculationContext;
 import nl.svb.bre.engine.domain.Dependency;
 import nl.svb.bre.engine.domain.DependencySet;
 import nl.svb.bre.engine.domain.Waarde;
+import nl.svb.bre.engine.domain.enums.CalculationError;
+import nl.svb.bre.engine.errors.FunctionalCalculationException;
 import nl.svb.bre.engine.rules.Rule;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +20,8 @@ import java.util.Map;
 
 @Component
 public class D12121_BedragKinderbijslagPerRelevantKind extends Rule<Collection<BigDecimal>> {
+
+    public final LocalDate datumV2 = LocalDate.of(2026, Month.APRIL, 1);
 
     private enum LeeftijdCat {
         NUL_TOT_ZES,
@@ -38,7 +42,7 @@ public class D12121_BedragKinderbijslagPerRelevantKind extends Rule<Collection<B
         }
     }
 
-    private enum Woonland {
+    public enum Woonland {
         IN_NL,
         BUITEN_NL
     }
@@ -72,7 +76,9 @@ public class D12121_BedragKinderbijslagPerRelevantKind extends Rule<Collection<B
     public DependencySet dependsOn() {
         return DependencySet.of(
                 Dependency.of(Definitiecode.SVB_LEEFTIJD_KIND1),
-                Dependency.of(Definitiecode.SVB_LEEFTIJD_KIND2)
+                Dependency.of(Definitiecode.SVB_LEEFTIJD_KIND2),
+                Dependency.of(Definitiecode.SVB_WOONLAND_KIND1),
+                Dependency.of(Definitiecode.SVB_WOONLAND_KIND2)
         );
     }
 
@@ -102,16 +108,19 @@ public class D12121_BedragKinderbijslagPerRelevantKind extends Rule<Collection<B
     private Waarde<Collection<BigDecimal>> versionV2(CalculationContext calculationContext) {
         List<BigDecimal> list = new LinkedList<>();
         Integer leeftijd = getCalculatedValue(calculationContext, Definitiecode.SVB_LEEFTIJD_KIND1);
-        Woonland woonland = Boolean.TRUE.equals(calculationContext.getTestObject().kindInNL1()) ? Woonland.IN_NL : Woonland.BUITEN_NL;
+        Woonland woonland = getCalculatedValue(calculationContext, Definitiecode.SVB_WOONLAND_KIND1);
         list.add(bedragLeeftijdV2(leeftijd, woonland));
         leeftijd = getCalculatedValue(calculationContext, Definitiecode.SVB_LEEFTIJD_KIND2);
-        woonland = Boolean.TRUE.equals(calculationContext.getTestObject().kindInNl2()) ? Woonland.IN_NL : Woonland.BUITEN_NL;
+        woonland = getCalculatedValue(calculationContext, Definitiecode.SVB_WOONLAND_KIND2);
         list.add(bedragLeeftijdV2(leeftijd, woonland));
         return new Waarde<>(list, null);
     }
 
     private BigDecimal bedragLeeftijdV2(Integer leeftijd, Woonland woonland) {
         LeeftijdCat categorie = LeeftijdCat.getCategorie(leeftijd);
+        if (woonland == null) {
+            throw new FunctionalCalculationException(CalculationError.MISSING_D12121_WOONLAND);
+        }
         return bedragenV2.get(woonland).get(categorie);
     }
 

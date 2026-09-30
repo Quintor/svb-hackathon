@@ -19,7 +19,7 @@ class D122_MinimumbedragMaatregelTest {
 
     @Test
     void testExecuteRule() {
-        var ctx = new CalculationContext(null, null, null);
+        var ctx = new CalculationContext(null, null, null, null);
 
         assertThat(rule.executeRule(ctx).value()).isEqualTo(new BigDecimal(25));
     }

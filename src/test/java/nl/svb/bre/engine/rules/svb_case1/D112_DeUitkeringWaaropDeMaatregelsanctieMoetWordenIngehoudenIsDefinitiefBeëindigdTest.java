@@ -29,7 +29,7 @@ class D112_DeUitkeringWaaropDeMaatregelsanctieMoetWordenIngehoudenIsDefinitiefBe
                          Boolean uitkeringKanHerleven,
                          Boolean expected) {
         var mockTestObject = mock(TestObject.class);
-        var ctx = new CalculationContext(null, mockTestObject, null);
+        var ctx = new CalculationContext(null, mockTestObject, null, null);
 
         when(ctx.getTestObject().isInhoudingsuitkeringBeeindigd()).thenReturn(isInhoudingsuitkeringBeeindigd);
         when(ctx.getTestObject().uitkeringKanHerleven()).thenReturn(uitkeringKanHerleven);

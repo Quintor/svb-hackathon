@@ -46,7 +46,8 @@ public class TestCase2 {
                 false,
                 false,
                 LocalDate.of(2016, 3, 25),
-                LocalDate.of(2018, 4, 1)
+                LocalDate.of(2018, 4, 1),
+                null, null
         );
     }
 

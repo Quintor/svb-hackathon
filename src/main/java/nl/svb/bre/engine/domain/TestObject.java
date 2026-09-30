@@ -44,6 +44,9 @@ public record TestObject(
         LocalDate geboortedatumKind2,
 
         Boolean kindInNL1,
-        Boolean kindInNl2
+        Boolean kindInNl2,
+
+        Integer leeftijd,
+        Integer afgerondMaandinkomen
 ) {
 }

@@ -16,6 +16,6 @@ public class D21_PersoonVoldoetAanDeLeeftijdseis extends Rule<Boolean> {
 
     @Override
     protected Waarde<Boolean> executeRule(CalculationContext calculationContext) {
-        return null;
+        return new Waarde<>(calculationContext.getTestObject().leeftijd() >= 18, null);
     }
 }

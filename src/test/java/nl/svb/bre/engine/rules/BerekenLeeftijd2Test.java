@@ -41,7 +41,7 @@ class BerekenLeeftijd2Test {
                 "", false, false,
                 false, null, false, false,
                 false, false, LocalDate.of(2014, 10, 10),
-                LocalDate.of(2024, 4, 5), null, null);
+                LocalDate.of(2024, 4, 5), null, null, 18, 1000);
     }
 
     TestObject getTestObject2() {
@@ -55,6 +55,6 @@ class BerekenLeeftijd2Test {
                 "", false, false,
                 false, null, false, false,
                 false, false, LocalDate.of(2014, 10, 10),
-                LocalDate.of(2024, 12, 5), null, null);
+                LocalDate.of(2024, 12, 5), null, null, 17, 1500);
     }
 }

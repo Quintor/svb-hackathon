@@ -16,6 +16,6 @@ public class D22_PersoonVoldoetAanDeInkomenseis extends Rule<Boolean> {
 
     @Override
     protected Waarde<Boolean> executeRule(CalculationContext calculationContext) {
-        return null;
+        return new Waarde<>(calculationContext.getTestObject().afgerondMaandinkomen() <= 1000, null);
     }
 }

@@ -10,7 +10,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Set;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -44,15 +43,12 @@ class D111_MedewerkingsverplichtingAKWOvertredenTest {
                          Boolean expected) {
         var mockTestObject = mock(TestObject.class);
         var ctx = new CalculationContext(null, mockTestObject, null);
+        ctx.addCalculatedRule(Definitiecode.D1112_UITZONDERING_MEDEWERKINGSVERPLICHTING_AKW, new Waarde<>(uitzonderingMedewerkingsverplichtingAkw, null));
+        if (Boolean.FALSE.equals(uitzonderingMedewerkingsverplichtingAkw)) {
+            ctx.addCalculatedRule(Definitiecode.D1111_OVERTREDEN_SOORT_VERPLICHTING_AKW, new Waarde<>(overtredenSoortVerplichtingAkw, null));
+        }
 
         when(mockTestObject.isMedewerkingsplichtigAkw()).thenReturn(isMedewerkingsplichtigAkw);
-
-        if (uitzonderingMedewerkingsverplichtingAkw != null) {
-            ctx.addCalculatedRule(Definitiecode.D1111_OVERTREDEN_SOORT_VERPLICHTING_AKW, new Waarde<>(overtredenSoortVerplichtingAkw, null));
-            if (!uitzonderingMedewerkingsverplichtingAkw) {
-                ctx.addCalculatedRule(Definitiecode.D1112_UITZONDERING_MEDEWERKINGSVERPLICHTING_AKW, new Waarde<>(uitzonderingMedewerkingsverplichtingAkw, null));
-            }
-        }
 
         assertThat(rule.executeRule(ctx).value()).isEqualTo(expected);
     }
@@ -60,7 +56,7 @@ class D111_MedewerkingsverplichtingAKWOvertredenTest {
     static Stream<Arguments> testExecuteRule() {
         return Stream.of(
                 Arguments.of(false, null, null, false),
-                Arguments.of(true, true, null, null),
+                Arguments.of(true, true, null, false),
                 Arguments.of(true, false, "something", false),
                 Arguments.of(true, false, "nakomen verplichting tweede categorie", true)
         );

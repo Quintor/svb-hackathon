@@ -9,8 +9,8 @@ import java.util.List;
 @UtilityClass
 public class TestCase1 {
 
-        public static TestObject TEST_OBJECT(final Long persoonId, final Long persoonIdKind1, final Long persoonIdKind2) {
-            return new TestObject(
+    public static TestObject TEST_OBJECT(final Long persoonId, final Long persoonIdKind1, final Long persoonIdKind2) {
+        return new TestObject(
                 persoonId,
                 List.of(persoonIdKind1, persoonIdKind2),
                 true,
@@ -47,8 +47,10 @@ public class TestCase1 {
                 false,
                 LocalDate.of(2016, 3, 25),
                 LocalDate.of(2018, 4, 1),
-        true,
-        false
+                true,
+                false,
+                35,
+                5500
         );
     }
 

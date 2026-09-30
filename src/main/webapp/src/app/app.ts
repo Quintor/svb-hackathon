@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { GrondslaggegevenNode } from './grondslaggegeven-node/grondslaggegeven-node';
 import { Grondslag, Grondslaggegeven } from './models/grondslag.model';
@@ -28,7 +28,11 @@ export class App implements OnInit {
 
   protected readonly grondslag = signal<Grondslag | null>(null);
   protected readonly error = signal<string | null>(null);
-  protected readonly warnings = signal<string[]>([]);
+  protected readonly warnings = computed(() =>
+    (this.grondslag()?.grondslaggegevens ?? [])
+      .filter((gegeven) => gegeven.calculationError != null)
+      .map((gegeven) => gegeven.calculationError!.message),
+  );
   protected readonly loading = signal(false);
 
   protected readonly savedGrondslagen = signal<Grondslag[]>([]);
@@ -47,7 +51,6 @@ export class App implements OnInit {
   calculate(): void {
     this.loading.set(true);
     this.error.set(null);
-    this.warnings.set([]);
     this.grondslagService
       .calculate({
         definitiecode: this.definitiecode,
@@ -58,14 +61,9 @@ export class App implements OnInit {
         peildatum: this.peildatum,
       })
       .subscribe({
-        next: (result) => {
-          this.grondslag.set(result.grondslag);
-          this.warnings.set(
-            (result.errors ?? []).flatMap((engineError) =>
-              engineError.errors.map((e) => e.message),
-            ),
-          );
-          this.selectedGrondslagId = result.grondslag.id;
+        next: (grondslag) => {
+          this.grondslag.set(grondslag);
+          this.selectedGrondslagId = grondslag.id;
           this.loading.set(false);
           this.loadSaved();
         },
@@ -84,7 +82,6 @@ export class App implements OnInit {
     if (selected) {
       this.grondslag.set(selected);
       this.error.set(null);
-      this.warnings.set([]);
     }
   }
 

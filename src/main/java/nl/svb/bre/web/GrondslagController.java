@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import nl.svb.bre.domain.Grondslag;
 import nl.svb.bre.domain.enums.Definitiecode;
 import nl.svb.bre.engine.TreeCalculator;
-import nl.svb.bre.engine.domain.EngineResult;
 import nl.svb.bre.engine.domain.ExampleObject;
 import nl.svb.bre.engine.domain.TestObject;
 import nl.svb.bre.engine.domain.enums.ExampleVehicle;
@@ -32,7 +31,7 @@ public class GrondslagController {
     private final GrondslagRepository grondslagRepository;
 
     @GetMapping("/calculate")
-    public EngineResult calculate(@RequestParam final Definitiecode definitiecode,
+    public Grondslag calculate(@RequestParam final Definitiecode definitiecode,
                                   @RequestParam final Long persoonId,
                                   @RequestParam final Long persoonIdKind1,
                                   @RequestParam final Long persoonIdKind2,
@@ -50,7 +49,7 @@ public class GrondslagController {
 
 
     @GetMapping("/calculate_journey")
-    public EngineResult calculate(@RequestParam final Definitiecode definitiecode,
+    public Grondslag calculate(@RequestParam final Definitiecode definitiecode,
                                @RequestParam final Long persoonId,
                                @RequestParam final Integer distance,
                                @RequestParam final Boolean electric,

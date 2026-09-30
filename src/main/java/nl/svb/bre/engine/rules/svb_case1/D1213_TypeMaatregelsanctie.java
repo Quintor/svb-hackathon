@@ -12,6 +12,8 @@ import nl.svb.bre.engine.errors.FunctionalCalculationException;
 import nl.svb.bre.engine.rules.Rule;
 import org.springframework.stereotype.Component;
 
+import java.util.function.Predicate;
+
 import static nl.svb.bre.domain.enums.D12131_RecidiveSoort.RECIDIVE_NA_MAATREGEL;
 import static nl.svb.bre.domain.enums.D12131_RecidiveSoort.RECIDIVE_NA_MAATREGELWAARSCHUWING;
 import static nl.svb.bre.domain.enums.Definitiecode.D12131_RECIDIVE;
@@ -19,6 +21,9 @@ import static nl.svb.bre.domain.enums.Definitiecode.D1213_TYPE_MAATREGELSANCTIE;
 
 @Component
 public class D1213_TypeMaatregelsanctie extends Rule<D1213_Maatregel> {
+
+    private static final Predicate<CalculationContext> soortOvertredenVerplichtingIsReagerenOpEenInformatieverzoek = c -> "reageren op een informatieverzoek".equalsIgnoreCase(c.getTestObject().soortOvertredenVerplichting());
+
     @Override
     public Definitiecode getDefinitionCode() {
         return D1213_TYPE_MAATREGELSANCTIE;
@@ -27,7 +32,7 @@ public class D1213_TypeMaatregelsanctie extends Rule<D1213_Maatregel> {
     @Override
     public DependencySet dependsOn() {
         return DependencySet.of(
-                Dependency.of(D12131_RECIDIVE)
+                Dependency.of(D12131_RECIDIVE, soortOvertredenVerplichtingIsReagerenOpEenInformatieverzoek)
         );
     }
 
@@ -40,7 +45,7 @@ public class D1213_TypeMaatregelsanctie extends Rule<D1213_Maatregel> {
                   new Waarde<>(D1213_Maatregel.SANCTIE_TWEEDE_CATEGORIE, null);
             case "nakomen overige controlevoorschriften" ->
                     new Waarde<>(D1213_Maatregel.SANCTIE_EERSTE_CATEGORIE, null);
-            default -> null;
+            case null, default -> throw new FunctionalCalculationException(CalculationError.MISSING_VALUE_D1213);
         };
     }
 

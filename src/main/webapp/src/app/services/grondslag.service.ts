@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { EngineResult, Grondslag } from '../models/grondslag.model';
+import { Grondslag } from '../models/grondslag.model';
 
 export interface CalculateParams {
   definitiecode: string;
@@ -18,8 +18,8 @@ export class GrondslagService {
 
   constructor(private readonly http: HttpClient) {}
 
-  calculate(params: CalculateParams): Observable<EngineResult> {
-    return this.http.get<EngineResult>(`${this.baseUrl}/calculate`, {
+  calculate(params: CalculateParams): Observable<Grondslag> {
+    return this.http.get<Grondslag>(`${this.baseUrl}/calculate`, {
       params: {
         definitiecode: params.definitiecode,
         persoonId: params.persoonId,

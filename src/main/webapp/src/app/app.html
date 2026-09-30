@@ -87,6 +87,8 @@
     @if (result.grondslaggegevens.length === 0) {
       <p class="empty">No Grondslaggegevens were calculated for this input.</p>
     } @else {
+      <p class="">PersoonId: {{result.persoonId}}</p>
+
       <ul class="tree">
         @for (root of roots(result); track root.id) {
           <app-grondslaggegeven-node [node]="root" />

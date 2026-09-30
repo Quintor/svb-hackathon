@@ -25,21 +25,6 @@ export interface Grondslaggegeven {
 
 export interface Grondslag {
   id: number;
+  persoonId: number;
   grondslaggegevens: Grondslaggegeven[];
-}
-
-export interface CalculationException {
-  message: string | null;
-  calculationError?: CalculationError;
-}
-
-export interface EngineError {
-  functional: boolean;
-  exception: CalculationException | null;
-  errors: CalculationError[];
-}
-
-export interface EngineResult {
-  grondslag: Grondslag;
-  errors: EngineError[];
 }

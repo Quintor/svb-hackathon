@@ -8,6 +8,10 @@ import nl.svb.bre.engine.domain.enums.ExampleVehicle;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import static nl.svb.bre.domain.enums.Definitiecode.D12111_DOOR_DE_EMOTIONELE_ONTWRICHTING_IS_DE_OVERTREDING_VERMINDERD_TOE_TE_REKENEN;
+import static nl.svb.bre.domain.enums.Definitiecode.D12112_DOOR_DE_GEESTELIJKE_TOESTAND_IS_DE_OVERTREDING_VERMINDERD_TOE_TE_REKENEN;
+import static nl.svb.bre.domain.enums.Definitiecode.D1213_TYPE_MAATREGELSANCTIE;
+
 public final class CalculationEnginePredicate {
 
     private CalculationEnginePredicate() {
@@ -15,7 +19,7 @@ public final class CalculationEnginePredicate {
 
     // SVB
     public static final Predicate<CalculationContext> isMedewerkingsplichtigVoorAKW = c -> c.getTestObject().isMedewerkingsplichtigAkw();
-    public static final Predicate<CalculationContext> isuitzonderingMedewerkingsverplichtingAKW = c -> getCalculatedValue(c, Definitiecode.D1112_UITZONDERING_MEDEWERKINGSVERPLICHTING_AKW);
+    public static final Predicate<CalculationContext> isuitzonderingMedewerkingsverplichtingAKW = c -> c.isCalculated(Definitiecode.D1112_UITZONDERING_MEDEWERKINGSVERPLICHTING_AKW) && Boolean.TRUE.equals(getCalculatedValue(c, Definitiecode.D1112_UITZONDERING_MEDEWERKINGSVERPLICHTING_AKW));
     public static final Predicate<CalculationContext> heeftSvbBoetewaarschuwingVoorZelfdeGedraging = c -> c.getTestObject().heeftSvbBoetewaarschuwingVoorZelfdeGedraging();
     public static final Predicate<CalculationContext> heeftSvbBoeteVoorZelfdeGedraging = c -> c.getTestObject().heeftSvbBoeteVoorZelfdeGedraging();
     public static final Predicate<CalculationContext> medewerkingsverplichtingAkwOvertreden = c -> c.isCalculated(Definitiecode.D111_MEDEWERKINGSVERPLICHTING_OVERTREDEN) && Boolean.TRUE.equals(getCalculatedValue(c, Definitiecode.D111_MEDEWERKINGSVERPLICHTING_OVERTREDEN));
@@ -24,6 +28,9 @@ public final class CalculationEnginePredicate {
     public static final Predicate<CalculationContext> heeftEisenMaatregelSanctie = c -> c.isCalculated(Definitiecode.D11_EISEN_MAATREGEL_SANCTIE) && Boolean.TRUE.equals(getCalculatedValue(c, Definitiecode.D11_EISEN_MAATREGEL_SANCTIE));
     public static final Predicate<CalculationContext> basisbedragIsLagerDanMinimum = c -> c.isCalculated(Definitiecode.D12_BASISBEDRAG_IS_LAGER_DAN_MINIMUM_BEDRAG) && Boolean.TRUE.equals(getCalculatedValue(c, Definitiecode.D12_BASISBEDRAG_IS_LAGER_DAN_MINIMUM_BEDRAG));
     public static final Function<D1213_Maatregel, Predicate<CalculationContext>> hasMaatregelType = m -> c -> c.isCalculated(Definitiecode.D1213_TYPE_MAATREGELSANCTIE) && m.equals(getCalculatedValue(c, Definitiecode.D1213_TYPE_MAATREGELSANCTIE));
+    public static final Predicate<CalculationContext> isD12111 = c -> getCalculatedValue(c, D12111_DOOR_DE_EMOTIONELE_ONTWRICHTING_IS_DE_OVERTREDING_VERMINDERD_TOE_TE_REKENEN);
+    public static final Predicate<CalculationContext> isD12112 = c -> getCalculatedValue(c, D12112_DOOR_DE_GEESTELIJKE_TOESTAND_IS_DE_OVERTREDING_VERMINDERD_TOE_TE_REKENEN);
+    public static final Predicate<CalculationContext> isOvertredingGedeeltelijkVerwijtbaar = c -> c.getTestObject().isOvertredingGedeeltelijkVerwijtbaar();
 
     // Product
     public static final Predicate<CalculationContext> isBicycle = c -> ExampleVehicle.BICYCLE == getCalculatedValue(c, Definitiecode.EXAMPLE_VEHICLE);

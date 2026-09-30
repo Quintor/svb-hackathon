@@ -24,6 +24,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
@@ -38,6 +39,7 @@ import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -70,7 +72,7 @@ class TreeCalculatorTest {
         Definitie definitie = definitie(EXAMPLE_VEHICLE);
         when(definitieRepository.findByDefinitiecode(EXAMPLE_VEHICLE)).thenReturn(definitie);
 
-        Grondslag grondslag = treeCalculator.calculateResult(EXAMPLE_VEHICLE, testObject, LocalDate.of(2024, 1, 1)).grondslag();
+        Grondslag grondslag = treeCalculator.calculateResult(EXAMPLE_VEHICLE, testObject, LocalDate.of(2024, 1, 1));
 
         assertThat(grondslag.getGrondslaggegevens(), hasSize(1));
         Grondslaggegeven<?> gegeven = findByDefinitiecode(grondslag, EXAMPLE_VEHICLE);
@@ -96,7 +98,7 @@ class TreeCalculatorTest {
         when(definitieRepository.findByDefinitiecode(EXAMPLE_VEHICLE)).thenReturn(definitie(EXAMPLE_VEHICLE));
         when(definitieRepository.findByDefinitiecode(EXAMPLE_JOURNEY)).thenReturn(definitie(EXAMPLE_JOURNEY));
 
-        Grondslag grondslag = treeCalculator.calculateResult(EXAMPLE_JOURNEY, testObject, LocalDate.of(2024, 1, 1)).grondslag();
+        Grondslag grondslag = treeCalculator.calculateResult(EXAMPLE_JOURNEY, testObject, LocalDate.of(2024, 1, 1));
 
         assertThat(executionOrder, contains(EXAMPLE_VEHICLE, EXAMPLE_JOURNEY));
         Grondslaggegeven<?> journeyGegeven = findByDefinitiecode(grondslag, EXAMPLE_JOURNEY);
@@ -114,7 +116,7 @@ class TreeCalculatorTest {
         calculationRules.put(EXAMPLE_JOURNEY, journeyRule);
         when(definitieRepository.findByDefinitiecode(EXAMPLE_JOURNEY)).thenReturn(definitie(EXAMPLE_JOURNEY));
 
-        Grondslag grondslag = treeCalculator.calculateResult(EXAMPLE_JOURNEY, testObject, LocalDate.of(2024, 1, 1)).grondslag();
+        Grondslag grondslag = treeCalculator.calculateResult(EXAMPLE_JOURNEY, testObject, LocalDate.of(2024, 1, 1));
 
         verify(bicycleRule, never()).execute(any());
         assertThat(findByDefinitiecode(grondslag, EXAMPLE_JOURNEY).getOnderliggend(), is(empty()));
@@ -142,10 +144,27 @@ class TreeCalculatorTest {
         when(failingRule.execute(any())).thenThrow(new FunctionalCalculationException(CalculationError.UNKNOWN_VEHICLE));
         calculationRules.put(EXAMPLE_JOURNEY, failingRule);
 
-        Grondslag grondslag = treeCalculator.calculateResult(EXAMPLE_JOURNEY, testObject, LocalDate.of(2024, 1, 1)).grondslag();
+        Grondslag grondslag = treeCalculator.calculateResult(EXAMPLE_JOURNEY, testObject, LocalDate.of(2024, 1, 1));
 
         assertThat(grondslag.getGrondslaggegevens(), is(hasSize(1)));
         verify(grondslagRepository).save(grondslag);
+    }
+
+    @Test
+    void calculateResults_existingGrondslaggegevenRuleNowFails_clearsPreviousWaarde() {
+        var existing = new Grondslaggegeven<>(1L, definitie(EXAMPLE_JOURNEY), new HashSet<>(), null, "old value", null);
+        var stored = new Grondslag(1L, null, new HashSet<>(Set.of(existing)));
+        when(grondslagRepository.findByPersoonId(any())).thenReturn(stored);
+        Rule<?> failingRule = mock(Rule.class);
+        when(failingRule.dependsOn()).thenReturn(DependencySet.of());
+        when(failingRule.execute(any())).thenThrow(new FunctionalCalculationException(CalculationError.UNKNOWN_VEHICLE));
+        calculationRules.put(EXAMPLE_JOURNEY, failingRule);
+
+        Grondslag grondslag = treeCalculator.calculateResult(EXAMPLE_JOURNEY, testObject, LocalDate.of(2024, 1, 1));
+
+        assertThat(grondslag.getGrondslaggegevens(), contains(existing));
+        assertThat(existing.getWaarde(), is(nullValue()));
+        assertThat(existing.getCalculationError(), is(CalculationError.UNKNOWN_VEHICLE));
     }
 
     private Definitie definitie(final Definitiecode definitiecode) {

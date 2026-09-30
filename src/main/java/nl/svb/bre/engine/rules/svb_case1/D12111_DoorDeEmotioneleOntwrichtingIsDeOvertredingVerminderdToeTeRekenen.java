@@ -10,11 +10,26 @@ import nl.svb.bre.engine.errors.FunctionalCalculationException;
 import nl.svb.bre.engine.rules.Rule;
 import org.springframework.stereotype.Component;
 
+import java.util.Set;
+import java.util.function.Predicate;
+
+import static java.util.function.Predicate.not;
 import static nl.svb.bre.domain.enums.Definitiecode.D113111_BUITENGEWONE_OMSTANDIGHEID;
 import static nl.svb.bre.domain.enums.Definitiecode.D12111_DOOR_DE_EMOTIONELE_ONTWRICHTING_IS_DE_OVERTREDING_VERMINDERD_TOE_TE_REKENEN;
 
 @Component
 public class D12111_DoorDeEmotioneleOntwrichtingIsDeOvertredingVerminderdToeTeRekenen extends Rule<Boolean> {
+
+    private static final Set<String> EMOTIONELE_ONTWRICHTING = Set.of(
+            "ernstige ziekte",
+            "weglopen kind",
+            "overlijden kind",
+            "faillissement",
+            "onvoorzien ontslag"
+    );
+
+    private static final Predicate<CalculationContext> containsEmotioneleOntwrichting = c -> EMOTIONELE_ONTWRICHTING.contains(c.getTestObject().beleidsvoorbeeldEmotioneleOntwrichting());
+
     @Override
     public Definitiecode getDefinitionCode() {
         return D12111_DOOR_DE_EMOTIONELE_ONTWRICHTING_IS_DE_OVERTREDING_VERMINDERD_TOE_TE_REKENEN;
@@ -22,7 +37,9 @@ public class D12111_DoorDeEmotioneleOntwrichtingIsDeOvertredingVerminderdToeTeRe
 
     @Override
     public DependencySet dependsOn() {
-        return DependencySet.of(Dependency.of(D113111_BUITENGEWONE_OMSTANDIGHEID));
+        return DependencySet.of(
+                Dependency.of(D113111_BUITENGEWONE_OMSTANDIGHEID, not(containsEmotioneleOntwrichting))
+        );
     }
 
     @Override

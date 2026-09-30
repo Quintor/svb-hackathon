@@ -2,7 +2,6 @@ package nl.svb.bre.engine;
 
 import nl.svb.bre.domain.Grondslag;
 import nl.svb.bre.domain.Grondslaggegeven;
-import nl.svb.bre.engine.domain.EngineResult;
 import nl.svb.bre.engine.domain.ExampleObject;
 import nl.svb.bre.engine.domain.enums.CalculationError;
 import nl.svb.bre.engine.domain.enums.ExampleVehicle;
@@ -47,27 +46,27 @@ class TreeCalculatorIntegrationTest {
     @ParameterizedTest
     @MethodSource
     void calculateResults(Integer distance, boolean electric, String duration) {
-        EngineResult outcome = treeCalculator.calculateResult(Definitiecode.EXAMPLE_JOURNEY, new ExampleObject(new Random().nextLong(), distance, electric, ExampleVehicle.BICYCLE), LocalDate.of(2024, 1, 1));
-        String result = findGrondslaggegevenByDefinitiecode(outcome.grondslag(), Definitiecode.EXAMPLE_JOURNEY).getWaarde();
+        Grondslag outcome = treeCalculator.calculateResult(Definitiecode.EXAMPLE_JOURNEY, new ExampleObject(new Random().nextLong(), distance, electric, ExampleVehicle.BICYCLE), LocalDate.of(2024, 1, 1));
+        String result = findGrondslaggegevenByDefinitiecode(outcome, Definitiecode.EXAMPLE_JOURNEY).getWaarde();
         assertThat(result, is("The journey by bicycle will take " + duration));
-        assertThat(outcome.errors(), is(empty()));
+        assertThat(outcome.getGrondslaggegevens().stream().filter(gg -> gg.getCalculationError() != null).toList(), is(empty()));
     }
 
     @RepeatedTest(2)
     void calculateResultsFor42() {
-        EngineResult outcome = treeCalculator.calculateResult(Definitiecode.EXAMPLE_JOURNEY, new ExampleObject(42L, 18, false, ExampleVehicle.BICYCLE), LocalDate.of(2024, 1, 1));
-        String result = findGrondslaggegevenByDefinitiecode(outcome.grondslag(), Definitiecode.EXAMPLE_JOURNEY).getWaarde();
+        Grondslag outcome = treeCalculator.calculateResult(Definitiecode.EXAMPLE_JOURNEY, new ExampleObject(42L, 18, false, ExampleVehicle.BICYCLE), LocalDate.of(2024, 1, 1));
+        String result = findGrondslaggegevenByDefinitiecode(outcome, Definitiecode.EXAMPLE_JOURNEY).getWaarde();
         assertThat(result, is("The journey by bicycle will take PT1H"));
-        assertThat(outcome.errors(), is(empty()));
+        assertThat(outcome.getGrondslaggegevens().stream().filter(gg -> gg.getCalculationError() != null).toList(), is(empty()));
     }
 
     @Test
     void calculationErrorIsPersisted() {
         long persoonId = new Random().nextLong();
-        EngineResult outcome = treeCalculator.calculateResult(Definitiecode.EXAMPLE_JOURNEY, new ExampleObject(persoonId, 18, false, ExampleVehicle.CAR), LocalDate.of(2024, 1, 1));
-        assertThat(outcome.errors().size(), is(1));
+        Grondslag outcome = treeCalculator.calculateResult(Definitiecode.EXAMPLE_JOURNEY, new ExampleObject(persoonId, 18, false, ExampleVehicle.CAR), LocalDate.of(2024, 1, 1));
+        assertThat(outcome.getGrondslaggegevens().stream().filter(gg -> gg.getCalculationError() != null).count(), is(1L));
 
-        Grondslaggegeven<?> journey = findGrondslaggegevenByDefinitiecode(grondslagRepository.findByPersoonId(persoonId), Definitiecode.EXAMPLE_JOURNEY);
+        Grondslaggegeven<?> journey = findGrondslaggegevenByDefinitiecode(outcome, Definitiecode.EXAMPLE_JOURNEY);
         assertThat(journey.getWaarde(), is(nullValue()));
         assertThat(journey.getCalculationError(), is(CalculationError.UNKNOWN_VEHICLE));
     }
